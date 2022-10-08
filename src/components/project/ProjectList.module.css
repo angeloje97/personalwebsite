@@ -12,6 +12,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  /* display: grid;
+  grid-template: 1fr / 1fr 1fr 2fr; */
+
   background-color: rgba(0, 0, 0, 0.15);
   border-color: var(--color-highlight);
   border-width: 1px;
@@ -25,8 +29,11 @@
 }
 
 .projectItem > * {
+  text-align: center;
   display: flex;
+  flex-direction: row;
   gap: 20px;
+  align-self: center;
 }
 
 .projectItem:hover {
@@ -34,7 +41,39 @@
   box-shadow: inset -2px -2px 10px black;
 }
 
+/* .title {
+}
+
+.type {
+} */
+
+.tags {
+  justify-self: flex-end;
+}
+
+.existingProject {
+  display: grid;
+  grid-template: 1fr / 1fr 1fr 2fr;
+}
+
+.newProjectForm {
+  grid-column-start: 0;
+  grid-column-end: 3;
+  column-span: all;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.newProjectForm > label {
+  align-self: center;
+  margin-right: 5px;
+}
+
+.newProjectButton > input {
+  background-color: red;
+}
+
 .newProjectButton {
   align-self: flex-end;
-  padding: 10px;
+  padding: 15px;
 }

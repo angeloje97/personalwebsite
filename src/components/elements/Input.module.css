@@ -17,3 +17,7 @@
   border-style: solid;
   outline-style: none;
 }
+
+.stretch {
+  flex-grow: 1;
+}

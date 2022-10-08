@@ -1,17 +1,10 @@
+import { styleGroup } from "../../helpers/styles";
 import style from "./Input.module.css";
 
 const Input = (props) => {
-  const { classType = "", className = "" } = props;
+  const { inputtype = "", className = "" } = props;
 
-  const names = classType.split(" ");
-
-  let finalClass = `${style.input} `;
-
-  for (let i = 0; i < names.length; i++) {
-    finalClass += `${style[names[i]]} `;
-  }
-
-  finalClass = (finalClass + className).trim();
+  const finalClass = styleGroup(style.input, inputtype, className, style);
 
   return (
     <input {...props} className={finalClass}>

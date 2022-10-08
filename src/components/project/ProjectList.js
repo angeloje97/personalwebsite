@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import List from "../elements/List";
 import Tag from "../elements/Tag";
-import style from "./Project.module.css";
+import style from "./ProjectList.module.css";
 import { useRouter } from "next/router";
 import Button from "../elements/Button";
+import NewProject from "./NewProject";
 import { useSelector } from "react-redux";
 import Loading from "../elements/Loading";
 
@@ -18,6 +19,7 @@ const ProjectList = (props) => {
   const [projects, setProjects] = useState([]);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [creatingNew, setCreatingNew] = useState(false);
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const fetchData = async () => {
@@ -51,17 +53,48 @@ const ProjectList = (props) => {
     />
   ));
 
-  const NewProjectButton = !isAuthenticated ? null : (
-    <Button className={style.newProjectButton}>New Project</Button>
+  const openNewProject = () => {
+    setCreatingNew(true);
+  };
+
+  const closeNewProject = () => {
+    setCreatingNew(false);
+  };
+
+  const handleNewProject = (newProject) => {
+    console.log(newProject);
+    setProjects((prev) => {
+      return [...prev, newProject];
+    });
+
+    closeNewProject();
+  };
+
+  const newProjectButton = !isAuthenticated ? null : creatingNew ? null : (
+    <Button className={style.newProjectButton} onClick={openNewProject}>
+      New Project
+    </Button>
+  );
+
+  const cancelProjectButton = !creatingNew ? null : (
+    <Button onClick={closeNewProject} className={style.newProjectButton}>
+      Cancel
+    </Button>
+  );
+
+  const newProjectForm = !creatingNew ? null : (
+    <NewProject onNewProject={handleNewProject} />
   );
 
   if (isLoading) {
     return <Loading />;
   }
   return (
-    <List className={style.projectList}>
+    <List className={`${style.projectList}`}>
       {projectsContent}
-      {NewProjectButton}
+      {newProjectForm}
+      {cancelProjectButton}
+      {newProjectButton}
     </List>
   );
 };
@@ -79,13 +112,13 @@ const ProjectItem = (props) => {
 
   return (
     <li
-      className={style.projectItem}
+      className={`${style.projectItem} ${style.existingProject}`}
       onClick={handleSelectItem}
       value={project}
     >
       <h3>{project.name}</h3>
       <p>{project.type}</p>
-      <div>{resources}</div>
+      <div className={style.tags}>{resources}</div>
     </li>
   );
 };
