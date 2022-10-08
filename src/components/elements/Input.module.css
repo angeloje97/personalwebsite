@@ -1,0 +1,19 @@
+.input {
+  background-color: rgba(0, 0, 0, 0.25);
+
+  border-style: groove;
+  border-radius: var(--border-radius);
+  border-width: 1px;
+  border-color: var(--color-highlight);
+
+  font-size: 15px;
+
+  padding: 0px 10px;
+
+  min-width: 100px;
+}
+
+.input:focus {
+  border-style: solid;
+  outline-style: none;
+}

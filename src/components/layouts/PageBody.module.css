@@ -1,0 +1,12 @@
+.body {
+  align-self: center;
+
+  display: flex;
+  flex-direction: column;
+
+  max-width: 95%;
+  width: 1040px;
+  min-height: 100vh;
+
+  background-color: var(--color-background);
+}

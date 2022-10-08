@@ -1,0 +1,17 @@
+.form {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form > * {
+  min-height: 35px;
+  min-width: 300px;
+}
+
+.card {
+  margin: auto;
+  margin-top: 250px;
+}
