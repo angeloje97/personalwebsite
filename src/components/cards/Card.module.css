@@ -20,7 +20,7 @@
   width: 100%;
   padding: 5px;
 
-  box-shadow: inset 0px 5px 10px black;
+  /* box-shadow: inset 0px 5px 10px black; */
 
   border-width: 0px 0px 0.25px 0px;
   border-style: solid;
@@ -31,7 +31,7 @@
   border-bottom-right-radius: var(--border-radius);
   padding: 5px;
 
-  box-shadow: inset 0px -5px 10px black;
+  /* box-shadow: inset 0px -5px 10px black; */
 }
 
 .centered {

@@ -18,11 +18,12 @@ a {
 :root {
   --color-primary: #314d58;
   --color-secondary: #526a66;
-  --color-background: #3b4f61;
+  --color-background: #161f34;
   --color-highlight: #c6ccce;
   --color-cardbackground: #506a66;
   --color-cardheader: #314d58;
   --color-shade: #1d335d;
+  --color-item: #4a3e4f;
   --border-radius: 5px;
 }
 

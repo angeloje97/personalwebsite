@@ -3,11 +3,19 @@ import Input from "../../src/components/elements/Input";
 import Button from "../../src/components/elements/Button";
 import style from "./admin.module.css";
 import CardHeader from "../../src/components/cards/CardHeader";
-import { useState } from "react";
+import React, { useState } from "react";
 import { authActions } from "../../src/store/auth";
 import { useDispatch } from "react-redux";
 
 const Admin = () => {
+  return (
+    <React.Fragment>
+      <LoginForm />
+    </React.Fragment>
+  );
+};
+
+const LoginForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,9 +24,6 @@ const Admin = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    console.log(name);
-    console.log(password);
 
     const response = await fetch("/api/login", {
       method: "PUT",
@@ -43,36 +48,33 @@ const Admin = () => {
     router.push("/");
   };
   const handleIncorrectUserName = (data) => {};
-
   return (
-    <div>
-      <CardHeader
-        className={style.card}
-        header={<h3>Admin</h3>}
-        headertype="centered"
-        bodytype="centered"
-      >
-        <form onSubmit={handleSubmit} className={style.form}>
-          <Input
-            type="username"
-            id="username"
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-            placeholder="Username"
-          ></Input>
-          <Input
-            type="password"
-            id="password"
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-            placeholder="Password"
-          ></Input>
-          <Button type="submit">Login</Button>
-        </form>
-      </CardHeader>
-    </div>
+    <CardHeader
+      className={style.card}
+      header={<h3>Admin</h3>}
+      headertype="centered"
+      bodytype="centered"
+    >
+      <form onSubmit={handleSubmit} className={style.form}>
+        <Input
+          type="username"
+          id="username"
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+          placeholder="Username"
+        ></Input>
+        <Input
+          type="password"
+          id="password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+          placeholder="Password"
+        ></Input>
+        <Button type="submit">Login</Button>
+      </form>
+    </CardHeader>
   );
 };
 

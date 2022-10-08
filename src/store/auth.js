@@ -18,11 +18,14 @@ const authSlice = createSlice({
 
       localStorage.setItem("sessionId", action.payload.sessionId);
       localStorage.setItem("username", action.payload.username);
+      localStorage.setItem("isAuthenticated", true);
     },
     logout(state) {
       for (const prop in state) {
         state[prop] = initialState[prop];
       }
+
+      localStorage.clear();
     },
   },
 });
