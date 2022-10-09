@@ -39,6 +39,7 @@
 .projectItem:hover {
   background-color: var(--color-item);
   box-shadow: inset -2px -2px 10px black;
+  cursor: pointer;
 }
 
 /* .title {
@@ -53,12 +54,17 @@
 
 .existingProject {
   display: grid;
-  grid-template: 1fr / 1fr 1fr 2fr;
+  grid-template: 1fr / 1fr 1fr 1fr 2fr;
+}
+
+.lastUpdate {
+  font-size: 15px;
+  color: var(--color-text-fade);
 }
 
 .newProjectForm {
   grid-column-start: 0;
-  grid-column-end: 3;
+  grid-column-end: 4;
   column-span: all;
   display: flex;
   width: 100%;

@@ -17,6 +17,8 @@ a {
 
 :root {
   --color-primary: #314d58;
+  --color-text: white;
+  --color-text-fade: rgba(255, 255, 255, 0.5);
   --color-secondary: #526a66;
   --color-background: #161f34;
   --color-highlight: #c6ccce;

@@ -2,9 +2,11 @@ import style from "./ProjectList.module.css";
 import Input from "../elements/Input";
 import Button from "../elements/Button";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const NewProject = (props) => {
   const [newProject, setNewProject] = useState({});
+  const sessionId = useSelector((state) => state.auth.sessionId);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -12,7 +14,14 @@ const NewProject = (props) => {
     const type = newProject.type;
     const resources = newProject.resources.split(", ");
 
-    const createdProject = { name, type, resources };
+    const currentDate = new Date();
+    const createdProject = {
+      name,
+      type,
+      resources,
+      created: currentDate,
+      updated: currentDate,
+    };
 
     try {
       const response = await fetch("/api/projects/new", {

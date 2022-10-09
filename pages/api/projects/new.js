@@ -8,15 +8,14 @@ async function handler(req, res) {
     });
     return;
   }
-  const body = JSON.parse(req.body);
+  const project = JSON.parse(req.body);
 
-  console.log(body);
   const client = await MongoClient.connect(database.url);
   try {
     const db = client.db("Angelo");
     const collection = db.collection("Projects");
 
-    const newProject = await collection.insertOne(body);
+    const newProject = await collection.insertOne(project);
 
     console.log(newProject);
 

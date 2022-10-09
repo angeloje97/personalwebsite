@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { projectActions } from "../../store/projects";
+import { formattedDate } from "../../helpers/stringHelper";
+import { useRouter } from "next/router";
 import List from "../elements/List";
 import Tag from "../elements/Tag";
 import style from "./ProjectList.module.css";
-import { useRouter } from "next/router";
 import Button from "../elements/Button";
 import NewProject from "./NewProject";
-import { useSelector } from "react-redux";
 import Loading from "../elements/Loading";
 
 const projectsTemplate = [
@@ -20,8 +22,10 @@ const ProjectList = (props) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [creatingNew, setCreatingNew] = useState(false);
+  const dispatch = useDispatch();
 
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -31,6 +35,7 @@ const ProjectList = (props) => {
       const fetchedProjects = data.body.projects;
 
       setProjects(fetchedProjects);
+      dispatch(projectActions.setProjects(fetchedProjects));
     } catch (error) {
       console.log(error.message);
       setProjects(projectsTemplate);
@@ -62,7 +67,6 @@ const ProjectList = (props) => {
   };
 
   const handleNewProject = (newProject) => {
-    console.log(newProject);
     setProjects((prev) => {
       return [...prev, newProject];
     });
@@ -70,11 +74,13 @@ const ProjectList = (props) => {
     closeNewProject();
   };
 
-  const newProjectButton = !isAuthenticated ? null : creatingNew ? null : (
+  const displayCreateNew = isAuthenticated && !creatingNew;
+
+  const newProjectButton = displayCreateNew ? (
     <Button className={style.newProjectButton} onClick={openNewProject}>
       New Project
     </Button>
-  );
+  ) : null;
 
   const cancelProjectButton = !creatingNew ? null : (
     <Button onClick={closeNewProject} className={style.newProjectButton}>
@@ -110,6 +116,8 @@ const ProjectItem = (props) => {
     props.onSelect(project);
   };
 
+  const date = formattedDate(new Date(project.updated));
+
   return (
     <li
       className={`${style.projectItem} ${style.existingProject}`}
@@ -118,6 +126,7 @@ const ProjectItem = (props) => {
     >
       <h3>{project.name}</h3>
       <p>{project.type}</p>
+      <p className={style.lastUpdate}>Last Update: {date}</p>
       <div className={style.tags}>{resources}</div>
     </li>
   );

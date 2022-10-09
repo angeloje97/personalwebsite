@@ -20,7 +20,10 @@ async function handler(req, res) {
 
     const collection = db.collection("Admins");
 
-    const user = await collection.findOne({ username, password });
+    const user = await collection.findOne({
+      username: username.toLowerCase(),
+      password,
+    });
 
     const newSessionId = randomString(50);
 
@@ -29,16 +32,18 @@ async function handler(req, res) {
       return;
     }
 
+    const sessionLifeTime = new Date(new Date().getTime() + 1440 * 1000);
+
     await collection.updateOne(
       { _id: user._id },
-      { $set: { sessionId: newSessionId } }
+      { $set: { sessionId: newSessionId, sessionLifeTime } }
     );
 
     client.close();
 
     res.status(200).json({
       successful: "Successful!",
-      body: { username, sessionId: newSessionId },
+      body: { username: user.alias, sessionId: newSessionId, sessionLifeTime },
     });
   } catch (error) {
     res

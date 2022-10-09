@@ -12,6 +12,8 @@
   font-family: "Exo 2";
 
   transition: all 0.2s ease-out;
+
+  cursor: pointer;
 }
 
 .navBar {

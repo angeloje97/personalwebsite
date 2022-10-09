@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "./Button";
 import style from "./NavBar.module.css";
-import Media from "react-media";
+
+import { styleGroup } from "../../helpers/styles";
 
 const NavBar = (props) => {
   return (
@@ -12,6 +13,9 @@ const NavBar = (props) => {
 };
 
 const Default = (props) => {
+  const { navbartype = "", className = "" } = props;
+
+  const finalClass = styleGroup(style.navBar, navbartype, className, style);
   const propChildrens = props.children;
   const children = Array.isArray(propChildrens)
     ? propChildrens
@@ -27,7 +31,7 @@ const Default = (props) => {
     );
   });
 
-  return <div className={style.navBar}>{childrenContent}</div>;
+  return <div className={finalClass}>{childrenContent}</div>;
 };
 
 const Mobile = (props) => {
