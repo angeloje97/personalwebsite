@@ -4,14 +4,9 @@ const initialState = {
   projects: [],
   selectedProjectIds: [],
   loading: false,
-  isRemoving: false,
 
-  projectList: {
-    editing: false,
-    currentId: "",
-    updatedProject: {},
-  },
-
+  removing: false,
+  editing: false,
   creatingNew: false,
   newProject: {},
 };
@@ -26,10 +21,6 @@ const projectSlice = createSlice({
 
     updateLoading(state, action) {
       state.loading = action.payload.loading;
-    },
-
-    setRemoveProjects(state, action) {
-      state.isRemoving = action.payload.isRemoving;
     },
 
     projectIdSelect(state, action) {
@@ -50,9 +41,16 @@ const projectSlice = createSlice({
     clearSelectedIds(state) {
       state.selectedProjectIds = [];
     },
+    setRemoveProjects(state, action) {
+      state.removing = action.payload.removing;
+    },
 
     setCreatingNewProject(state, action) {
       state.creatingNew = action.payload.createNew;
+    },
+
+    setEditing(state, action) {
+      state.editing = action.payload.editing;
     },
   },
 });

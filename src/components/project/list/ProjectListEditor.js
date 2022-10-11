@@ -10,19 +10,26 @@ const reducer = (state, action) => {};
 const ProjectListEditor = () => {
   const dispatch = useDispatch();
 
-  const [removing, setRemoving] = useState(false);
-  const [editing, setEditing] = useState(false);
+  const removing = useSelector((state) => state.proj.removing);
+  const editing = useSelector((state) => state.proj.editing);
+  const loading = useSelector((state) => state.proj.loading);
 
+  if (loading) {
+    return null;
+  }
+  // const [removing, setRemoving] = useState(false);
+  // const [editing, setEditing] = useState(false);
   const handleNewProjectButton = () => {
     dispatch(projActions.setCreatingNewProject({ createNew: true }));
   };
 
   const toggleRemove = () => {
-    setRemoving((prev) => !prev);
+    dispatch(projActions.setRemoveProjects({ removing: !removing }));
+    // setRemoving((prev) => !prev);
   };
 
   const toggleEditing = () => {
-    setEditing((prev) => !prev);
+    dispatch(projActions.setEditing({ editing: !editing }));
   };
 
   if (editing) {
@@ -45,15 +52,14 @@ const ProjectListEditor = () => {
 const ProjectRemover = (props) => {
   const dispatch = useDispatch();
   const sessionId = useSelector((state) => state.auth.sessionId);
+
   const selectedProjectIds = useSelector(
     (state) => state.proj.selectedProjectIds
   );
   const projects = useSelector((state) => state.proj.projects);
   useEffect(() => {
-    dispatch(projActions.setRemoveProjects({ isRemoving: true }));
     return () => {
       dispatch(projActions.clearSelectedIds());
-      dispatch(projActions.setRemoveProjects({ isRemoving: false }));
     };
   }, []);
 
@@ -64,8 +70,6 @@ const ProjectRemover = (props) => {
 
   const handleConfirm = async () => {
     dispatch(removeSelectedProjects(selectedProjectIds, projects, sessionId));
-
-    props.onClose();
   };
 
   return (
@@ -77,6 +81,10 @@ const ProjectRemover = (props) => {
 };
 
 const ProjectEditor = (props) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return () => {};
+  }, []);
   return (
     <div className={style.editor}>
       <Button onClick={props.onClose}>Back</Button>

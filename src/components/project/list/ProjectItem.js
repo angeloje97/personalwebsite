@@ -4,12 +4,14 @@ import { projActions } from "../../../store/projects";
 import Tag from "../../elements/Tag";
 import Input from "../../elements/Input";
 import style from "./ProjectList.module.css";
-import React from "react";
+import React, { useState } from "react";
+import NewProject from "./NewProject";
 
 const ProjectItem = (props) => {
   const { project } = props;
-
-  const isRemoving = useSelector((state) => state.proj.isRemoving);
+  const isRemoving = useSelector((state) => state.proj.removing);
+  const isEditing = useSelector((state) => state.proj.editing);
+  const [editingCurrent, setEditingCurrent] = useState(false);
 
   const tags = project.tags.map((resource) => (
     <Tag key={resource}>{resource}</Tag>
@@ -17,7 +19,15 @@ const ProjectItem = (props) => {
 
   const handleSelectItem = () => {
     if (isRemoving) return;
+    if (isEditing) {
+      setEditingCurrent(true);
+      return;
+    }
     props.onSelect(project);
+  };
+
+  const handleEditingClose = () => {
+    setEditingCurrent(false);
   };
 
   const date = formattedDate(new Date(project.updated));
@@ -33,18 +43,18 @@ const ProjectItem = (props) => {
         <p>{project.type}</p>
         <p className={style.lastUpdate}>Last Update: {date}</p>
         <div className={style.tags}>
-          {tags} <RemovableContent project={project} />
+          {tags} {isRemoving && <RemovableContent project={project} />}
         </div>
       </li>
-      <EditingContent project={project} />
+      {editingCurrent && (
+        <EditingContent project={project} onClose={handleEditingClose} />
+      )}
     </React.Fragment>
   );
 };
 
 const RemovableContent = ({ project }) => {
-  const isRemoving = useSelector((state) => state.proj.isRemoving);
   const dispatch = useDispatch();
-  if (!isRemoving) return null;
 
   const handleChange = (event) => {
     var checked = event.target.checked;
@@ -56,8 +66,10 @@ const RemovableContent = ({ project }) => {
 
   return <Input type="checkbox" onChange={handleChange} />;
 };
-const EditingContent = ({ project }) => {
-  const isEditing = useSelector((state) => state.proj.projectList.editing);
-  if (!isEditing) return;
+
+const EditingContent = ({ project, onClose }) => {
+  return (
+    <NewProject editing={project} onClose={onClose} label={project.name} />
+  );
 };
 export default ProjectItem;

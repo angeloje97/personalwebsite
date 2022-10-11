@@ -27,6 +27,8 @@ export const removeSelectedProjects = (
           ),
         })
       );
+
+      dispatch(projActions.setRemoveProjects({ removing: false }));
     }
   };
 };
@@ -55,6 +57,8 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
           projects: [...currentProjects, createdProject],
         })
       );
+
+      dispatch(projActions.setCreatingNewProject({ creatingNew: false }));
     }
   };
 };
