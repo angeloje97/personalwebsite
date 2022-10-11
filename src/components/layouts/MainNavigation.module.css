@@ -20,11 +20,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-end;
   list-style: none;
   align-self: stretch;
   box-shadow: inset 0 0 10px black;
   border-bottom-right-radius: var(--border-radius);
+  padding-bottom: 5px;
 }
 
 .side > a {

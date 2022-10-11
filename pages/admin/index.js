@@ -3,9 +3,10 @@ import Input from "../../src/components/elements/Input";
 import Button from "../../src/components/elements/Button";
 import style from "./admin.module.css";
 import CardHeader from "../../src/components/cards/CardHeader";
-import React, { useState } from "react";
+import Card from "../../src/components/cards/Card";
+import React, { useEffect, useState } from "react";
 import { authActions } from "../../src/store/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Admin = () => {
   return (
@@ -18,6 +19,7 @@ const Admin = () => {
 const LoginForm = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -48,6 +50,18 @@ const LoginForm = () => {
     router.push("/");
   };
   const handleIncorrectUserName = (data) => {};
+
+  if (isAuthenticated) {
+    return (
+      <Card className={`${style.card}`}>
+        <div className={style.singleCard}>
+          <h3>Already Logged In</h3>
+          <Button>Change Password</Button>
+          <Button>Logout</Button>
+        </div>
+      </Card>
+    );
+  }
   return (
     <CardHeader
       className={style.card}

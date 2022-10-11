@@ -1,8 +1,9 @@
 import NavBar from "../elements/NavBar";
 import Button from "../elements/Button";
-import { useRouter } from "next/router";
 import style from "./MainNavigation.module.css";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { authActions } from "../../store/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 const hiddenRoutes = ["/admin"];
 
@@ -71,8 +72,16 @@ const NavButtons = (props) => {
 
 const SideBar = () => {
   const personal = useSelector((state) => state.personal);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+
   const onClickEmail = (event) => {
     event.preventDefault();
+  };
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    dispatch(authActions.logout());
   };
 
   return (
@@ -80,8 +89,17 @@ const SideBar = () => {
       <a href={personal.email} onClick={onClickEmail}>
         Email
       </a>
-      <a href={personal.linkedIn}>LinkedIn</a>
-      <a href={personal.gitHub}>GitHub</a>
+      <a href={personal.linkedIn} target="_blank">
+        LinkedIn
+      </a>
+      <a href={personal.gitHub} target="_blank">
+        GitHub
+      </a>
+      {isAuthenticated && (
+        <Button classtype="link" onClick={handleLogout}>
+          Logout
+        </Button>
+      )}
     </div>
   );
 };

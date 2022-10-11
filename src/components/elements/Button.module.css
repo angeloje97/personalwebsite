@@ -42,7 +42,7 @@
 .navBar:hover {
   background-color: var(--color-highlight);
   outline-color: var(--color-primary);
-
+  border-width: 2px;
   border-color: var(--color-primary);
   color: var(--color-primary);
 }
@@ -66,4 +66,26 @@
 .symbol {
   width: 50px;
   height: 50px;
+}
+
+.link {
+  border-width: 0px;
+  border-radius: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: none;
+  color: var(--color-highlight);
+
+  transition: all 0.1s ease-in-out;
+  padding: 0px;
+}
+
+.link:hover {
+  text-shadow: 2px 2px black;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-radius: 0px;
+  border-style: solid;
+  border-color: white;
+  border-bottom-width: 1px;
+  padding: 0px;
 }

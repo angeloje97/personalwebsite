@@ -1,0 +1,10 @@
+.editor {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 10px;
+  min-height: 50px;
+
+  margin: 20px;
+}

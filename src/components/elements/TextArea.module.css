@@ -1,6 +1,6 @@
-.input {
-  background-color: rgba(0, 0, 0, 0.25);
+.textarea {
   font-family: "Exo 2";
+  background-color: rgba(0, 0, 0, 0.25);
 
   border-style: groove;
   border-radius: var(--border-radius);
@@ -11,15 +11,5 @@
 
   padding: 0px 10px;
 
-  min-width: 100px;
   color: var(--color-text);
-}
-
-.input:focus {
-  border-style: solid;
-  outline-style: none;
-}
-
-.stretch {
-  flex-grow: 1;
 }

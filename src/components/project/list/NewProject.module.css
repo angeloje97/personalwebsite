@@ -1,0 +1,42 @@
+.card {
+  --card-width: 400px;
+  --input-width: 380px;
+  width: var(--card-width);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  gap: 15px;
+  align-items: stretch;
+}
+
+.body > * {
+  padding: 10px;
+  min-width: 95%;
+  max-width: 95%;
+  margin: auto;
+}
+
+.tag {
+  min-height: 100px;
+}
+
+.header {
+  margin: 10px;
+  text-align: center;
+}
+
+.tags {
+  height: 100px;
+}
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  gap: 15px;
+  align-items: stretch;
+  height: 45px;
+  padding: 0px;
+}
