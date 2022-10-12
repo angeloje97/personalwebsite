@@ -1,6 +1,29 @@
 import { useSelector } from "react-redux";
 import { projActions } from "./projects";
 
+export const onStartProjects = () => {
+  return (dispatch) => {
+    dispatch(loadProjects());
+  };
+};
+
+export const loadProjects = () => {
+  return async (dispatch) => {
+    dispatch(projActions.update({ loading: true }));
+    try {
+      const response = await fetch("/api/projects");
+      const data = await response.json();
+
+      const fetchedProjects = data.body.projects.sort(
+        (a, b) => new Date(b.updated) - new Date(a.updated)
+      );
+
+      dispatch(projActions.setProjects({ projects: fetchedProjects }));
+    } catch (error) {}
+    dispatch(projActions.update({ loading: false }));
+  };
+};
+
 export const removeSelectedProjects = (
   selectedIds,
   currentProjects,
@@ -28,8 +51,50 @@ export const removeSelectedProjects = (
         })
       );
 
-      dispatch(projActions.setRemoveProjects({ removing: false }));
+      dispatch(projActions.update({ removing: false }));
     }
+  };
+};
+
+export const updateProject = (updatedProject, currentProjects, sessionId) => {
+  return async (dispatch) => {
+    updatedProject.updated = new Date();
+    updatedProject.created = new Date(updatedProject.created);
+    updatedProject.tags = updatedProject.tags.split(", ");
+
+    const response = await fetch("/api/projects/update", {
+      method: "PUT",
+      body: JSON.stringify({
+        updatedProject,
+        sessionId,
+      }),
+      "Content-Type": "Application/json",
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+
+    updatedProject.updated = `${updatedProject.updated}`;
+    updatedProject.created = `${updatedProject.created}`;
+
+    if (currentProjects) {
+      const updatedProjects = currentProjects.filter(
+        (proj) => proj._id !== updatedProject._id
+      );
+
+      dispatch(
+        projActions.setProjects({
+          projects: [updatedProject, ...updatedProjects],
+        })
+      );
+    }
+
+    dispatch(
+      projActions.update({
+        editing: false,
+      })
+    );
   };
 };
 
@@ -54,11 +119,10 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
     if (currentProjects) {
       dispatch(
         projActions.setProjects({
-          projects: [...currentProjects, createdProject],
+          projects: [createdProject, ...currentProjects],
         })
       );
-
-      dispatch(projActions.setCreatingNewProject({ creatingNew: false }));
     }
+    dispatch(projActions.update({ creatingNew: false }));
   };
 };

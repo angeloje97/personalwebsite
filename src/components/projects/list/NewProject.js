@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { projActions } from "../../../store/projects";
 import { useState } from "react";
-import { addNewProject } from "../../../store/projActions";
+import { addNewProject, updateProject } from "../../../store/projActions";
 import Modal from "../../modals/Modal";
 import CardHeader from "../../cards/CardHeader";
 import Input from "../../elements/Input";
@@ -27,7 +27,7 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
     if (editing) {
       return;
     }
-    dispatch(projActions.setCreatingNewProject({ createNew: false }));
+    dispatch(projActions.update({ creatingNew: false }));
   };
 
   const handleCancel = (event) => {
@@ -47,6 +47,16 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
       tags,
     };
     if (editing) {
+      if (
+        editing.name === name &&
+        editing.type === type &&
+        editing.tags === tags.split(", ")
+      ) {
+        return;
+      }
+      const updatedProject = { ...editing, name, type, tags };
+
+      dispatch(updateProject(updatedProject, currentProjects, sessionId));
     } else {
       dispatch(addNewProject(createdProject, currentProjects, sessionId));
     }

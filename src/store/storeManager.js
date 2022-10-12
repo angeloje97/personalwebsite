@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "./auth";
+import { onStartProjects } from "./projActions";
 
 const StoreManager = () => {
   const dispatch = useDispatch();
@@ -8,6 +9,7 @@ const StoreManager = () => {
   //Every starting function for different slices.
   useEffect(() => {
     dispatch(authActions.onStart());
+    dispatch(onStartProjects());
   }, []);
   return null;
 };

@@ -21,6 +21,7 @@ a {
   --color-text-fade: rgba(255, 255, 255, 0.5);
   --color-secondary: #526a66;
   --color-background: #161f34;
+  /* --color-background: white; */
   --color-highlight: #c6ccce;
   --color-cardbackground: #506a66;
   --color-cardheader: #314d58;

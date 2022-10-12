@@ -41,16 +41,11 @@ const projectSlice = createSlice({
     clearSelectedIds(state) {
       state.selectedProjectIds = [];
     },
-    setRemoveProjects(state, action) {
-      state.removing = action.payload.removing;
-    },
 
-    setCreatingNewProject(state, action) {
-      state.creatingNew = action.payload.createNew;
-    },
-
-    setEditing(state, action) {
-      state.editing = action.payload.editing;
+    update(state, action) {
+      for (const prop in action.payload) {
+        state[prop] = action.payload[prop];
+      }
     },
   },
 });

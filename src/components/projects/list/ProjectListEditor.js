@@ -20,16 +20,15 @@ const ProjectListEditor = () => {
   // const [removing, setRemoving] = useState(false);
   // const [editing, setEditing] = useState(false);
   const handleNewProjectButton = () => {
-    dispatch(projActions.setCreatingNewProject({ createNew: true }));
+    dispatch(projActions.update({ creatingNew: true }));
   };
 
   const toggleRemove = () => {
-    dispatch(projActions.setRemoveProjects({ removing: !removing }));
-    // setRemoving((prev) => !prev);
+    dispatch(projActions.update({ removing: !removing }));
   };
 
   const toggleEditing = () => {
-    dispatch(projActions.setEditing({ editing: !editing }));
+    dispatch(projActions.update({ editing: !editing }));
   };
 
   if (editing) {
@@ -81,12 +80,9 @@ const ProjectRemover = (props) => {
 };
 
 const ProjectEditor = (props) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    return () => {};
-  }, []);
   return (
     <div className={style.editor}>
+      <h3>{"Click on a project to edit its properties."}</h3>
       <Button onClick={props.onClose}>Back</Button>
     </div>
   );

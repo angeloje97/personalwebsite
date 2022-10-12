@@ -46,7 +46,7 @@ const ProjectItem = (props) => {
           {tags} {isRemoving && <RemovableContent project={project} />}
         </div>
       </li>
-      {editingCurrent && (
+      {editingCurrent && isEditing && (
         <EditingContent project={project} onClose={handleEditingClose} />
       )}
     </React.Fragment>

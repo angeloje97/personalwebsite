@@ -1,0 +1,23 @@
+.routing {
+  border-radius: var(--border-radius);
+  border-style: solid;
+  min-height: 500px;
+}
+
+.routingList {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-start;
+  gap: 0px;
+  list-style: none;
+}
+
+.routingList > * {
+  height: 50px;
+  border-style: solid;
+  width: 100%;
+  /* background-color: var(--color-secondary); */
+  border-width: 2px 0px 0px 0px;
+}
