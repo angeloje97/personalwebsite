@@ -1,0 +1,24 @@
+.progressBar {
+  min-height: 40px;
+  min-width: 40px;
+
+  border-style: solid;
+  border-radius: var(--border-radius);
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.progressBar > span {
+  min-height: 100%;
+  background-color: var(--color-progress-1);
+  box-shadow: inset 0 0 5px black;
+}
+
+.progressBar > div {
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+}

@@ -1,5 +1,6 @@
 .routing {
   border-radius: var(--border-radius);
+  border-width: 0.5px;
   border-style: solid;
   min-height: 500px;
 }
@@ -12,6 +13,7 @@
   justify-content: flex-start;
   gap: 0px;
   list-style: none;
+  margin-top: 0px;
 }
 
 .routingList > * {
@@ -19,5 +21,15 @@
   border-style: solid;
   width: 100%;
   /* background-color: var(--color-secondary); */
-  border-width: 2px 0px 0px 0px;
+  border-width: 0px 0px 0.5px 0px;
+  font-size: 18px;
+}
+
+.item {
+  padding-left: 15px;
+  margin: 0px;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
 }

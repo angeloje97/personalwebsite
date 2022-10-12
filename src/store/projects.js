@@ -3,12 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   projects: [],
   selectedProjectIds: [],
-  loading: false,
 
+  loading: false,
   removing: false,
   editing: false,
   creatingNew: false,
-  newProject: {},
+
+  currentProject: {},
 };
 
 const projectSlice = createSlice({
@@ -42,9 +43,28 @@ const projectSlice = createSlice({
       state.selectedProjectIds = [];
     },
 
+    setCurrentProject(state, action) {
+      state.currentProject = action.payload.project;
+    },
+
     update(state, action) {
       for (const prop in action.payload) {
+        if (!state[prop] === undefined) {
+          throw new Error("Cannot add property to update");
+        }
         state[prop] = action.payload[prop];
+      }
+    },
+
+    resetEditor(state) {
+      const newFlags = {
+        editing: false,
+        removing: false,
+        creatingNew: false,
+      };
+
+      for (const prop in newFlags) {
+        state[prop] = newFlags[prop];
       }
     },
   },

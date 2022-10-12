@@ -3,5 +3,6 @@
   border-style: solid;
   border-radius: var(--border-radius);
   text-align: center;
+  border-width: 0.5px;
   text-shadow: 2px 2px black;
 }

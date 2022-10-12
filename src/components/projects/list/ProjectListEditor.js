@@ -39,11 +39,24 @@ const ProjectListEditor = () => {
     return <ProjectRemover onClose={toggleRemove} />;
   }
 
+  const handleClick = (event) => {
+    const updated = {};
+    updated[event.target.id] = event.target.value;
+
+    dispatch(projActions.update(updated));
+  };
+
   return (
     <div className={style.editor}>
-      <Button onClick={handleNewProjectButton}>New Project</Button>
-      <Button onClick={toggleRemove}>Remove Projects</Button>
-      <Button onClick={toggleEditing}>Edit Project</Button>
+      <Button onClick={handleClick} id="creatingNew" value={true}>
+        New Project
+      </Button>
+      <Button onClick={handleClick} id="removing" value={true}>
+        Remove Projects
+      </Button>
+      <Button onClick={handleClick} id="editing" value={true}>
+        Edit Project
+      </Button>
     </div>
   );
 };

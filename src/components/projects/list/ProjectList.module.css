@@ -19,6 +19,7 @@
 
   background-color: rgba(0, 0, 0, 0.15);
   border-color: var(--color-highlight);
+  border-radius: var(--border-radius);
   border-width: 1px;
   border-style: solid;
 

@@ -5,8 +5,8 @@
 
 .projectLayout {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 150px 1fr 1fr;
+  grid-template-columns: 0.75fr 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
   gap: 15px;
   grid-template-areas: "head head head head" "route main main main" "route main main main";
 
@@ -16,8 +16,8 @@
 .projectLayout > * {
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
   color: var(--color-highlight);
-  border-width: 1px;
-  border-style: solid;
+  /* border-width: 1px;
+  border-style: solid; */
 }
 
 .header {

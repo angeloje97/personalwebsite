@@ -1,0 +1,90 @@
+Date : 2022-10-12 12:36:36
+Directory : /Volumes/AJDWS/WorkSpace/Websites/angelo/src
+Total : 54 files,  1514 codes, 18 comments, 352 blanks, all 1884 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         33 |        966 |          6 |        218 |      1,190 |
+| CSS        |         21 |        548 |         12 |        134 |        694 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                         | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                            |         54 |      1,514 |         18 |        352 |      1,884 |
+| components                                                                                                   |         45 |      1,210 |         17 |        280 |      1,507 |
+| components/cards                                                                                             |          3 |         66 |          2 |         18 |         86 |
+| components/elements                                                                                          |         16 |        319 |          3 |         90 |        412 |
+| components/layouts                                                                                           |          6 |        157 |          2 |         36 |        195 |
+| components/modals                                                                                            |          2 |         35 |          0 |          7 |         42 |
+| components/projects                                                                                          |         18 |        633 |         10 |        129 |        772 |
+| components/projects/list                                                                                     |          8 |        386 |          9 |         79 |        474 |
+| components/projects/project                                                                                  |         10 |        247 |          1 |         50 |        298 |
+| components/projects/project/overview                                                                         |          4 |        101 |          0 |         24 |        125 |
+| helpers                                                                                                      |          3 |         38 |          0 |         10 |         48 |
+| store                                                                                                        |          6 |        266 |          1 |         62 |        329 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                     | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/cards/Card.js                                        | JavaScript |         12 |          0 |          4 |         16 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/cards/Card.module.css                                | CSS        |         32 |          2 |          8 |         42 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/cards/CardHeader.js                                  | JavaScript |         22 |          0 |          6 |         28 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Button.js                                   | JavaScript |         12 |          0 |          4 |         16 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Button.module.css                           | CSS        |         75 |          0 |         17 |         92 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/InnerShadow.js                              | JavaScript |          8 |          1 |          3 |         12 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/InnerShadow.module.css                      | CSS        |         10 |          1 |          1 |         12 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Input.js                                    | JavaScript |         12 |          0 |          5 |         17 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Input.module.css                            | CSS        |         19 |          0 |          7 |         26 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/List.js                                     | JavaScript |          8 |          0 |          3 |         11 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/List.module.css                             | CSS        |          7 |          0 |          2 |          9 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Loading.js                                  | JavaScript |          5 |          0 |          2 |          7 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Loading.module.css                          | CSS        |         16 |          0 |          6 |         22 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/NavBar.js                                   | JavaScript |         39 |          0 |          8 |         47 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/NavBar.module.css                           | CSS        |         71 |          1 |         17 |         89 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Tag.js                                      | JavaScript |          5 |          0 |          3 |          8 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/Tag.module.css                              | CSS        |          9 |          0 |          3 |         12 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/TextArea.js                                 | JavaScript |         12 |          0 |          4 |         16 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/elements/TextArea.module.css                         | CSS        |         11 |          0 |          5 |         16 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/layouts/Layout.js                                    | JavaScript |         12 |          0 |          4 |         16 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/layouts/Layout.module.css                            | CSS        |          5 |          0 |          2 |          7 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/layouts/MainNavigation.js                            | JavaScript |         91 |          2 |         14 |        107 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/layouts/MainNavigation.module.css                    | CSS        |         35 |          0 |          8 |         43 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/layouts/PageBody.js                                  | JavaScript |          5 |          0 |          2 |          7 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/layouts/PageBody.module.css                          | CSS        |          9 |          0 |          6 |         15 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/modals/Modal.js                                      | JavaScript |         11 |          0 |          3 |         14 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/modals/Modal.module.css                              | CSS        |         24 |          0 |          4 |         28 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/NewProject.js                          | JavaScript |         94 |          0 |         14 |        108 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/NewProject.module.css                  | CSS        |         37 |          0 |          6 |         43 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/ProjectItem.js                         | JavaScript |         64 |          0 |         12 |         76 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/ProjectList.js                         | JavaScript |         27 |          0 |          8 |         35 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/ProjectList.module.css                 | CSS        |         64 |          7 |         16 |         87 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/ProjectListEditor.js                   | JavaScript |         84 |          2 |         19 |        105 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/ProjectListEditor.module.css           | CSS        |         12 |          0 |          2 |         14 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/list/ProjectsFilter.js                      | JavaScript |          4 |          0 |          2 |          6 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/ProjectEditor.js                    | JavaScript |         57 |          0 |          7 |         64 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/ProjectEditor.module.css            | CSS        |         13 |          0 |          4 |         17 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/ProjectHeader.js                    | JavaScript |         19 |          0 |          4 |         23 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/ProjectHeader.module.css            | CSS        |          8 |          0 |          1 |          9 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/ProjectRouting.js                   | JavaScript |         19 |          0 |          5 |         24 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/ProjectRouting.module.css           | CSS        |         30 |          1 |          5 |         36 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/overview/OverviewEditor.js          | JavaScript |          7 |          0 |          3 |         10 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/overview/OverviewEditor.module.css  | CSS        |          0 |          0 |          1 |          1 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/overview/ProjectOverView.js         | JavaScript |         33 |          0 |          7 |         40 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/components/projects/project/overview/ProjectOverView.module.css | CSS        |         61 |          0 |         13 |         74 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/helpers/Task.js                                                 | JavaScript |          5 |          0 |          1 |          6 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/helpers/stringHelper.js                                         | JavaScript |         24 |          0 |          5 |         29 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/helpers/styles.js                                               | JavaScript |          9 |          0 |          4 |         13 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/store/auth.js                                                   | JavaScript |         60 |          0 |         14 |         74 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/store/index.js                                                  | JavaScript |         12 |          0 |          3 |         15 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/store/personal.js                                               | JavaScript |         13 |          0 |          5 |         18 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/store/projActions.js                                            | JavaScript |        107 |          0 |         22 |        129 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/store/projects.js                                               | JavaScript |         61 |          0 |         14 |         75 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/src/store/storeManager.js                                           | JavaScript |         13 |          1 |          4 |         18 |
+| Total                                                                                                        |            |      1,514 |         18 |        352 |      1,884 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
