@@ -79,7 +79,7 @@ const ProjectOverView = (props) => {
         <div className={style.link}>{links}</div>
         <div>
           <InterpretedText
-            fallBack="No Project Description"
+            fallback="No Project Description"
             text={overview.description}
             className={style.description}
           />

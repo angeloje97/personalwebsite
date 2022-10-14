@@ -4,11 +4,11 @@ import { styleGroup } from "../../helpers/styles";
 import style from "./InterpretedText.module.css";
 
 const InterpretedText = (props) => {
-  const { text, fallBack = "No Text", classtype = "", className = "" } = props;
+  const { text, fallback = "No Text", classtype = "", className = "" } = props;
   const finalClass = styleGroup(style.interpreted, classtype, className, style);
 
   if (!text) {
-    return <p className={finalClass}>{fallBack}</p>;
+    return <p className={finalClass}>{fallback}</p>;
   }
   const sections = text.split("\\");
   let results = [];
