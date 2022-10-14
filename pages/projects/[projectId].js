@@ -21,7 +21,9 @@ const Project = (props) => {
   const currentProject = useSelector((state) => state.proj.currentProject);
 
   useEffect(() => {
-    dispatch(projActions.setCurrentProject({ project: { ...realProject } }));
+    if (realProject) {
+      dispatch(projActions.setCurrentProject({ project: { ...realProject } }));
+    }
   }, [projects]);
   if (loading) {
     return (

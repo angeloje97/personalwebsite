@@ -1,36 +1,89 @@
 import { styleGroup } from "../../../../helpers/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { projActions } from "../../../../store/projects";
 import InnerShadow from "../../../elements/InnerShadow";
 
 import style from "./ProjectOverView.module.css";
 import ReactPlayer from "react-player";
-import { useSelector } from "react-redux";
+import OverviewEditor from "./OverviewEditor";
+import DynamicMedia from "../../../dynamics/DynamicMedia";
+import InterpretedText from "../../../dynamics/InterpretedText";
 
 const ProjectOverView = (props) => {
   const { classtype = "", className = "" } = props;
-  const finalClass = styleGroup(style.overview, classtype, className, style);
 
+  const editing = useSelector((state) => state.proj.editing);
   const project = useSelector((state) => state.proj.currentProject);
+  const dispatch = useDispatch();
 
-  const video = project.mainVideo ? (
+  const overview = project.overview || {
+    media: {},
+  };
+  const links = overview.links ? (
+    overview.links.map((link) => <a href={link.url}>{link.name}</a>)
+  ) : (
+    <a>No Links</a>
+  );
+
+  const [showEditor, setShowEditor] = useState(false);
+
+  const firstStyle = editing
+    ? `${style.overview} ${style.editing}`
+    : style.overview;
+
+  const finalClass = styleGroup(firstStyle, classtype, className, style);
+  const handleOverviewClick = () => {
+    if (!editing) return;
+    setShowEditor(true);
+  };
+
+  const handleClickOut = () => {
+    setShowEditor(false);
+  };
+
+  const video = overview.media.link ? (
     <div className={style.video}>
-      <ReactPlayer controls url={project.mainVideo} />
+      <DynamicMedia
+        controls
+        url={overview.media.link}
+        src={overview.media.link}
+        mediatype={overview.media.type}
+      />
     </div>
   ) : (
     <h3 className={style.noVideo}>No Video</h3>
   );
 
+  const handleSubmitOverview = (overviewData) => {
+    const updatedProject = { ...project };
+    updatedProject.overview = overviewData;
+
+    dispatch(projActions.setCurrentProject({ project: updatedProject }));
+  };
+
   return (
     <div className={finalClass}>
       <InnerShadow />
-      <div className={style.header}>
-        <h2>{project.overview || "No Overview Title"}</h2>
-      </div>
-      {video}
-      <div className={style.link}>
-        <a>Links</a>
-      </div>
-      <div className={style.description}>
-        <p>{project.description || "No Description"}</p>
+      {showEditor && (
+        <OverviewEditor
+          onClickOut={handleClickOut}
+          onSubmit={handleSubmitOverview}
+        />
+      )}
+      <div className={style.content} onClick={handleOverviewClick}>
+        <div className={style.header}>
+          <h2>{overview.title || "No Overview Title"}</h2>
+        </div>
+        {video}
+        <div className={style.link}>{links}</div>
+        <div>
+          <InterpretedText
+            fallBack="No Project Description"
+            text={overview.description}
+            className={style.description}
+          />
+        </div>
       </div>
     </div>
   );

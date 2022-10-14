@@ -12,9 +12,24 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
   const dispatch = useDispatch();
 
   const tagsJoined = editing ? editing.tags.join(", ") : "";
-  const [name, setName] = useState(editing ? editing.name : "");
-  const [type, setType] = useState(editing ? editing.type : "");
-  const [tags, setTags] = useState(tagsJoined);
+
+  const [data, setData] = useState({
+    name: editing ? editing.name : "",
+    type: editing ? editing.type : "",
+    tags: tagsJoined,
+  });
+
+  const updateData = (event) => {
+    const id = event.target.id;
+    const value = event.target.value;
+
+    setData((prev) => {
+      const newData = { ...prev };
+      newData[id] = value;
+
+      return newData;
+    });
+  };
 
   const currentProjects = useSelector((state) => state.proj.projects);
   const sessionId = useSelector((state) => state.auth.sessionId);
@@ -39,12 +54,14 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const { name, type, tags } = data;
+
     if (name.trim() === "") return;
     if (type.trim() === "") return;
     const createdProject = {
       name,
       type,
-      tags,
+      tags: tags.split(", "),
     };
     if (editing) {
       if (
@@ -54,7 +71,7 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
       ) {
         return;
       }
-      const updatedProject = { ...editing, name, type, tags };
+      const updatedProject = { ...editing, name, type, tags: tags.split(", ") };
 
       dispatch(updateProject(updatedProject, currentProjects, sessionId));
     } else {
@@ -78,24 +95,21 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
         <form className={style.body} onSubmit={handleSubmit}>
           <Input
             placeholder="Project Name"
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-            value={name}
+            onChange={updateData}
+            id="name"
+            value={data.name}
           />
           <Input
             placeholder="Type"
-            onChange={(event) => {
-              setType(event.target.value);
-            }}
-            value={type}
+            onChange={updateData}
+            id="type"
+            value={data.type}
           />
           <Input
             placeholder="Tags"
-            onChange={(event) => {
-              setTags(event.target.value);
-            }}
-            value={tags}
+            onChange={updateData}
+            id="tags"
+            value={data.tags}
           ></Input>
           {buttons}
         </form>

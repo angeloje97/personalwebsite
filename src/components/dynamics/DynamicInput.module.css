@@ -1,0 +1,19 @@
+.dynamic {
+  display: flex;
+  gap: 5px;
+}
+.dynamic > input {
+  flex-grow: 3;
+}
+
+.dynamic > select {
+  flex-grow: 1;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}

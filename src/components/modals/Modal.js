@@ -1,12 +1,21 @@
 import style from "./Modal.module.css";
-import { ReactPortal } from "react";
+import React, { ReactPortal } from "react";
+import ReactDOM from "react-dom";
 
 const Modal = (props) => {
+  const portalElement = document.getElementById("overlays");
   return (
-    <div className={style.modal}>
-      <div className={style.background} onClick={props.onClickOut} />
-      {props.children}
-    </div>
+    <React.Fragment>
+      {ReactDOM.createPortal(
+        <div className={style.background} onClick={props.onClickOut}></div>,
+        portalElement
+      )}
+
+      {ReactDOM.createPortal(
+        <div className={style.modal}>{props.children}</div>,
+        portalElement
+      )}
+    </React.Fragment>
   );
 };
 

@@ -5,7 +5,7 @@ import style from "./InnerShadow.module.css";
 const InnerShadow = (props) => {
   const { classtype = "", className = "" } = props;
   const finalClass = styleGroup(style.innerShadow, classtype, className, style);
-  return <div className={finalClass} />;
+  return <div {...props} className={finalClass} />;
 };
 
 export default InnerShadow;

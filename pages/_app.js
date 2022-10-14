@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <div id="overlays" />
     </Provider>
   );
 }

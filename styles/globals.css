@@ -28,7 +28,10 @@ a {
   --color-shade: #1d335d;
   --color-item: #1a5e6e;
   --color-progress-1: #d5cac9;
+  --color-tabs: #e7c8ae;
   --border-radius: 5px;
+
+  --height-input: 35px;
 }
 
 @media (prefers-color-scheme: dark) {

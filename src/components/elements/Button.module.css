@@ -8,6 +8,7 @@
   color: var(--color-highlight);
   box-shadow: inset 0 0 15px rgba(0, 0, 0);
   font-size: 15px;
+  overflow: hide;
 
   font-family: "Exo 2";
 
@@ -42,15 +43,15 @@
 .navBar:hover {
   background-color: var(--color-highlight);
   outline-color: var(--color-primary);
-  border-width: 2px;
-  border-color: var(--color-primary);
+  border-width: 1px;
+  border-color: var(--color-highlight);
   color: var(--color-primary);
 }
 
 .selected {
   background-color: var(--color-highlight);
   color: var(--color-primary);
-  border-color: var(--color-primary);
+  border-color: var(--color-highlight);
 }
 
 .first {

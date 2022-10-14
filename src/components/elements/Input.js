@@ -7,7 +7,7 @@ const Input = (props) => {
   const finalClass = styleGroup(style.input, inputtype, className, style);
 
   return (
-    <input {...props} className={finalClass}>
+    <input {...props} className={finalClass} value={props.value || ""}>
       {props.children}
     </input>
   );

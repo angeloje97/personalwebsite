@@ -6,6 +6,10 @@
   border-top-width: 0px;
 }
 
+.main > *:hover {
+  border-top-width: 0px;
+}
+
 .first {
   border-top-left-radius: 0px;
   border-bottom-left-radius: var(--border-radius);

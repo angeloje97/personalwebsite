@@ -1,0 +1,29 @@
+.tabs {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 25px;
+  height: 40px;
+}
+
+.tab {
+  min-width: 100px;
+  font-size: 18px;
+  border-bottom-width: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: var(--color-tabs);
+  color: var(--color-primary);
+}
+
+.selectedTab {
+  background-color: var(--color-highlight);
+  color: var(--color-primary);
+  border-color: (--color-highlight);
+  border-bottom-width: 0px;
+}
+
+.tabs > button:hover {
+  border-bottom-width: 0px;
+}

@@ -12,12 +12,18 @@
   padding: 0px 10px;
 
   min-width: 100px;
+  height: var(--height-input);
   color: var(--color-text);
 }
 
 .input:focus {
   border-style: solid;
   outline-style: none;
+}
+
+.input:active {
+  border-style: solid;
+  border-width: 2px;
 }
 
 .stretch {

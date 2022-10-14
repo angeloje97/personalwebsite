@@ -43,15 +43,9 @@
   box-shadow: inset -2px -2px 10px black;
   cursor: pointer;
 }
-
-/* .title {
-}
-
-.type {
-} */
-
 .tags {
   justify-self: flex-end;
+  align-items: center;
 }
 
 .existingProject {

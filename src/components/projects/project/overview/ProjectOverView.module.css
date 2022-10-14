@@ -3,10 +3,17 @@
   border-radius: var(--border-radius);
   border-style: solid;
   border-width: 0.5px;
+}
 
+.content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  height: 100%;
+}
+
+.editing {
+  cursor: pointer;
 }
 
 .header {
@@ -24,8 +31,34 @@
   border-width: 0px;
   border-style: solid;
   border-top-width: 1px;
+  padding: 10px;
   margin: 0px;
-  padding: 0px 10px 0px 10px;
+  font-weight: lighter;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0px;
+}
+
+.description > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description > p {
+  text-indent: 2rem;
+  line-height: 1.5rem;
+}
+
+.description > h3 {
+  text-indent: 2rem;
+  color: var(--color-progress-1);
+  font-weight: bold;
+}
+.description > * {
+  border-width: 0px;
 }
 
 .link {
@@ -34,6 +67,7 @@
   align-items: flex-end;
   gap: 10px;
   padding-right: 20px;
+  cursor: pointer;
 }
 
 .link > a {

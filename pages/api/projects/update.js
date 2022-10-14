@@ -26,17 +26,7 @@ async function handler(req, res) {
       return;
     }
 
-    // const response = collection.updateOne(
-    //   { _id: ObjectId(updatedProject._id) },
-    //   { $set: { ...updatedProject } }
-    // );
-
     updatedProject._id = ObjectId(updatedProject._id);
-
-    // const response = collection.updateOne({
-    //   _id: updatedProject._id,
-    //   {$set: {...updatedProject}}
-    // });
 
     const response = await collection.updateOne(
       { _id: updatedProject._id },

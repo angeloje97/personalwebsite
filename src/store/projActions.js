@@ -58,34 +58,29 @@ export const removeSelectedProjects = (
 
 export const updateProject = (updatedProject, currentProjects, sessionId) => {
   return async (dispatch) => {
-    updatedProject.updated = new Date();
-    updatedProject.created = new Date(updatedProject.created);
-    updatedProject.tags = updatedProject.tags.split(", ");
+    const modifiedProject = { ...updatedProject };
+
+    modifiedProject.updated = new Date();
 
     const response = await fetch("/api/projects/update", {
       method: "PUT",
       body: JSON.stringify({
-        updatedProject,
+        updatedProject: modifiedProject,
         sessionId,
       }),
       "Content-Type": "Application/json",
     });
 
-    const data = await response.json();
-
-    console.log(data);
-
-    updatedProject.updated = `${updatedProject.updated}`;
-    updatedProject.created = `${updatedProject.created}`;
+    modifiedProject.updated = `${modifiedProject.updated}`;
 
     if (currentProjects) {
       const updatedProjects = currentProjects.filter(
-        (proj) => proj._id !== updatedProject._id
+        (proj) => proj._id !== modifiedProject._id
       );
 
       dispatch(
         projActions.setProjects({
-          projects: [updatedProject, ...updatedProjects],
+          projects: [modifiedProject, ...updatedProjects],
         })
       );
     }
@@ -98,11 +93,20 @@ export const updateProject = (updatedProject, currentProjects, sessionId) => {
   };
 };
 
+export const revertChanges = (projectId, projects) => {
+  return (dispatch) => {
+    const originalProject = projects.find((proj) => proj._id === projectId);
+    if (originalProject) {
+      dispatch(projActions.setCurrentProject({ project: originalProject }));
+    }
+  };
+};
+
 export const addNewProject = (createdProject, currentProjects, sessionId) => {
   return async (dispatch) => {
     createdProject.created = new Date();
     createdProject.updated = new Date();
-    createdProject.tags = createdProject.tags.split(", ");
+    // createdProject.tags = createdProject.tags.split(", ");
 
     const response = await fetch("/api/projects/new", {
       method: "POST",

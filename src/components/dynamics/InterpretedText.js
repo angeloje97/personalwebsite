@@ -1,0 +1,58 @@
+import React from "react";
+import ReactPlayer from "react-player";
+import { styleGroup } from "../../helpers/styles";
+import style from "./InterpretedText.module.css";
+
+const InterpretedText = (props) => {
+  const { text, fallBack = "No Text", classtype = "", className = "" } = props;
+  const finalClass = styleGroup(style.interpreted, classtype, className, style);
+
+  if (!text) {
+    return <p className={finalClass}>{fallBack}</p>;
+  }
+  const sections = text.split("\\");
+  let results = [];
+  let index = 0;
+  for (const section of sections) {
+    index++;
+    if (section.trim() === "") continue;
+
+    let currentCharacter = 0;
+    let type = "";
+
+    for (let i = 0; i < section.length; i++) {
+      currentCharacter++;
+      if (section[i] === " ") break;
+      type += section[i];
+    }
+
+    const content = section.slice(currentCharacter, section.length);
+
+    if (type === "img") {
+      results.push(<img src={content} key={index} />);
+      continue;
+    }
+
+    if (type === "video") {
+      results.push(
+        <div key={index}>
+          <ReactPlayer controls url={content} />
+        </div>
+      );
+      continue;
+    }
+
+    const CustomTag = type;
+
+    results.push(
+      <CustomTag key={index} {...props}>
+        {" "}
+        {content}
+      </CustomTag>
+    );
+  }
+
+  return <div className={finalClass}>{results}</div>;
+};
+
+export default InterpretedText;

@@ -9,7 +9,7 @@ const initialState = {
   editing: false,
   creatingNew: false,
 
-  currentProject: {},
+  currentProject: null,
 };
 
 const projectSlice = createSlice({
@@ -45,6 +45,16 @@ const projectSlice = createSlice({
 
     setCurrentProject(state, action) {
       state.currentProject = action.payload.project;
+    },
+
+    revertCurrentProjectChanges(state) {
+      if (!state.currentProject) return;
+      var id = state.currentProject._id;
+      const project = state.projects.find((proj) => proj._id === id);
+
+      if (project) {
+        state.currentProject = { ...project };
+      }
     },
 
     update(state, action) {

@@ -52,8 +52,6 @@ const authSlice = createSlice({
       }
     },
     login(state, action) {
-      console.log(action.payload);
-
       for (const prop in initialState) {
         state[prop] = action.payload[prop];
       }
