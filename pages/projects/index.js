@@ -10,9 +10,7 @@ const Projects = () => {
   const creatingNew = useSelector((state) => state.proj.creatingNew);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const acquireProjects = async () => {
-    // dispatch(loadProjects());
-  };
+  const acquireProjects = async () => {};
   useEffect(() => {
     acquireProjects();
   }, []);

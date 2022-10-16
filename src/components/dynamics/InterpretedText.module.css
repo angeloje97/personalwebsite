@@ -1,1 +1,6 @@
-
+.line {
+  border-width: 2px;
+  background-color: red;
+  height: 2px;
+  width: 200px;
+}

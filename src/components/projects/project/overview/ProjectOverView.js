@@ -5,7 +5,6 @@ import { projActions } from "../../../../store/projects";
 import InnerShadow from "../../../elements/InnerShadow";
 
 import style from "./ProjectOverView.module.css";
-import ReactPlayer from "react-player";
 import OverviewEditor from "./OverviewEditor";
 import DynamicMedia from "../../../dynamics/DynamicMedia";
 import InterpretedText from "../../../dynamics/InterpretedText";
@@ -51,9 +50,7 @@ const ProjectOverView = (props) => {
         mediatype={overview.media.type}
       />
     </div>
-  ) : (
-    <h3 className={style.noVideo}>No Video</h3>
-  );
+  ) : null;
 
   const handleSubmitOverview = (overviewData) => {
     const updatedProject = { ...project };

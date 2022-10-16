@@ -95,7 +95,7 @@ const ProjectRemover = (props) => {
 const ProjectEditor = (props) => {
   return (
     <div className={style.editor}>
-      <h3>{"Click on a project to edit its properties."}</h3>
+      <h3>Click on a project to edit its properties.</h3>
       <Button onClick={props.onClose}>Back</Button>
     </div>
   );

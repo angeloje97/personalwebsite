@@ -28,6 +28,18 @@ const InterpretedText = (props) => {
 
     const content = section.slice(currentCharacter, section.length);
 
+    if (type === "link") {
+      const linkContent = content.split(":");
+      const linkName = linkContent[0];
+      const linkUrl = linkContent[1];
+      results.push(
+        <a href={linkUrl} className={style.link} target="_blank">
+          {linkName}
+        </a>
+      );
+      continue;
+    }
+
     if (type === "img") {
       results.push(<img src={content} key={index} />);
       continue;

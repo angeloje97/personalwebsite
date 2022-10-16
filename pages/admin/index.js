@@ -17,8 +17,8 @@ const Admin = () => {
 };
 
 const LoginForm = () => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState({ username: "", password: "" });
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const router = useRouter();
@@ -27,27 +27,40 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const { username, password } = data;
+
     const response = await fetch("/api/login", {
       method: "PUT",
       body: JSON.stringify({
-        username: name.trim(),
+        username: username.trim(),
         password: password.trim(),
       }),
       "Content-Type": "Application/json",
     });
-    const data = await response.json();
+    const responseData = await response.json();
 
     if (!response.ok) {
-      handleIncorrectUserName(data);
+      handleIncorrectUserName(responseData);
       return;
     }
 
-    handleSuccessful(data);
+    handleSuccessful(responseData);
   };
 
   const handleSuccessful = (data) => {
     dispatch(authActions.login(data.body));
     router.push("/");
+  };
+
+  const updateData = (event) => {
+    const id = event.target.id;
+    const value = event.target.value;
+
+    setData((prev) => {
+      const newData = { ...prev };
+      newData[id] = value;
+      return newData;
+    });
   };
   const handleIncorrectUserName = (data) => {};
 
@@ -73,17 +86,15 @@ const LoginForm = () => {
         <Input
           type="username"
           id="username"
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
+          value={data.username}
+          onChange={updateData}
           placeholder="Username"
         ></Input>
         <Input
           type="password"
           id="password"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
+          value={data.password}
+          onChange={updateData}
           placeholder="Password"
         ></Input>
         <Button type="submit">Login</Button>

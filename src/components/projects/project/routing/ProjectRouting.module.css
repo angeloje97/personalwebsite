@@ -25,11 +25,40 @@
   font-size: 18px;
 }
 
-.item {
+.routingList > li {
   padding-left: 15px;
   margin: 0px;
-  cursor: pointer;
 
   display: flex;
   flex-direction: column;
+}
+
+.overview {
+  text-align: center;
+  border-style: solid;
+  border-width: 0px;
+  border-bottom-width: 1px;
+
+  padding: 10px;
+}
+
+.overview:hover {
+  cursor: pointer;
+}
+
+.overview > * {
+  margin: 0px;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.routingButtons {
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+
+.routingButtons > button {
+  min-width: 30px;
+  min-height: 30px;
 }

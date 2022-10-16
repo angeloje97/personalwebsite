@@ -1,0 +1,5 @@
+.content {
+  border-style: solid;
+  border-radius: var(--border-radius);
+  border-width: 0.5px;
+}
