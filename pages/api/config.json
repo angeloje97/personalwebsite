@@ -1,5 +1,6 @@
 {
   "template": "mongodb+srv://angeloje:<password>@websites.qn8jymm.mongodb.net/?retryWrites=true&w=majority",
+  "name": "Angelo",
   "username": "angeloje",
   "password": "Gj79kzfrkwYohglt",
   "cluster": "websites.qn8jymm.mongodb.net"

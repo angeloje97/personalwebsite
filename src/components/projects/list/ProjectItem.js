@@ -39,7 +39,15 @@ const ProjectItem = (props) => {
         onClick={handleSelectItem}
         value={project}
       >
-        <h3>{project.name}</h3>
+        <h3>
+          {project.name}
+          {project.favorite && (
+            <img
+              src="/resources/icons/star.png"
+              className={style.favoriteImage}
+            />
+          )}
+        </h3>
         <p>{project.type}</p>
         <p className={style.lastUpdate}>Last Update: {date}</p>
         <div className={style.tags}>

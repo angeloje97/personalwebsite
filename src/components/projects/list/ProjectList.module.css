@@ -79,3 +79,9 @@
   align-self: flex-end;
   padding: 15px;
 }
+
+.favoriteImage {
+  max-width: 16px;
+  max-height: 16px;
+  align-self: center;
+}

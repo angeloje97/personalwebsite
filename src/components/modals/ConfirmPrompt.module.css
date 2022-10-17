@@ -1,0 +1,25 @@
+.prompt {
+  min-width: 400px;
+}
+
+.header {
+  text-align: center;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  align-items: stretch;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.buttons > button {
+  padding: 10px;
+}

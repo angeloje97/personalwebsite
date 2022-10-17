@@ -19,7 +19,7 @@ async function handler(req, res) {
 
     console.log(body);
 
-    const db = client.db("Angelo");
+    const db = client.db(database.name);
     const collection = db.collection("Projects");
 
     const response = await collection.deleteMany({

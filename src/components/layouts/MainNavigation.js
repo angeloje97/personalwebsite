@@ -4,6 +4,8 @@ import style from "./MainNavigation.module.css";
 import { useRouter } from "next/router";
 import { authActions } from "../../store/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import ClipBoard from "../modals/ClipBoard";
 
 const hiddenRoutes = ["/admin"];
 
@@ -75,14 +77,26 @@ const SideBar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
+  const [copyingEmail, setCopyingEmail] = useState(false);
+
   const onClickEmail = (event) => {
     event.preventDefault();
+
+    setCopyingEmail(true);
+  };
+
+  const emailClose = () => {
+    setCopyingEmail(false);
   };
 
   const handleLogout = (event) => {
     event.preventDefault();
     dispatch(authActions.logout());
   };
+
+  const emailClipBoard = (
+    <ClipBoard copyContent={personal.email} onClose={emailClose} />
+  );
 
   return (
     <div className={style.side}>
@@ -100,6 +114,8 @@ const SideBar = () => {
           Logout
         </Button>
       )}
+
+      {copyingEmail && emailClipBoard}
     </div>
   );
 };

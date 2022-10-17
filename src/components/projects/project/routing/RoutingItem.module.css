@@ -1,5 +1,6 @@
 .item {
   height: fit-content;
+  min-height: 50px;
 }
 
 .header {
@@ -8,12 +9,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  cursor: default;
 }
 
 .header > p {
   margin: 0px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .header > div > button {
@@ -45,6 +46,10 @@
 .contentList > li > button {
   min-width: 30px;
   aspect-ratio: 1/1;
+}
+
+.selectedItem > p {
+  margin: auto;
 }
 
 .contentList > li > p {

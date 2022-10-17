@@ -31,6 +31,12 @@
 .tags {
   height: 100px;
 }
+
+.preferences {
+  display: flex;
+  align-items: center;
+}
+
 .buttons {
   display: flex;
   flex-direction: row-reverse;

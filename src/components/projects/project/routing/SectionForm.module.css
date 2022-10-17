@@ -1,0 +1,18 @@
+.sectionForm {
+  min-width: 400px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  text-align: center;
+}
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}

@@ -15,7 +15,7 @@ async function handler(req, res) {
 
   try {
     const { updatedProject, sessionId } = body;
-    const db = client.db("Angelo");
+    const db = client.db(database.name);
     const collection = db.collection("Projects");
     const admins = db.collection("Admins");
 

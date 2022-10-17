@@ -16,12 +16,13 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
   const [data, setData] = useState({
     name: editing ? editing.name : "",
     type: editing ? editing.type : "",
+    favorite: editing ? editing.favorite : false,
     tags: tagsJoined,
   });
 
   const updateData = (event) => {
     const id = event.target.id;
-    const value = event.target.value;
+    const value = id === "favorite" ? event.target.checked : event.target.value;
 
     setData((prev) => {
       const newData = { ...prev };
@@ -54,7 +55,7 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const { name, type, tags } = data;
+    const { name, type, tags, favorite } = data;
 
     if (name.trim() === "") return;
     if (type.trim() === "") return;
@@ -62,6 +63,7 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
       name,
       type,
       tags: tags.split(", "),
+      favorite,
     };
     if (editing) {
       if (
@@ -71,7 +73,13 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
       ) {
         return;
       }
-      const updatedProject = { ...editing, name, type, tags: tags.split(", ") };
+      const updatedProject = {
+        ...editing,
+        name,
+        type,
+        tags: tags.split(", "),
+        favorite,
+      };
 
       dispatch(updateProject(updatedProject, currentProjects, sessionId));
     } else {
@@ -111,6 +119,17 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
             id="tags"
             value={data.tags}
           ></Input>
+
+          <div className={style.preferences}>
+            <label>Favorite:</label>
+            <Input
+              type="checkbox"
+              value={data.favorite}
+              id="favorite"
+              onChange={updateData}
+              checked={data.favorite}
+            />
+          </div>
           {buttons}
         </form>
       </CardHeader>

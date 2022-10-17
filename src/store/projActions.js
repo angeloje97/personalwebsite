@@ -14,9 +14,16 @@ export const loadProjects = () => {
       const response = await fetch("/api/projects");
       const data = await response.json();
 
-      const fetchedProjects = data.body.projects.sort(
-        (a, b) => new Date(b.updated) - new Date(a.updated)
-      );
+      const fetchedProjects = data.body.projects.sort((a, b) => {
+        if (a.favorite && !b.favorite) {
+          return -1;
+        }
+
+        if (!a.favorite && b.favorite) {
+          return 1;
+        }
+        return new Date(b.updated) - new Date(a.updated);
+      });
 
       dispatch(projActions.setProjects({ projects: fetchedProjects }));
     } catch (error) {}

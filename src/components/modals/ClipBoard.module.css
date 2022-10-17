@@ -1,0 +1,33 @@
+.clipBoard {
+  min-width: 300px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+
+  border-radius: var(--border-radius);
+  justify-content: space-between;
+  gap: 30px;
+
+  padding-left: 20px;
+}
+
+.copyButton {
+  border-width: 0px;
+  border-left: 1px;
+  border-style: solid;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background-color: white;
+}
+
+.copyButton:hover {
+  border-width: 0px;
+  border-left-width: 1px;
+}
+
+.copyButton > img {
+  max-width: 20px;
+  filter: opacity(0.5) drop-shadow(white);
+}

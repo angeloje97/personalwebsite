@@ -14,7 +14,7 @@ async function handler(req, res) {
 
   const client = await MongoClient.connect(database.url);
   try {
-    const db = client.db("Angelo");
+    const db = client.db(database.name);
     const admins = db.collection("Admins");
     const collection = db.collection("Projects");
 
