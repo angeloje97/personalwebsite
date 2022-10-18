@@ -87,7 +87,6 @@
   align-items: flex-end;
   gap: 10px;
   padding-right: 20px;
-  cursor: pointer;
 }
 
 .link > a {
@@ -96,6 +95,14 @@
   border-top-right-radius: var(--border-radius);
   padding: 10px;
   border-bottom-width: 0px;
+  cursor: pointer;
+}
+
+.link > a:hover {
+  background-color: var(--color-highlight);
+  color: var(--color-primary);
+  box-shadow: inset 0px 0px 10px black;
+  border-color: var(--color-highlight);
 }
 
 .video {

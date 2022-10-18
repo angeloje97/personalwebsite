@@ -56,7 +56,7 @@ const ContentForm = (props) => {
     const updatedContents = section.contents ? [...section.contents] : [];
 
     if (contentIndex === -1) {
-      updatedContents.push({ name, type });
+      updatedContents.push({ name, type, updated: `${new Date()}` });
     } else {
       updatedContents[contentIndex].name = name;
       updatedContents[contentIndex].type = type;

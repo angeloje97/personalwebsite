@@ -1,2 +1,21 @@
 .dynamicList {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.dynamicList > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+.buttons > button {
+  aspect-ratio: 1/1;
+  min-width: 30px;
 }

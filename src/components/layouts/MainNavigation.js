@@ -103,10 +103,10 @@ const SideBar = () => {
       <a href={personal.email} onClick={onClickEmail}>
         Email
       </a>
-      <a href={personal.linkedIn} target="_blank">
+      <a href={personal.linkedIn} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
-      <a href={personal.gitHub} target="_blank">
+      <a href={personal.gitHub} target="_blank" rel="noreferrer">
         GitHub
       </a>
       {isAuthenticated && (

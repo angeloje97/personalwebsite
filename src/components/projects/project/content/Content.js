@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { styleGroup } from "../../../../helpers/styles";
 import style from "./Content.module.css";
-import { TESTING_SECTIONS } from "../routing";
+import Blog from "./Blog";
+import Module from "./Module";
 
 const Content = (props) => {
   const {
@@ -10,14 +11,13 @@ const Content = (props) => {
     classtype = "",
     className = "",
   } = props;
-  const finalStyle = styleGroup(style.content, classtype, className, style);
-  const sections =
-    useSelector((state) => state.proj.currentProject.sections) ||
-    TESTING_SECTIONS;
 
-  const content = sections
-    ? sections[sectionIndex].contents[contentIndex]
-    : undefined;
+  const content = useSelector(
+    (state) =>
+      state.proj.currentProject.sections[sectionIndex].contents[contentIndex]
+  );
+
+  const finalStyle = styleGroup(style.content, classtype, className, style);
 
   if (!content) {
     return <div className={finalStyle}>No Content</div>;
@@ -25,7 +25,15 @@ const Content = (props) => {
 
   const { type } = content;
 
-  return <div className={finalStyle}></div>;
+  if (type.toLowerCase() === "blog") {
+    return <Blog content={content} className={finalStyle} />;
+  }
+
+  if (type.toLowerCase() === "module") {
+    return <Module content={content} className={finalStyle} />;
+  }
+
+  return <div className={finalStyle}>Found no content of type {type}</div>;
 };
 
 export default Content;

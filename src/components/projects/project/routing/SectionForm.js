@@ -54,7 +54,11 @@ const SectionForm = (props) => {
 
       editedProject.sections = updatedSections;
     } else {
-      sections.push({ name: sectionData.name, contents: [] });
+      sections.push({
+        name: sectionData.name,
+        contents: [],
+        updated: `${new Date()}`,
+      });
       editedProject.sections = sections;
     }
 

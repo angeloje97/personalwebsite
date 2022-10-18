@@ -19,11 +19,24 @@ const ProjectOverView = (props) => {
   const overview = project.overview || {
     media: {},
   };
-  const links = overview.links ? (
-    overview.links.map((link) => <a href={link.url}>{link.name}</a>)
-  ) : (
-    <a>No Links</a>
-  );
+
+  let linkCount = overview.links ? overview.links.length : 0;
+
+  if (linkCount === 1) {
+    if (!overview.links[0].url) {
+      linkCount = 0;
+    }
+  }
+  const links =
+    linkCount > 0 ? (
+      overview.links.map((link) => (
+        <a href={link.url} key={link.url} target="_blank" rel="noreferrer">
+          {link.name}
+        </a>
+      ))
+    ) : (
+      <a>No Links</a>
+    );
 
   const [showEditor, setShowEditor] = useState(false);
 

@@ -33,7 +33,12 @@ const InterpretedText = (props) => {
       const linkName = linkContent[0];
       const linkUrl = linkContent[1];
       results.push(
-        <a href={linkUrl} className={style.link} target="_blank">
+        <a
+          href={linkUrl}
+          className={style.link}
+          target="_blank"
+          rel="noreferrer"
+        >
           {linkName}
         </a>
       );

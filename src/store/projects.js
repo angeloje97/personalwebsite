@@ -9,6 +9,11 @@ const initialState = {
   editing: false,
   creatingNew: false,
 
+  routingData: {
+    name: "",
+    sectionIndex: "",
+    contentIndex: "",
+  },
   currentProject: null,
 };
 
@@ -51,6 +56,8 @@ const projectSlice = createSlice({
       const { newContents, sectionIndex } = action.payload;
       console.log(newContents);
       state.currentProject.sections[sectionIndex].contents = newContents;
+
+      state.currentProject.sections[sectionIndex].updated = `${new Date()}`;
     },
 
     removeContent(state, action) {

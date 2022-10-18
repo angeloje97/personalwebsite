@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import React from "react";
 import Button from "../../../elements/Button";
 import List from "../../../elements/List";
@@ -20,6 +20,9 @@ const RoutingItem = (props) => {
   const selectedSection = routingData.selectedSection === sectionIndex;
 
   const [createNew, setCreateNew] = useState(false);
+
+  const dragItem = useRef(null);
+  const dragOver = useRef(null);
 
   const handleRemoveSection = () => {
     props.onRemoveSection(sectionIndex);
@@ -55,6 +58,12 @@ const RoutingItem = (props) => {
     );
   };
 
+  const handleDragEnd = () => {
+    props.onMoveContent(dragItem.current, dragOver.current, sectionIndex);
+    dragItem.current = null;
+    dragOver.current = null;
+  };
+
   const contentList = names.map((name, index) => {
     const isSelected =
       (routingData.sectionIndex === sectionIndex) &
@@ -63,7 +72,18 @@ const RoutingItem = (props) => {
     const itemStyle = isSelected ? style.selectedContent : "";
 
     return (
-      <li key={name} className={itemStyle}>
+      <li
+        key={name}
+        className={itemStyle}
+        draggable={editing}
+        onDragEnter={() => {
+          dragOver.current = index;
+        }}
+        onDragStart={() => {
+          dragItem.current = index;
+        }}
+        onDragEnd={handleDragEnd}
+      >
         <p
           onClick={() => {
             handleClickContent(index);
@@ -91,7 +111,13 @@ const RoutingItem = (props) => {
   }
 
   return (
-    <li className={style.item}>
+    <li
+      className={style.item}
+      onDragStart={props.onDragStart}
+      onDragEnter={props.onDragEnter}
+      onDragEnd={props.onDragEnd}
+      draggable={editing}
+    >
       <div className={sectionClass}>
         <p onClick={handleClickSection}>{name}</p>
         {editing && buttons}

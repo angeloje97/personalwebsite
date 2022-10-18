@@ -29,6 +29,7 @@ const Project = (props) => {
 
   const handleRouteChange = (routeData) => {
     setRoutingData(routeData);
+    dispatch(projActions.update({ routingData }));
   };
 
   useEffect(() => {

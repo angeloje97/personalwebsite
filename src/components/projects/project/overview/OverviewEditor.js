@@ -7,6 +7,8 @@ import DynamicInput from "../../../dynamics/DynamicInput";
 import Input from "../../../elements/Input";
 import TextArea from "../../../elements/TextArea";
 import Button from "../../../elements/Button";
+import DynamicList from "../../../dynamics/DynamicList";
+import LinkInput from "../../../elements/LinkInput";
 
 const OverviewEditor = (props) => {
   const currentProject = useSelector((state) => state.proj.currentProject);
@@ -16,6 +18,7 @@ const OverviewEditor = (props) => {
       ? currentProject.overview
       : {
           media: { type: "Video" },
+          links: [],
         }
   );
 
@@ -25,8 +28,6 @@ const OverviewEditor = (props) => {
     if (currentProject.overview) {
       setInitialSate(currentProject.overview);
       setOverviewData(currentProject.overview);
-
-      console.log(overviewData);
     }
   }, []);
 
@@ -46,7 +47,7 @@ const OverviewEditor = (props) => {
     });
   };
 
-  const close = () => {
+  const close = (event) => {
     props.onClickOut();
   };
 
@@ -60,6 +61,25 @@ const OverviewEditor = (props) => {
     close();
   };
 
+  const handleLinkChange = (data) => {
+    setOverviewData((prev) => {
+      const newData = { ...prev };
+      newData.links = data;
+
+      if (newData.links.length === 1 && newData.links[0].url) {
+        if (newData.links[0].url.trim() === "") {
+          newData.links = [];
+        }
+      }
+
+      return newData;
+    });
+  };
+
+  useEffect(() => {
+    console.log(overviewData);
+  }, [overviewData]);
+
   const handleChangeDynamic = (data) => {
     setOverviewData((prev) => {
       const newData = {};
@@ -71,7 +91,6 @@ const OverviewEditor = (props) => {
         newData[prop] = prev[prop];
       }
 
-      console.log(newData);
       return newData;
     });
   };
@@ -81,27 +100,39 @@ const OverviewEditor = (props) => {
       <CardHeader header={headerContent} className={style.card}>
         <form onSubmit={handleSubmit}>
           <div className={style.body}>
-            <Input
-              placeholder="Overview Title"
-              value={overviewData.title}
-              onChange={updateData}
-              id="title"
-            />
-            <DynamicInput
-              className={style.media}
-              id="media"
-              types={["Video", "Image"]}
-              value={overviewData.media}
-              placeholder="Media Link"
-              onChange={handleChangeDynamic}
-            ></DynamicInput>
-            <TextArea
-              className={style.textArea}
-              placeholder="Description"
-              onChange={updateData}
-              value={overviewData.description}
-              id="description"
-            />
+            <div className={style.firstInputs}>
+              <Input
+                placeholder="Overview Title"
+                value={overviewData.title}
+                onChange={updateData}
+                id="title"
+              />
+              <DynamicInput
+                className={style.media}
+                id="media"
+                types={["Video", "Image"]}
+                value={overviewData.media}
+                placeholder="Media Link"
+                onChange={handleChangeDynamic}
+              ></DynamicInput>
+              <TextArea
+                resize="none"
+                className={style.textArea}
+                placeholder="Description"
+                onChange={updateData}
+                value={overviewData.description}
+                id="description"
+              />
+            </div>
+            <div className={style.links}>
+              <DynamicList
+                className={style.linkList}
+                startingValue={overviewData.links}
+                onChange={handleLinkChange}
+              >
+                <LinkInput />
+              </DynamicList>
+            </div>
           </div>
           <div className={style.buttons}>
             <Button type="submit">Confirm</Button>

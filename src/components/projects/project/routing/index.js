@@ -33,13 +33,12 @@ const ProjectRouting = (props) => {
     editingContent: false,
   });
 
-  const sections = currentProject.sections || TESTING_SECTIONS;
+  const sections = currentProject.sections || FALLBACK;
 
   const editing = useSelector((state) => state.proj.editing);
   const finalClass = styleGroup(style.routing, classtype, className, style);
 
   const handleChangeRoute = (routeData) => {
-    console.log(routeData);
     if (routeData.name.toLowerCase() === "overview") {
       setRoutingData(routeData);
       props.onChangeRoute(routeData);
@@ -55,6 +54,23 @@ const ProjectRouting = (props) => {
       return newData;
     });
     props.onChangeRoute(routeData);
+  };
+
+  const handleMoveContent = (from, to, sectionIndex) => {
+    const content = sections[sectionIndex].contents[from];
+    const newContents = [];
+
+    for (let i = 0; i < sections[sectionIndex].contents.length; i++) {
+      if (i === from) continue;
+      if (i === to) {
+        newContents.push(content);
+      }
+      newContents.push(sections[sectionIndex].contents[i]);
+    }
+
+    dispatch(
+      projActions.updateCurrentProjectContent({ newContents, sectionIndex })
+    );
   };
 
   const handleSelectSection = (sectionIndex) => {
@@ -96,7 +112,7 @@ const ProjectRouting = (props) => {
     const contentLength = sections[sectionIndex].contents.length;
     if (contentLength > 1) {
       const nextIndex = contentIndex > 0 ? contentIndex - 1 : contentLength - 2;
-      console.log(nextIndex);
+
       handleChangeRoute({
         name: "Content",
         sectionIndex,
@@ -118,6 +134,7 @@ const ProjectRouting = (props) => {
             contentIndex: itemIndex,
           })
         }
+        onMoveContent={handleMoveContent}
         onSelectSection={handleSelectSection}
         onRemoveSection={handleRemoveSection}
         onRemoveContent={handleRemoveContent}
