@@ -1,7 +1,11 @@
+import { useState } from "react";
 import React from "react";
 import Button from "../../../elements/Button";
 import List from "../../../elements/List";
+import ContentForm from "./ContentForm";
 import style from "./RoutingItem.module.css";
+import { projActions } from "../../../../store/projects";
+import { useDispatch } from "react-redux";
 
 const RoutingItem = (props) => {
   const {
@@ -12,15 +16,23 @@ const RoutingItem = (props) => {
     editing = false,
   } = props;
 
+  const dispatch = useDispatch();
   const selectedSection = routingData.selectedSection === sectionIndex;
+
+  const [createNew, setCreateNew] = useState(false);
 
   const handleRemoveSection = () => {
     props.onRemoveSection(sectionIndex);
   };
 
+  const toggleCreateNew = () => {
+    handleClickSection();
+    setCreateNew((prev) => !prev);
+  };
+
   const buttons = (
     <div>
-      <Button>+</Button>
+      <Button onClick={toggleCreateNew}>+</Button>
       <Button onClick={handleRemoveSection}>-</Button>
     </div>
   );
@@ -33,35 +45,62 @@ const RoutingItem = (props) => {
     props.onSelectSection(sectionIndex);
   };
 
+  const handleDeleteContent = (index) => {
+    props.onRemoveContent(sectionIndex, index);
+    dispatch(
+      projActions.removeContent({
+        sectionIndex,
+        contentIndex: index,
+      })
+    );
+  };
+
   const contentList = names.map((name, index) => {
     const isSelected =
       (routingData.sectionIndex === sectionIndex) &
       (routingData.contentIndex === index);
 
-    const itemStyle = isSelected ? style.selectedItem : "";
-    const itemName = isSelected ? `<${name}>` : name;
+    const itemStyle = isSelected ? style.selectedContent : "";
+
     return (
       <li key={name} className={itemStyle}>
-        {editing && <Button>-</Button>}
         <p
           onClick={() => {
             handleClickContent(index);
           }}
         >
-          {itemName}
+          {name}
         </p>
+        {editing && (
+          <Button
+            onClick={() => {
+              handleDeleteContent(index);
+            }}
+          >
+            -
+          </Button>
+        )}
       </li>
     );
   });
 
+  let sectionClass = style.section;
+
+  if (selectedSection) {
+    sectionClass += ` ${style.selectedSection}`;
+  }
+
   return (
     <li className={style.item}>
-      <div className={style.header}>
+      <div className={sectionClass}>
         <p onClick={handleClickSection}>{name}</p>
         {editing && buttons}
       </div>
       {selectedSection && (
         <List className={style.contentList}>{contentList}</List>
+      )}
+      {createNew && (
+        <ContentForm onClose={toggleCreateNew} sectionIndex={sectionIndex} />
       )}
     </li>
   );

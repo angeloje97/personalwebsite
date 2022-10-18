@@ -12,7 +12,7 @@ export const TESTING_SECTIONS = [
   {
     name: "Module",
     testing: true,
-    content: [
+    contents: [
       { name: "Mid Term", type: "Blog" },
       { name: "Final", type: "Blog" },
     ],
@@ -33,13 +33,27 @@ const ProjectRouting = (props) => {
     editingContent: false,
   });
 
-  const sections = currentProject.sections || FALLBACK;
+  const sections = currentProject.sections || TESTING_SECTIONS;
 
   const editing = useSelector((state) => state.proj.editing);
   const finalClass = styleGroup(style.routing, classtype, className, style);
 
   const handleChangeRoute = (routeData) => {
-    setRoutingData(routeData);
+    console.log(routeData);
+    if (routeData.name.toLowerCase() === "overview") {
+      setRoutingData(routeData);
+      props.onChangeRoute(routeData);
+      return;
+    }
+    setRoutingData((prev) => {
+      const newData = { ...prev };
+
+      for (const prop in routeData) {
+        newData[prop] = routeData[prop];
+      }
+
+      return newData;
+    });
     props.onChangeRoute(routeData);
   };
 
@@ -61,7 +75,7 @@ const ProjectRouting = (props) => {
   };
 
   const handleRemoveSection = (sectionIndex) => {
-    console.log(sectionIndex);
+    changeToOverview();
 
     const updatedSections = sections.filter(
       (section, index) => index !== sectionIndex
@@ -73,8 +87,28 @@ const ProjectRouting = (props) => {
     dispatch(projActions.setCurrentProject({ project: updatedProject }));
   };
 
+  const changeToOverview = () => {
+    handleChangeRoute({ name: "Overview" });
+  };
+
+  const handleRemoveContent = (sectionIndex, contentIndex) => {
+    if (routingData.sectionIndex !== sectionIndex) return;
+    const contentLength = sections[sectionIndex].contents.length;
+    if (contentLength > 1) {
+      const nextIndex = contentIndex > 0 ? contentIndex - 1 : contentLength - 2;
+      console.log(nextIndex);
+      handleChangeRoute({
+        name: "Content",
+        sectionIndex,
+        contentIndex: nextIndex,
+      });
+    } else {
+      handleChangeRoute({ name: "Overview" });
+    }
+  };
+
   const routes = sections.map((section, index) => {
-    const names = section.content.map((content) => content.name);
+    const names = section.contents.map((content) => content.name);
     return (
       <RoutingItem
         onSelect={(itemIndex) =>
@@ -86,6 +120,7 @@ const ProjectRouting = (props) => {
         }
         onSelectSection={handleSelectSection}
         onRemoveSection={handleRemoveSection}
+        onRemoveContent={handleRemoveContent}
         name={section.name}
         names={names}
         key={section.name}
@@ -98,14 +133,16 @@ const ProjectRouting = (props) => {
     );
   });
 
-  const overviewName =
-    routingData.name.toLowerCase() === "overview" ? `<Overview>` : "Overview";
+  let overviewName = "Overview";
+
+  let overviewStyle = style.overview;
+  if (routingData.name.toLowerCase() === "overview") {
+    overviewStyle += ` ${style.selectedOverview}`;
+  }
 
   const overview = (
-    <div className={style.overview}>
-      <p onClick={() => handleChangeRoute({ name: "Overview" })}>
-        {overviewName}
-      </p>
+    <div className={overviewStyle}>
+      <p onClick={changeToOverview}>{overviewName}</p>
     </div>
   );
 

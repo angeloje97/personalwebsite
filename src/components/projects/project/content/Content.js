@@ -16,7 +16,7 @@ const Content = (props) => {
     TESTING_SECTIONS;
 
   const content = sections
-    ? sections[sectionIndex].content[contentIndex]
+    ? sections[sectionIndex].contents[contentIndex]
     : undefined;
 
   if (!content) {

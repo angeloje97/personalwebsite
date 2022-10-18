@@ -1,0 +1,36 @@
+.card {
+  min-width: 400px;
+}
+
+.inputs {
+  display: flex;
+  gap: 5px;
+}
+
+.inputs > input {
+  flex-grow: 2;
+}
+
+.inputs > select {
+  flex-grow: 1;
+}
+
+.header {
+  text-align: center;
+
+  padding: 15px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  padding: 10px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}

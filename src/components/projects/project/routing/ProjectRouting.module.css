@@ -18,17 +18,15 @@
 
 .routingList > * {
   height: 50px;
-  border-style: solid;
+  /* border-style: solid; */
   width: 100%;
   /* background-color: var(--color-secondary); */
-  border-width: 0px 0px 0.5px 0px;
+  /* border-width: 0px 0px 0.5px 0px; */
   font-size: 18px;
 }
 
 .routingList > li {
-  padding-left: 15px;
   margin: 0px;
-
   display: flex;
   flex-direction: column;
 }
@@ -38,6 +36,8 @@
   border-style: solid;
   border-width: 0px;
   border-bottom-width: 1px;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
 
   padding: 10px;
 }
@@ -50,6 +50,12 @@
   margin: 0px;
   font-weight: 800;
   font-size: 20px;
+}
+
+.selectedOverview {
+  color: var(--color-primary);
+  background-color: var(--color-highlight);
+  box-shadow: inset 2px 2px 10px black;
 }
 
 .routingButtons {

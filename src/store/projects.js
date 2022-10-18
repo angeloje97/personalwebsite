@@ -47,6 +47,20 @@ const projectSlice = createSlice({
       state.currentProject = action.payload.project;
     },
 
+    updateCurrentProjectContent(state, action) {
+      const { newContents, sectionIndex } = action.payload;
+      console.log(newContents);
+      state.currentProject.sections[sectionIndex].contents = newContents;
+    },
+
+    removeContent(state, action) {
+      const { sectionIndex, contentIndex } = action.payload;
+      state.currentProject.sections[sectionIndex].contents =
+        state.currentProject.sections[sectionIndex].contents.filter(
+          (content, index) => index !== contentIndex
+        );
+    },
+
     revertCurrentProjectChanges(state) {
       if (!state.currentProject) return;
       var id = state.currentProject._id;
