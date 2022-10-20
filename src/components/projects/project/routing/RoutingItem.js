@@ -18,11 +18,16 @@ const RoutingItem = (props) => {
 
   const dispatch = useDispatch();
   const selectedSection = routingData.selectedSection === sectionIndex;
+  const [openContent, setOpenContent] = useState(false);
 
   const [createNew, setCreateNew] = useState(false);
 
   const dragItem = useRef(null);
   const dragOver = useRef(null);
+
+  const toggleContent = () => {
+    setOpenContent((prev) => !prev);
+  };
 
   const handleRemoveSection = () => {
     props.onRemoveSection(sectionIndex);
@@ -106,10 +111,6 @@ const RoutingItem = (props) => {
 
   let sectionClass = style.section;
 
-  if (selectedSection) {
-    sectionClass += ` ${style.selectedSection}`;
-  }
-
   return (
     <li
       className={style.item}
@@ -119,12 +120,10 @@ const RoutingItem = (props) => {
       draggable={editing}
     >
       <div className={sectionClass}>
-        <p onClick={handleClickSection}>{name}</p>
+        <p onClick={toggleContent}>{name}</p>
         {editing && buttons}
       </div>
-      {selectedSection && (
-        <List className={style.contentList}>{contentList}</List>
-      )}
+      {openContent && <List className={style.contentList}>{contentList}</List>}
       {createNew && (
         <ContentForm onClose={toggleCreateNew} sectionIndex={sectionIndex} />
       )}

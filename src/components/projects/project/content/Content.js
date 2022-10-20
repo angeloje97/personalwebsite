@@ -5,12 +5,10 @@ import Blog from "./Blog";
 import Module from "./Module";
 
 const Content = (props) => {
-  const {
-    sectionIndex = 0,
-    contentIndex = 0,
-    classtype = "",
-    className = "",
-  } = props;
+  const { classtype = "", className = "" } = props;
+
+  const routingData = useSelector((state) => state.proj.routingData);
+  const { sectionIndex, contentIndex } = routingData;
 
   const content = useSelector(
     (state) =>

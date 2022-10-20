@@ -57,7 +57,13 @@ const ProjectRouting = (props) => {
   };
 
   const handleMoveContent = (from, to, sectionIndex) => {
-    const content = sections[sectionIndex].contents[from];
+    const contents = sections[sectionIndex].contents;
+    const length = contents.length;
+
+    if (to < 0 || to >= length) return;
+
+    const content = contents[from];
+
     const newContents = [];
 
     for (let i = 0; i < sections[sectionIndex].contents.length; i++) {
