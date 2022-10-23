@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import React from "react";
 import Button from "../../../elements/Button";
+import Icon from "../../../elements/Icon";
 import List from "../../../elements/List";
 import ContentForm from "./ContentForm";
 import style from "./RoutingItem.module.css";
 import { projActions } from "../../../../store/projects";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const RoutingItem = (props) => {
   const {
@@ -17,10 +18,9 @@ const RoutingItem = (props) => {
   } = props;
 
   const dispatch = useDispatch();
-  const selectedSection = routingData.selectedSection === sectionIndex;
   const [openContent, setOpenContent] = useState(false);
-
   const [createNew, setCreateNew] = useState(false);
+  const editingContent = useSelector((state) => state.proj.editingContent);
 
   const dragItem = useRef(null);
   const dragOver = useRef(null);
@@ -38,11 +38,28 @@ const RoutingItem = (props) => {
     setCreateNew((prev) => !prev);
   };
 
+  const handleEdit = () => {
+    if (props.onEdit) {
+      props.onEditSection(sectionIndex);
+    }
+  };
+
+  // const buttons = (
+  //   <div>
+  //     <Button onClick={handleEdit}>
+  //       <Icon icon="edit" />
+  //     </Button>
+  //     <Button onClick={toggleCreateNew}>+</Button>
+  //     <Button onClick={handleRemoveSection}>-</Button>
+  //   </div>
+  // );
+
   const buttons = (
-    <div>
-      <Button onClick={toggleCreateNew}>+</Button>
-      <Button onClick={handleRemoveSection}>-</Button>
-    </div>
+    <SectionEditorButtons
+      toggleCreateNew={toggleCreateNew}
+      handleRemoveSection={handleRemoveSection}
+      sectionIndex={sectionIndex}
+    />
   );
 
   const handleClickContent = (index) => {
@@ -97,13 +114,11 @@ const RoutingItem = (props) => {
           {name}
         </p>
         {editing && (
-          <Button
-            onClick={() => {
-              handleDeleteContent(index);
-            }}
-          >
-            -
-          </Button>
+          <ContentEditorButtons
+            sectionIndex={sectionIndex}
+            contentIndex={index}
+            onDeleteContent={() => handleDeleteContent(index)}
+          />
         )}
       </li>
     );
@@ -124,10 +139,66 @@ const RoutingItem = (props) => {
         {editing && buttons}
       </div>
       {openContent && <List className={style.contentList}>{contentList}</List>}
-      {createNew && (
-        <ContentForm onClose={toggleCreateNew} sectionIndex={sectionIndex} />
-      )}
+      {editingContent && <ContentForm sectionIndex={sectionIndex} />}
     </li>
+  );
+};
+
+const SectionEditorButtons = (props) => {
+  const { toggleCreateNew, handleRemoveSection, sectionIndex } = props;
+  const dispatch = useDispatch();
+
+  const handleEdit = () => {
+    dispatch(
+      projActions.update({
+        editingSection: true,
+        editingSectionIndex: sectionIndex,
+      })
+    );
+  };
+
+  const handleCreateNewContent = () => {
+    dispatch(
+      projActions.update({
+        editingContent: true,
+        editingContentIndex: -1,
+        editingSectionIndex: sectionIndex,
+      })
+    );
+  };
+
+  return (
+    <div>
+      <Button onClick={handleEdit}>
+        <Icon icon="edit" />
+      </Button>
+      <Button onClick={handleCreateNewContent}>+</Button>
+      <Button onClick={handleRemoveSection}>-</Button>
+    </div>
+  );
+};
+
+const ContentEditorButtons = (props) => {
+  const { sectionIndex, contentIndex } = props;
+
+  const dispatch = useDispatch();
+
+  const handleEditContent = () => {
+    dispatch(
+      projActions.update({
+        editingContent: true,
+        editingSectionIndex: sectionIndex,
+        editingContentIndex: contentIndex,
+      })
+    );
+  };
+  return (
+    <div className={style.contentButtons}>
+      <Button onClick={handleEditContent}>
+        <Icon icon="edit" />
+      </Button>
+      <Button onClick={props.onDeleteContent}>-</Button>
+    </div>
   );
 };
 

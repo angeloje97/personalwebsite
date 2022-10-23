@@ -24,14 +24,11 @@ const ProjectRouting = (props) => {
   const { classtype = "", className = "" } = props;
 
   const currentProject = useSelector((state) => state.proj.currentProject);
+  const editingSection = useSelector((state) => state.proj.editingSection);
 
   const dispatch = useDispatch();
 
   const [routingData, setRoutingData] = useState({ name: "Overview" });
-  const [editorData, setEditorData] = useState({
-    editingSection: false,
-    editingContent: false,
-  });
 
   const sections = currentProject.sections || FALLBACK;
 
@@ -97,7 +94,9 @@ const ProjectRouting = (props) => {
   };
 
   const handleRemoveSection = (sectionIndex) => {
-    changeToOverview();
+    if (sectionIndex === routingData.sectionIndex) {
+      changeToOverview();
+    }
 
     const updatedSections = sections.filter(
       (section, index) => index !== sectionIndex
@@ -173,18 +172,22 @@ const ProjectRouting = (props) => {
     <div className={finalClass}>
       {overview}
       <List className={style.routingList}>{routes}</List>
-      {editing && <EditorButtons onShowNewSection={toggleSectionEditor} />}
-      {editorData.editingSection && (
-        <SectionForm onClose={toggleSectionEditor} />
-      )}
+      {editing && <EditorButtons />}
+
+      {editingSection && <SectionForm />}
     </div>
   );
 };
 
 const EditorButtons = (props) => {
+  const dispatch = useDispatch();
+
+  const handleOpenEditor = () => {
+    dispatch(projActions.update({ editingSection: true }));
+  };
   return (
     <div className={style.routingButtons}>
-      <Button onClick={props.onShowNewSection}>+</Button>
+      <Button onClick={handleOpenEditor}>+</Button>
     </div>
   );
 };

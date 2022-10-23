@@ -11,16 +11,19 @@ import { projActions } from "../../../../store/projects";
 const CONTENT_TYPES = ["Blog", "Module"];
 
 const ContentForm = (props) => {
-  const { sectionIndex, contentIndex = -1 } = props;
-  const [contentData, setContentData] = useState({
-    name: "",
-    type: "Blog",
-  });
-
   const dispatch = useDispatch();
   const currentProject = useSelector((state) => state.proj.currentProject);
-
+  const contentIndex = useSelector((state) => state.proj.editingContentIndex);
+  const sectionIndex = useSelector((state) => state.proj.editingSectionIndex);
   const section = currentProject.sections[sectionIndex];
+  const content = contentIndex !== -1 ? section.contents[contentIndex] : null;
+
+  const [contentData, setContentData] = useState(
+    content || {
+      name: "",
+      type: "Blog",
+    }
+  );
 
   const updateData = (event) => {
     const id = event.target.id;
@@ -33,21 +36,19 @@ const ContentForm = (props) => {
       return newData;
     });
   };
-  const header = <div className={style.header}>New Content</div>;
+  const header = (
+    <div className={style.header}>
+      {content ? `Editing ${content.name}` : "New Content"}
+    </div>
+  );
 
   const options = CONTENT_TYPES.map((type) => {
     return (
-      <option key={type} value={type}>
+      <option key={type} value={type} selected={type === contentData.type}>
         {type}
       </option>
     );
   });
-
-  const close = () => {
-    if (props.onClose) {
-      props.onClose();
-    }
-  };
 
   const handleSubmission = (event) => {
     event.preventDefault();
@@ -58,8 +59,18 @@ const ContentForm = (props) => {
     if (contentIndex === -1) {
       updatedContents.push({ name, type, updated: `${new Date()}` });
     } else {
-      updatedContents[contentIndex].name = name;
-      updatedContents[contentIndex].type = type;
+      const newContent = { ...section.contents[contentIndex] };
+
+      newContent.name = name;
+      newContent.type = type;
+
+      for (let i = 0; i < updatedContents.length; i++) {
+        if (i !== contentIndex) {
+          continue;
+        }
+
+        updatedContents[i] = newContent;
+      }
     }
 
     dispatch(
@@ -71,6 +82,16 @@ const ContentForm = (props) => {
 
     close();
   };
+  const close = () => {
+    dispatch(
+      projActions.update({
+        editingContent: false,
+        editingContentIndex: -1,
+        editingContentIndex: -1,
+      })
+    );
+  };
+
   return (
     <Modal onClickOut={close}>
       <CardHeader className={style.card} header={header}>

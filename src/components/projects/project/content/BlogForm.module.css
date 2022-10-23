@@ -1,0 +1,33 @@
+.card {
+  min-width: 800px;
+}
+
+.card > section > h3 {
+  text-align: center;
+}
+
+.card > section > form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px;
+  padding-bottom: 5px;
+  gap: 10px;
+}
+
+.card > section > form > textarea {
+  min-width: 100%;
+  min-height: 400px;
+  align-self: center;
+  resize: none;
+  overflow: scroll;
+  padding: 10px;
+}
+
+.card > section > form > div {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: stretch;
+
+  gap: 10px;
+}

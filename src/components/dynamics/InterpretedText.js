@@ -11,6 +11,9 @@ const InterpretedText = (props) => {
     return <p className={finalClass}>{fallback}</p>;
   }
   const sections = text.split("\\");
+  if (sections[0].length === text.length) {
+    return <p className={finalClass}>{fallback}</p>;
+  }
   let results = [];
   let index = 0;
   for (const section of sections) {

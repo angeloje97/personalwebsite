@@ -9,9 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { projActions } from "../../../../store/projects";
 
 const SectionForm = (props) => {
-  const { section, sectionIndex } = props;
-
   const currentProject = useSelector((state) => state.proj.currentProject);
+  const sectionIndex = useSelector((state) => state.proj.editingSectionIndex);
+
+  const section =
+    sectionIndex !== -1
+      ? useSelector((state) => state.proj.currentProject.sections[sectionIndex])
+      : null;
 
   const dispatch = useDispatch();
 
@@ -27,9 +31,9 @@ const SectionForm = (props) => {
     });
   };
   const close = () => {
-    if (props.onClose) {
-      props.onClose();
-    }
+    dispatch(
+      projActions.update({ editingSection: false, editingSectionIndex: -1 })
+    );
   };
 
   const handleSubmit = (event) => {
@@ -44,7 +48,7 @@ const SectionForm = (props) => {
     if (section) {
       const updatedSections = [];
 
-      for (let i = 0; i < section.length; i++) {
+      for (let i = 0; i < sections.length; i++) {
         if (i === sectionIndex) {
           updatedSections.push({ ...section, name: sectionData.name });
           continue;
@@ -68,7 +72,7 @@ const SectionForm = (props) => {
 
   const header = (
     <div className={style.header}>
-      <h3>{section ? "Edit Section Name" : "New Section Name"}</h3>
+      <h3>{section ? `Editing ${section.name}` : "New Section Name"}</h3>
     </div>
   );
 

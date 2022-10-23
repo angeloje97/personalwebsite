@@ -8,12 +8,19 @@ const initialState = {
   removing: false,
   editing: false,
   creatingNew: false,
+  editingSection: false,
+  editingContent: false,
+  editingBlog: false,
 
   routingData: {
     name: "",
     sectionIndex: "",
     contentIndex: "",
   },
+
+  editingSectionIndex: -1,
+  editingContentIndex: -1,
+  editingBlogIndex: -1,
   currentProject: null,
 };
 
