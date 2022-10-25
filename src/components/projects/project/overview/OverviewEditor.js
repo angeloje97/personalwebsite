@@ -129,6 +129,7 @@ const OverviewEditor = (props) => {
                 className={style.linkList}
                 startingValue={overviewData.links}
                 onChange={handleLinkChange}
+                templateValue={{ name: "", link: "" }}
               >
                 <LinkInput />
               </DynamicList>

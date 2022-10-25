@@ -11,6 +11,7 @@ const initialState = {
   editingSection: false,
   editingContent: false,
   editingBlog: false,
+  editingModule: false,
 
   routingData: {
     name: "",
@@ -21,6 +22,7 @@ const initialState = {
   editingSectionIndex: -1,
   editingContentIndex: -1,
   editingBlogIndex: -1,
+  editingModuleIndex: -1,
   currentProject: null,
 };
 
@@ -61,7 +63,6 @@ const projectSlice = createSlice({
 
     updateCurrentProjectContent(state, action) {
       const { newContents, sectionIndex } = action.payload;
-      console.log(newContents);
       state.currentProject.sections[sectionIndex].contents = newContents;
 
       state.currentProject.sections[sectionIndex].updated = `${new Date()}`;

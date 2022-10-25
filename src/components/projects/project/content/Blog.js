@@ -10,10 +10,10 @@ import BlogForm from "./BlogForm";
 import { projActions } from "../../../../store/projects";
 import List from "../../../elements/List";
 import { formattedDate } from "../../../../helpers/stringHelper";
+import Icon from "../../../elements/Icon";
 
 const Blog = (props) => {
   const { classtype = "", className = "" } = props;
-  const [editinActive, setEditingActive] = useState(false);
   const editing = useSelector((state) => state.proj.editing);
   const editingBlog = useSelector((state) => state.proj.editingBlog);
 
@@ -26,12 +26,12 @@ const Blog = (props) => {
     <div className={finalStyle}>
       {editing && <BlogEditorButtons />}
       {editingBlog && <BlogForm />}
-      <Entries entries={entries} />
+      <Entries entries={entries} editing={editing} />
     </div>
   );
 };
 
-const Entries = ({ entries }) => {
+const Entries = ({ entries, editing }) => {
   const entryContent = entries.map((entry, index) => {
     const date = formattedDate(new Date(entry.dateCreated));
 
@@ -39,6 +39,7 @@ const Entries = ({ entries }) => {
     return (
       <li key={index} className={style.entry}>
         {divider}
+        {editing && <EntryEditorButtons entryIndex={index} />}
         <h4 className={style.dateCreated}>{date}</h4>
         <InterpretedText text={entry.text} />
       </li>
@@ -58,6 +59,35 @@ const BlogEditorButtons = () => {
   return (
     <div className={style.editorButtons}>
       <Button onClick={handleNewBlog}>New Blog</Button>
+    </div>
+  );
+};
+
+const EntryEditorButtons = ({ entryIndex }) => {
+  const dispatch = useDispatch();
+  const [content, setContent] = useContent(true);
+
+  const handleEdit = () => {
+    dispatch(
+      projActions.update({ editingBlog: true, editingBlogIndex: entryIndex })
+    );
+  };
+
+  const handleDelete = () => {
+    setContent({
+      ...content,
+      entries: content.entries.filter((entry, index) => index !== entryIndex),
+    });
+  };
+
+  return (
+    <div className={style.entryButtons}>
+      <Button onClick={handleEdit}>
+        <Icon icon="edit" />
+      </Button>
+      <Button onClick={handleDelete}>
+        <Icon icon="trash" />
+      </Button>
     </div>
   );
 };

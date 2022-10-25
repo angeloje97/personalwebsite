@@ -8,6 +8,7 @@ const DynamicList = (props) => {
   const {
     controlValue = true,
     startingValue = [],
+    templateValue = "",
     showButtons = true,
     max = 5,
     classtype = "",
@@ -44,7 +45,7 @@ const DynamicList = (props) => {
 
     for (let i = 0; i < count; i++) {
       if (i >= data.length) {
-        newData.push({ name: "", link: "" });
+        newData.push(templateValue);
         continue;
       }
       newData.push(data[i]);

@@ -1,0 +1,52 @@
+Date : 2022-10-24 18:59:06
+Directory : /Volumes/AJDWS/WorkSpace/Websites/angelo/pages
+Total : 21 files,  574 codes, 2 comments, 129 blanks, all 705 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         17 |        513 |          0 |        116 |        629 |
+| CSS        |          3 |         54 |          2 |         12 |         68 |
+| JSON       |          1 |          7 |          0 |          1 |          8 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                            | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                               |         21 |        574 |          2 |        129 |        705 |
+| admin                                                                           |          2 |        116 |          0 |         19 |        135 |
+| api                                                                             |          8 |        197 |          0 |         64 |        261 |
+| api/helper                                                                      |          2 |         20 |          0 |          9 |         29 |
+| api/projects                                                                    |          4 |        128 |          0 |         40 |        168 |
+| projects                                                                        |          3 |        117 |          2 |         22 |        141 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                        | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/_app.js                          | JavaScript |         17 |          0 |          3 |         20 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/_document.js                     | JavaScript |         19 |          0 |          2 |         21 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/about-me.js                      | JavaScript |         12 |          0 |          3 |         15 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/admin/admin.module.css           | CSS        |         24 |          0 |          4 |         28 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/admin/index.js                   | JavaScript |         92 |          0 |         15 |        107 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/config.json                  | JSON       |          7 |          0 |          1 |          8 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/helper/database.js           | JavaScript |          5 |          0 |          2 |          7 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/helper/stringHelper.js       | JavaScript |         15 |          0 |          7 |         22 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/login.js                     | JavaScript |         42 |          0 |         14 |         56 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/projects/index.js            | JavaScript |         22 |          0 |          8 |         30 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/projects/new.js              | JavaScript |         40 |          0 |         10 |         50 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/projects/remove.js           | JavaScript |         31 |          0 |         11 |         42 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/api/projects/update.js           | JavaScript |         35 |          0 |         11 |         46 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/index.js                         | JavaScript |          6 |          0 |          2 |          8 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/indexnext.js                     | JavaScript |         61 |          0 |          9 |         70 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/projects/ProjectsPage.module.css | CSS        |         25 |          2 |          7 |         34 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/projects/[projectId].js          | JavaScript |         69 |          0 |         10 |         79 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/projects/index.js                | JavaScript |         23 |          0 |          5 |         28 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/resume.js                        | JavaScript |          4 |          0 |          2 |          6 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/testing.js                       | JavaScript |         20 |          0 |          2 |         22 |
+| /Volumes/AJDWS/WorkSpace/Websites/angelo/pages/testing.module.css               | CSS        |          5 |          0 |          1 |          6 |
+| Total                                                                           |            |        574 |          2 |        129 |        705 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

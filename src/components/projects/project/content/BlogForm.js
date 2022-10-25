@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useContent } from "../../../../custom-hooks/website-projects";
 import { projActions } from "../../../../store/projects";
 import CardHeader from "../../../cards/CardHeader";
@@ -13,9 +13,24 @@ const BlogForm = (props) => {
   const dispatch = useDispatch();
 
   const [content, setContent] = useContent(true);
-  const [data, setData] = useState({});
+  const blogIndex = useSelector((state) => state.proj.editingBlogIndex);
 
-  const title = "New Entry";
+  let currentEntry = null;
+
+  if (blogIndex !== -1) {
+    currentEntry = content.entries[blogIndex];
+  }
+
+  const [data, setData] = useState(
+    currentEntry
+      ? currentEntry
+      : {
+          text: "",
+          dateCreated: "",
+        }
+  );
+
+  const title = currentEntry ? `Editing Entry ${blogIndex + 1}` : "New Entry";
 
   const updateData = (event) => {
     const id = event.target.id;
@@ -39,13 +54,24 @@ const BlogForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const entry = { ...data };
-    entry.dateCreated = `${new Date()}`;
-    console.log(entry);
 
-    const newEntries = content.entries ? [...content.entries, entry] : [entry];
+    if (currentEntry) {
+      const newEntries = [...content.entries];
 
-    setContent({ ...content, entries: newEntries });
+      newEntries[blogIndex] = entry;
+
+      setContent({ ...content, entries: newEntries });
+    } else {
+      entry.dateCreated = `${new Date()}`;
+
+      const newEntries = content.entries
+        ? [entry, ...content.entries]
+        : [entry];
+
+      setContent({ ...content, entries: newEntries });
+    }
     close();
   };
 
@@ -54,7 +80,12 @@ const BlogForm = (props) => {
     <Modal onClickOut={close}>
       <CardHeader header={header} className={style.card}>
         <form onSubmit={handleSubmit}>
-          <TextArea placeholder="Entry Text" id="text" onChange={updateData} />
+          <TextArea
+            placeholder="Entry Text"
+            id="text"
+            onChange={updateData}
+            value={data.text}
+          />
           <div>
             <Button type="submit">Confirm</Button>
             <Button type="button" onClick={close}>

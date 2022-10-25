@@ -26,6 +26,10 @@
   margin: 10px;
 }
 
+.entry > div {
+  display: flex;
+  flex-direction: column;
+}
 .entry > div > h2 {
   text-align: center;
 }
@@ -53,10 +57,22 @@
 
   width: 800px;
 }
+
+.entryButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 .entry > div > div > * {
   min-height: 100%;
   min-width: 100%;
   aspect-ratio: 16/9;
+}
+
+.entry > div > img {
+  max-width: 80%;
+  height: 600px;
+  align-self: center;
 }
 
 .entryDivider {
