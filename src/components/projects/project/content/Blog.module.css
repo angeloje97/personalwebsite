@@ -61,12 +61,30 @@
 .entryButtons {
   display: flex;
   justify-content: flex-end;
+
   gap: 10px;
+  align-self: flex-end;
 }
 .entry > div > div > * {
   min-height: 100%;
   min-width: 100%;
   aspect-ratio: 16/9;
+}
+
+.entry > div > a {
+  border-style: solid;
+  border-radius: var(--border-radius);
+  width: fit-content;
+  padding: 10px;
+  align-self: center;
+  margin: 10px;
+}
+
+.entry > div > a:hover {
+  background-color: var(--color-highlight);
+  box-shadow: inset 0px 0px 10px black;
+  color: var(--color-primary);
+  border-color: var(--color-highlight);
 }
 
 .entry > div > img {

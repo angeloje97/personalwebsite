@@ -32,7 +32,7 @@ const InterpretedText = (props) => {
     const content = section.slice(currentCharacter, section.length);
 
     if (type === "link") {
-      const linkContent = content.split(":");
+      const linkContent = content.split("|");
       const linkName = linkContent[0];
       const linkUrl = linkContent[1];
       results.push(

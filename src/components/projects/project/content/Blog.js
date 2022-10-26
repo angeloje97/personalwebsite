@@ -81,14 +81,14 @@ const EntryEditorButtons = ({ entryIndex }) => {
   };
 
   return (
-    <div className={style.entryButtons}>
+    <section className={style.entryButtons}>
       <Button onClick={handleEdit}>
         <Icon icon="edit" />
       </Button>
       <Button onClick={handleDelete}>
         <Icon icon="trash" />
       </Button>
-    </div>
+    </section>
   );
 };
 
