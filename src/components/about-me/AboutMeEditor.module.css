@@ -1,0 +1,15 @@
+.editor {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 20px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.editor > button {
+  min-width: 100px;
+  padding: 15px;
+}

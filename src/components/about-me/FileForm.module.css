@@ -1,0 +1,11 @@
+.card {
+  min-width: 300px;
+}
+
+.card > section > header {
+  text-align: center;
+}
+
+.body {
+  min-height: 300px;
+}

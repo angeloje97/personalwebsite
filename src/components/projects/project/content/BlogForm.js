@@ -5,6 +5,8 @@ import CardHeader from "../../../cards/CardHeader";
 import Modal from "../../../modals/Modal";
 import TextArea from "../../../elements/TextArea";
 import Button from "../../../elements/Button";
+import DynamicList from "../../../dynamics/DynamicList";
+import LinkInput from "../../../elements/LinkInput";
 
 import style from "./BlogForm.module.css";
 import { useState } from "react";
@@ -27,6 +29,7 @@ const BlogForm = (props) => {
       : {
           text: "",
           dateCreated: "",
+          links: [],
         }
   );
 
@@ -41,6 +44,11 @@ const BlogForm = (props) => {
 
       return newData;
     });
+  };
+
+  const handleLinkChange = (linkData) => {
+    console.log(linkData);
+    setData({ ...data, links: linkData });
   };
 
   const close = () => {
@@ -80,13 +88,23 @@ const BlogForm = (props) => {
     <Modal onClickOut={close}>
       <CardHeader header={header} className={style.card}>
         <form onSubmit={handleSubmit}>
-          <TextArea
-            placeholder="Entry Text"
-            id="text"
-            onChange={updateData}
-            value={data.text}
-          />
-          <div>
+          <div className={style.inputs}>
+            <TextArea
+              placeholder="Entry Text"
+              id="text"
+              onChange={updateData}
+              value={data.text}
+            />
+            <DynamicList
+              className={style.links}
+              startingValue={data.links}
+              templateValue={{ name: "", link: "" }}
+              onChange={handleLinkChange}
+            >
+              <LinkInput />
+            </DynamicList>
+          </div>
+          <div className={style.buttons}>
             <Button type="submit">Confirm</Button>
             <Button type="button" onClick={close}>
               Cancel

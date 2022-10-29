@@ -7,8 +7,9 @@ import style from "./Blog.module.css";
 import InterpretedText from "../../../dynamics/InterpretedText";
 import Button from "../../../elements/Button";
 import BlogForm from "./BlogForm";
-import { projActions } from "../../../../store/projects";
 import List from "../../../elements/List";
+import Link from "../../../elements/Link";
+import { projActions } from "../../../../store/projects";
 import { formattedDate } from "../../../../helpers/stringHelper";
 import Icon from "../../../elements/Icon";
 
@@ -35,6 +36,18 @@ const Entries = ({ entries, editing }) => {
   const entryContent = entries.map((entry, index) => {
     const date = formattedDate(new Date(entry.dateCreated));
 
+    const linkContent =
+      entry.links &&
+      entry.links.map((link) => {
+        return (
+          <li>
+            <Link href={link.url} key={link.link}>
+              {link.name}
+            </Link>
+          </li>
+        );
+      });
+
     const divider = index > 0 ? <div className={style.entryDivider} /> : null;
     return (
       <li key={index} className={style.entry}>
@@ -42,6 +55,7 @@ const Entries = ({ entries, editing }) => {
         {editing && <EntryEditorButtons entryIndex={index} />}
         <h4 className={style.dateCreated}>{date}</h4>
         <InterpretedText text={entry.text} />
+        <List className={style.linkList}>{linkContent}</List>
       </li>
     );
   });

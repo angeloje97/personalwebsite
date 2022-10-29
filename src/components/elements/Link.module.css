@@ -1,0 +1,16 @@
+.link {
+  border-style: solid;
+  border-radius: var(--border-radius);
+  border-width: 1px;
+  border-color: var(--color-highlight);
+  padding: 5px;
+
+  transition: all 0.3s ease-out;
+}
+
+.link:hover {
+  background: var(--color-highlight);
+  color: var(--color-primary);
+  border-color: var(--color-highlight);
+  box-shadow: inset 0px 0px 10px black;
+}
