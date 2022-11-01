@@ -35,7 +35,7 @@ const FileForm = (props) => {
   return (
     <Modal onClickOut={close}>
       <CardHeader header={header} className={style.card}>
-        <div className={style.body}></div>
+        <form onSubmit={handleSubmission} className={style.body}></form>
       </CardHeader>
     </Modal>
   );
