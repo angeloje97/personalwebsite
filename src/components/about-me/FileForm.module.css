@@ -7,5 +7,13 @@
 }
 
 .body {
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formButtons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-self: flex-end;
 }
