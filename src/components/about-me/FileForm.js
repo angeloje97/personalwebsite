@@ -40,6 +40,8 @@ const FileForm = (props) => {
 
   const handleSubmission = (event) => {
     event.preventDefault();
+
+    close();
   };
 
   return (
