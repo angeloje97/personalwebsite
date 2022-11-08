@@ -4,6 +4,7 @@ const initialState = {
   files: [],
   loading: false,
   editing: false,
+  removing: false,
 
   editingFile: false,
   editingFileIndex: -1,

@@ -19,3 +19,33 @@ export const loadFiles = () => {
     }
   };
 };
+
+export const addFile = (newFile, currentFiles, sessionId) => {
+  return async (dispatch) => {
+    try {
+      newFile.created = new Date();
+      newFile.updated = new Date();
+      const response = await fetch("/api/about-me/new", {
+        method: "POST",
+        body: JSON.stringify({
+          sessionId,
+          newFile,
+        }),
+        "Content-Type": "Application/json",
+      });
+
+      const data = await response.json();
+      newFile._id = data.body.newFile.insertedId;
+      newFile.created = `${newFile.created}`;
+      newFile.updated = `${newFile.updated}`;
+
+      if (currentFiles) {
+        dispatch(
+          aboutMeActions.update({
+            files: [newFile, ...currentFiles],
+          })
+        );
+      }
+    } catch (error) {}
+  };
+};

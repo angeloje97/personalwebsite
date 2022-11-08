@@ -34,6 +34,8 @@ async function handler(req, res) {
 
     client.close();
 
+    console.log(newProject.insertedId);
+
     res.status(200).json({
       message: "Succesfuly created a new project!",
       body: { newProject },

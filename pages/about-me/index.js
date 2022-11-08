@@ -11,11 +11,9 @@ const AboutMe = () => {
   const files = useSelector((state) => state.aboutMe.files);
   const editingFile = useSelector((state) => state.aboutMe.editingFile);
 
-  const tabs = files.map((file) => file.name);
-
   return (
     <div>
-      <Tabs tabs={tabs} onChangeTab={handleChangeTab} />
+      <Tabs files={files} onChangeTab={handleChangeTab} />
       {isAuthenticated && <AboutMeEditor />}
       {editingFile && <FileForm />}
     </div>

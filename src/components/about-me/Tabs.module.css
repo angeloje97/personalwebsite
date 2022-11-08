@@ -8,13 +8,25 @@
 }
 
 .tab {
-  min-width: 100px;
+  min-width: fit-content;
+  min-height: 50px;
   font-size: 18px;
   border-bottom-width: 0px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   background-color: var(--color-tabs);
   color: var(--color-primary);
+}
+
+.tab > div {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.tab > div > * {
+  width: fit-content;
+  margin: 0px;
 }
 
 .selectedTab {

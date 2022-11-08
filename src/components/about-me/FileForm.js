@@ -5,12 +5,15 @@ import CardHeader from "../../components/cards/CardHeader";
 import Button from "../../components/elements/Button";
 
 import { useDispatch, useSelector } from "react-redux";
-import { aboutMeActions } from "../../store/about-me";
+import aboutMe, { aboutMeActions } from "../../store/about-me";
+import { addFile } from "../../store/aboutMeActions";
+
 import { useState } from "react";
 
 const FileForm = (props) => {
   const fileIndex = useSelector((state) => state.aboutMe.editingFileIndex);
   const files = useSelector((state) => state.aboutMe.files);
+  const sessionId = useSelector((state) => state.auth.sessionId);
   const dispatch = useDispatch();
 
   const [data, setData] = useState({
@@ -41,7 +44,7 @@ const FileForm = (props) => {
   const handleSubmission = (event) => {
     event.preventDefault();
 
-    close();
+    dispatch(addFile(data, files, sessionId));
   };
 
   return (
