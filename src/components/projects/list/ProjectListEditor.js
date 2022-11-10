@@ -4,6 +4,8 @@ import Button from "../../elements/Button";
 import style from "./ProjectListEditor.module.css";
 import { projActions } from "../../../store/projects";
 import { removeSelectedProjects } from "../../../store/projActions";
+import CardHeader from "../../cards/CardHeader";
+import Modal from "../../modals/Modal";
 
 const reducer = (state, action) => {};
 
@@ -64,11 +66,18 @@ const ProjectListEditor = () => {
 const ProjectRemover = (props) => {
   const dispatch = useDispatch();
   const sessionId = useSelector((state) => state.auth.sessionId);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const selectedProjectIds = useSelector(
     (state) => state.proj.selectedProjectIds
   );
   const projects = useSelector((state) => state.proj.projects);
+
+  const selectedProjectNames = projects
+    .filter((project) => selectedProjectIds.includes(project._id))
+    .map((project) => project.name)
+    .join(", ");
+
   useEffect(() => {
     return () => {
       dispatch(projActions.clearSelectedIds());
@@ -84,9 +93,35 @@ const ProjectRemover = (props) => {
     dispatch(removeSelectedProjects(selectedProjectIds, projects, sessionId));
   };
 
+  const closeModal = () => {
+    setShowConfirm(false);
+  };
+
+  const confirmModal = showConfirm && (
+    <Modal onClickOut={closeModal}>
+      <CardHeader
+        header={<h2>Confirm Remove Projects</h2>}
+        className={style.confirmCard}
+      >
+        <p>Are you sure you want to remove {selectedProjectNames}?</p>
+        <section>
+          <Button onClick={handleConfirm}>Confirm</Button>
+          <Button onClick={closeModal}>Cancel</Button>
+        </section>
+      </CardHeader>
+    </Modal>
+  );
+
   return (
     <div className={style.editor}>
-      <Button onClick={handleConfirm}>Confirm Remove</Button>
+      {confirmModal}
+      <Button
+        onClick={() => {
+          setShowConfirm(true);
+        }}
+      >
+        Remove Selected
+      </Button>
       <Button onClick={handleCancel}>Cancel</Button>
     </div>
   );

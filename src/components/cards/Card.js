@@ -6,9 +6,9 @@ const Card = (props) => {
   const finalStyle = styleGroup(style.card, type, className, style);
 
   return (
-    <div {...props} className={finalStyle}>
+    <main {...props} className={finalStyle}>
       {props.children}
-    </div>
+    </main>
   );
 };
 

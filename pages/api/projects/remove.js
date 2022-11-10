@@ -15,11 +15,23 @@ async function handler(req, res) {
     const body = JSON.parse(req.body);
     const { projectIds, sessionId } = body;
 
+    const db = client.db(database.name);
+
+    const admins = db.collection("Admins");
+    const authenticated = await admins.findOne({ sessionId });
+
+    if (!authenticated) {
+      res
+        .status(401)
+        .json({ message: "Invalid session ID to make this request" });
+      client.close();
+      return;
+    }
+
     const formattedIds = projectIds.map((id) => ObjectId(id));
 
     console.log(body);
 
-    const db = client.db(database.name);
     const collection = db.collection("Projects");
 
     const response = await collection.deleteMany({

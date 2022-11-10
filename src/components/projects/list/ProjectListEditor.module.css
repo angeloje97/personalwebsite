@@ -12,3 +12,21 @@
 .editor > button {
   min-width: 100px;
 }
+
+.confirmCard {
+  min-width: fit-content;
+}
+
+.confirmCard > header {
+  text-align: center;
+  padding: 10px;
+}
+
+.confirmCard > main {
+  text-align: center;
+}
+.confirmCard > main > section {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}

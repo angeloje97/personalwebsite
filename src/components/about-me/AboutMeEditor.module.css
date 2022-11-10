@@ -13,3 +13,21 @@
   min-width: 100px;
   padding: 15px;
 }
+
+.confirmCard {
+  min-width: fit-content;
+}
+
+.confirmCard > header > h2 {
+  text-align: center;
+}
+
+.confirmCard > main > p {
+  text-align: center;
+}
+
+.confirmCard > main > section {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}

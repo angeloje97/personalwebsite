@@ -18,8 +18,8 @@ const CardHeader = (props) => {
   const finalStyle = styleGroup(style.card, type, className, style);
   return (
     <div className={finalStyle}>
-      <section className={finalHeaderStyle}>{props.header}</section>
-      <section className={finalBodyStyle}>{props.children}</section>
+      <header className={finalHeaderStyle}>{props.header}</header>
+      <main className={finalBodyStyle}>{props.children}</main>
     </div>
   );
 };

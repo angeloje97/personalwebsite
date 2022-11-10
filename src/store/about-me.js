@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   files: [],
+  selectedFilesId: [],
   loading: false,
   editing: false,
   removing: false,
@@ -29,6 +30,28 @@ const aboutMeSlice = createSlice({
         if (state[property]) continue;
         state[property] = action.payload[property];
       }
+    },
+
+    setSelectFile(state, action) {
+      const { _id: fileId } = action.payload.file;
+      const { selected } = action.payload;
+
+      console.log(fileId, selected);
+
+      if (selected) {
+        if (state.selectedFilesId.includes(fileId)) return;
+        state.selectedFilesId = [...state.selectedFilesId, fileId];
+      } else {
+        state.selectedFilesId = state.selectedFilesId.filter(
+          (id) => id !== fileId
+        );
+      }
+    },
+
+    selectFile(state, action) {
+      const { _id: fileId } = action.payload.file;
+      if (state.selectedFilesId.includes(fileId)) return;
+      state.selectedFilesId = [...state.selectedFilesId, fileId];
     },
   },
 });

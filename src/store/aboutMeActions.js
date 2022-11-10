@@ -1,4 +1,4 @@
-import { aboutMeActions } from "./about-me";
+import aboutMe, { aboutMeActions } from "./about-me";
 
 export const onStartAboutMe = () => {
   return (dispatch) => {
@@ -43,6 +43,13 @@ export const addFile = (newFile, currentFiles, sessionId) => {
         dispatch(
           aboutMeActions.update({
             files: [newFile, ...currentFiles],
+          })
+        );
+
+        dispatch(
+          aboutMeActions.update({
+            editingFile: false,
+            editingFileIndex: -1,
           })
         );
       }

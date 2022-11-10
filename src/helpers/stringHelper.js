@@ -26,3 +26,17 @@ export const formattedDate = (date) => {
 
   return formatted;
 };
+
+export const stringList = (items) => {
+  let result = "";
+
+  for (let i = 0; i < items.length; i++) {
+    if (result.length > 0 && items[i].length > 0) {
+      result += ", ";
+    }
+
+    result += items[i];
+  }
+
+  return result;
+};
