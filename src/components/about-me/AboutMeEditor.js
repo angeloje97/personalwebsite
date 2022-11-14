@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { aboutMeActions } from "../../store/about-me";
+import { removeFiles } from "../../store/aboutMeActions";
 
 import Modal from "../modals/Modal";
 import CardHeader from "../cards/CardHeader";
@@ -53,6 +54,7 @@ const AboutMeEditor = () => {
 const RemovingButtons = ({ dispatch }) => {
   const selectedFilesId = useSelector((state) => state.aboutMe.selectedFilesId);
   const files = useSelector((state) => state.aboutMe.files);
+  const sessionId = useSelector((state) => state.auth.sessionId);
   const [showConfirm, setShowConfirm] = useState(false);
 
   const fileNames = files
@@ -73,7 +75,7 @@ const RemovingButtons = ({ dispatch }) => {
   };
 
   const handleConfirmRemove = () => {
-    setShowConfirm(false);
+    dispatch(removeFiles(selectedFilesId, files, sessionId));
   };
 
   const confirmModal = showConfirm && (

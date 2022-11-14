@@ -47,8 +47,6 @@ export const removeSelectedProjects = (
     });
 
     const data = await response.json();
-    console.log(data);
-    console.log(data.body);
 
     if (data.body.deletedCount > 0) {
       dispatch(

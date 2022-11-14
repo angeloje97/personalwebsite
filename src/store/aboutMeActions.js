@@ -20,6 +20,34 @@ export const loadFiles = () => {
   };
 };
 
+export const removeFiles = (fileIds, currentFiles, sessionId) => {
+  return async (dispatch) => {
+    console.log(fileIds, currentFiles);
+    const response = await fetch("/api/about-me/remove-many", {
+      method: "DELETE",
+      body: JSON.stringify({
+        fileIds,
+        sessionId,
+      }),
+      "Content-Type": "Application/json",
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+
+    if (data.body && data.body.deletedCount) {
+      dispatch(
+        aboutMeActions.update({
+          files: currentFiles.filter((file) => !fileIds.includes(file._id)),
+          removing: false,
+          selectedFileIds: [],
+        })
+      );
+    }
+  };
+};
+
 export const addFile = (newFile, currentFiles, sessionId) => {
   return async (dispatch) => {
     try {

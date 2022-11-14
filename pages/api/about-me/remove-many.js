@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 
   const client = await MongoClient.connect(database.url);
   const { sessionId, fileIds } = JSON.parse(req.body);
+
   try {
     const db = client.db("Angelo");
 
@@ -27,7 +28,7 @@ export default async function handler(req, res) {
 
     const formattedIds = fileIds.map((id) => ObjectId(id));
 
-    const collection = db.collection("aboutMe");
+    const collection = db.collection("AboutMe");
 
     const response = await collection.deleteMany({
       _id: { $in: formattedIds },

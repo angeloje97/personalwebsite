@@ -42,10 +42,7 @@ const ProjectListEditor = () => {
   }
 
   const handleClick = (event) => {
-    const updated = {};
-    updated[event.target.id] = event.target.value;
-
-    dispatch(projActions.update(updated));
+    dispatch(projActions.update({ [event.target.id]: event.target.value }));
   };
 
   return (
@@ -81,6 +78,12 @@ const ProjectRemover = (props) => {
   useEffect(() => {
     return () => {
       dispatch(projActions.clearSelectedIds());
+      dispatch(
+        projActions.update({
+          editing: false,
+          removing: false,
+        })
+      );
     };
   }, []);
 
