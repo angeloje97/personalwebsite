@@ -10,8 +10,6 @@ async function handler(req, res) {
 
     const aboutMeFiles = await collection.find({}).toArray();
 
-    console.log(aboutMeFiles);
-
     res
       .status(200)
       .json({ message: "Success!", body: { files: aboutMeFiles } });
