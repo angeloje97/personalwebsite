@@ -48,6 +48,43 @@ export const removeFiles = (fileIds, currentFiles, sessionId) => {
   };
 };
 
+export const updateFile = (updatedFile, currentFiles, sessionId) => {
+  return async (dispatch) => {
+    try {
+      updatedFile.updated = new Date();
+
+      const response = await fetch("/api/about-me/update", {
+        method: "PUT",
+        body: JSON.stringify({
+          sessionId,
+          updatedFile,
+        }),
+        "Content-Type": "Application/json",
+      });
+
+      updatedFile.update = `${updatedFile.updated}`;
+
+      const newFiles = [];
+
+      for (let i = 0; i < currentFiles.length; i++) {
+        if (currentFiles[i]._id === updatedFile._id) {
+          newFiles.push(updatedFile);
+        } else {
+          newFiles.push(currentFiles[i]);
+        }
+      }
+
+      dispatch(
+        aboutMeActions.update({
+          files: newFiles,
+          editingFile: false,
+          editingFileIndex: -1,
+        })
+      );
+    } catch (error) {}
+  };
+};
+
 export const addFile = (newFile, currentFiles, sessionId) => {
   return async (dispatch) => {
     try {
@@ -71,11 +108,6 @@ export const addFile = (newFile, currentFiles, sessionId) => {
         dispatch(
           aboutMeActions.update({
             files: [newFile, ...currentFiles],
-          })
-        );
-
-        dispatch(
-          aboutMeActions.update({
             editingFile: false,
             editingFileIndex: -1,
           })

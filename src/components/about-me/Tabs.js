@@ -12,9 +12,25 @@ const Tabs = (props) => {
   const [currentTab, setCurrentTab] = useState(null);
   const dispatch = useDispatch();
   const finalClass = styleGroup(style.tabs, classtype, className, style);
+
+  const editingFileNames = useSelector(
+    (state) => state.aboutMe.editingFileNames
+  );
+
   const removing = useSelector((state) => state.aboutMe.removing);
 
   const handleClickTab = (name) => {
+    if (editingFileNames) {
+      const index = files.findIndex((file) => file.name === name);
+      dispatch(
+        aboutMeActions.update({
+          editingFile: true,
+          editingFileIndex: index,
+        })
+      );
+      return;
+    }
+
     setCurrentTab(name);
 
     if (props.onChangeTab) {
@@ -28,7 +44,7 @@ const Tabs = (props) => {
       currentTab={currentTab}
       removing={removing}
       dispatch={dispatch}
-      onCLickTab={handleClickTab}
+      onClickTab={handleClickTab}
       key={file._id}
     />
   ));
@@ -36,7 +52,7 @@ const Tabs = (props) => {
 };
 
 const Tab = (props) => {
-  const { file, currentTab, removing, dispatch, onCLickTab } = props;
+  const { file, currentTab, removing, dispatch, onClickTab } = props;
 
   const selectedClass =
     file.name === currentTab ? `${style.tab} ${style.selectedTab}` : style.tab;
@@ -53,7 +69,7 @@ const Tab = (props) => {
   return (
     <Button
       onClick={() => {
-        onCLickTab(file.name);
+        onClickTab(file.name);
       }}
       id={file._id}
       key={file._id}

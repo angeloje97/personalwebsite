@@ -6,7 +6,7 @@ import Button from "../../components/elements/Button";
 
 import { useDispatch, useSelector } from "react-redux";
 import aboutMe, { aboutMeActions } from "../../store/about-me";
-import { addFile } from "../../store/aboutMeActions";
+import { addFile, updateFile } from "../../store/aboutMeActions";
 
 import { useState } from "react";
 
@@ -16,18 +16,18 @@ const FileForm = (props) => {
   const sessionId = useSelector((state) => state.auth.sessionId);
   const dispatch = useDispatch();
 
-  const [data, setData] = useState({
-    name: "",
-  });
+  const [data, setData] = useState(
+    fileIndex === -1
+      ? {
+          name: "",
+        }
+      : files[fileIndex]
+  );
 
   const title =
     fileIndex !== -1 ? `Editing ${files[fileIndex].name}` : "Creating New File";
 
-  const header = (
-    <header>
-      <h3>{title}</h3>
-    </header>
-  );
+  const header = <h3>{title}</h3>;
 
   const close = () => {
     dispatch(
@@ -44,7 +44,11 @@ const FileForm = (props) => {
   const handleSubmission = (event) => {
     event.preventDefault();
 
-    dispatch(addFile(data, files, sessionId));
+    if (fileIndex === -1) {
+      dispatch(addFile(data, files, sessionId));
+    } else {
+      dispatch(updateFile(data, files, sessionId));
+    }
   };
 
   return (

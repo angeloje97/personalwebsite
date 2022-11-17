@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { aboutMeActions } from "../../store/about-me";
+import aboutMe, { aboutMeActions } from "../../store/about-me";
 import { removeFiles } from "../../store/aboutMeActions";
 
 import Modal from "../modals/Modal";
@@ -12,12 +12,23 @@ const AboutMeEditor = () => {
   const dispatch = useDispatch();
 
   const removingFiles = useSelector((state) => state.aboutMe.removing);
+  const editingFileNames = useSelector(
+    (state) => state.aboutMe.editingFileNames
+  );
 
   const handleAddNewFile = () => {
     dispatch(
       aboutMeActions.update({
         editingFile: true,
         editingFileIndex: -1,
+      })
+    );
+  };
+
+  const handleEditFileName = () => {
+    dispatch(
+      aboutMeActions.update({
+        editingFileNames: true,
       })
     );
   };
@@ -29,6 +40,7 @@ const AboutMeEditor = () => {
           editing: false,
           removing: false,
           editingFile: false,
+          editingFileNames: false,
         })
       );
     };
@@ -42,11 +54,26 @@ const AboutMeEditor = () => {
     return <RemovingButtons dispatch={dispatch} />;
   }
 
+  if (editingFileNames) {
+    return <EditingFileNameButtons dispatch={dispatch} />;
+  }
+
   return (
     <div className={style.editor}>
       <Button onClick={handleRemove}>Remove</Button>
-      <Button>Edit</Button>
+      <Button onClick={handleEditFileName}>Edit File Names</Button>
       <Button onClick={handleAddNewFile}>Add New File</Button>
+    </div>
+  );
+};
+
+const EditingFileNameButtons = ({ dispatch }) => {
+  const handleBack = () => {
+    dispatch(aboutMeActions.update({ editingFileNames: false }));
+  };
+  return (
+    <div className={style.editor}>
+      <Button onClick={handleBack}>Back</Button>
     </div>
   );
 };

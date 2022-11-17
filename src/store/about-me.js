@@ -9,6 +9,8 @@ const initialState = {
 
   editingFile: false,
   editingFileIndex: -1,
+
+  editingFileNames: false,
 };
 
 const aboutMeSlice = createSlice({
