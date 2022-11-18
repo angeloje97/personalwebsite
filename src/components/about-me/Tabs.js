@@ -19,9 +19,9 @@ const Tabs = (props) => {
 
   const removing = useSelector((state) => state.aboutMe.removing);
 
-  const handleClickTab = (name) => {
+  const handleClickTab = (selectedFile) => {
     if (editingFileNames) {
-      const index = files.findIndex((file) => file.name === name);
+      const index = files.findIndex((file) => file.name === selectedFile.name);
       dispatch(
         aboutMeActions.update({
           editingFile: true,
@@ -31,10 +31,10 @@ const Tabs = (props) => {
       return;
     }
 
-    setCurrentTab(name);
+    setCurrentTab(selectedFile.name);
 
     if (props.onChangeTab) {
-      props.onChangeTab(name);
+      props.onChangeTab(selectedFile.name);
     }
   };
 
@@ -69,7 +69,7 @@ const Tab = (props) => {
   return (
     <Button
       onClick={() => {
-        onClickTab(file.name);
+        onClickTab(file);
       }}
       id={file._id}
       key={file._id}
