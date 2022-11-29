@@ -35,15 +35,12 @@ const Blog = (props) => {
 const Entries = ({ entries, editing }) => {
   const entryContent = entries.map((entry, index) => {
     const date = formattedDate(new Date(entry.dateCreated));
-
     const linkContent =
       entry.links &&
       entry.links.map((link) => {
         return (
-          <li>
-            <Link href={link.url} key={link.link}>
-              {link.name}
-            </Link>
+          <li key={link.url}>
+            <Link href={link.url}>{link.name}</Link>
           </li>
         );
       });

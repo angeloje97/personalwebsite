@@ -15,7 +15,7 @@ const Project = (props) => {
   const loading = useSelector((state) => state.proj.loading);
   const projects = useSelector((state) => state.proj.projects);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const projectId = router.query.projectId;
+  const { id: projectId, sectionIndex, contentIndex } = router.query;
   const dispatch = useDispatch();
 
   const realProject = projects.find((proj) => proj._id === projectId);
@@ -23,14 +23,36 @@ const Project = (props) => {
 
   const [routingData, setRoutingData] = useState({
     name: "Overview",
-    sectionIndex: 0,
-    contentIndex: 0,
+    sectionIndex: -1,
+    contentIndex: -1,
   });
 
-  const handleRouteChange = (newRouteData) => {
+  const handleRouteChange = (newRouteData, fromRouter = false) => {
     dispatch(projActions.update({ routingData: newRouteData }));
     setRoutingData(newRouteData);
+
+    if (fromRouter) return;
+    if (newRouteData.name.toLowerCase() === "content") {
+      router.push(
+        `/projects/select?id=${projectId}&sectionIndex=${newRouteData.sectionIndex}&contentIndex=${newRouteData.contentIndex}`
+      );
+    } else {
+      router.push(`/projects/select?id=${projectId}`);
+    }
   };
+
+  useEffect(() => {
+    if (sectionIndex && contentIndex) {
+      handleRouteChange(
+        {
+          name: "Content",
+          sectionIndex: parseInt(sectionIndex),
+          contentIndex: parseInt(contentIndex),
+        },
+        true
+      );
+    }
+  }, [sectionIndex, contentIndex]);
 
   useEffect(() => {
     if (realProject) {
@@ -51,8 +73,8 @@ const Project = (props) => {
 
   const content = routingData.name.toLowerCase() === "content" && (
     <Content
-      sectionIndex={routingData.sectionIndex}
-      contentIndex={routingData.contentIndex}
+      sectionIndex={sectionIndex}
+      contentIndex={contentIndex}
       className={style.main}
     />
   );
@@ -64,6 +86,7 @@ const Project = (props) => {
         <ProjectRouting
           className={style.routing}
           onChangeRoute={handleRouteChange}
+          routingData={routingData}
         />
         {routingData.name.toLowerCase() === "overview" && (
           <ProjectOverView className={style.main} />

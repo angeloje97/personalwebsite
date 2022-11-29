@@ -18,7 +18,10 @@ const RoutingItem = (props) => {
   } = props;
 
   const dispatch = useDispatch();
-  const [openContent, setOpenContent] = useState(false);
+
+  const [openContent, setOpenContent] = useState(
+    routingData.sectionIndex === sectionIndex
+  );
   const [createNew, setCreateNew] = useState(false);
   const editingContent = useSelector((state) => state.proj.editingContent);
 
@@ -86,10 +89,13 @@ const RoutingItem = (props) => {
     dragOver.current = null;
   };
 
+  console.log(routingData);
   const contentList = names.map((name, index) => {
+    console.log(routingData.sectionIndex, "==", sectionIndex);
+    console.log(routingData.contentIndex, "==", index);
     const isSelected =
-      (routingData.sectionIndex === sectionIndex) &
-      (routingData.contentIndex === index);
+      routingData.sectionIndex === sectionIndex &&
+      routingData.contentIndex === index;
 
     const itemStyle = isSelected ? style.selectedContent : "";
 

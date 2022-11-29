@@ -16,6 +16,8 @@ const AboutMeEditor = () => {
     (state) => state.aboutMe.editingFileNames
   );
 
+  const currentFile = useSelector((state) => state.aboutMe.currentFile);
+
   const handleAddNewFile = () => {
     dispatch(
       aboutMeActions.update({
@@ -58,9 +60,13 @@ const AboutMeEditor = () => {
     return <EditingFileNameButtons dispatch={dispatch} />;
   }
 
+  const editSelectedButton = currentFile.name ? (
+    <Button>Edit {currentFile.name}</Button>
+  ) : null;
   return (
     <div className={style.editor}>
       <Button onClick={handleRemove}>Remove</Button>
+      {editSelectedButton}
       <Button onClick={handleEditFileName}>Edit File Names</Button>
       <Button onClick={handleAddNewFile}>Add New File</Button>
     </div>

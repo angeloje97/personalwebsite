@@ -34,7 +34,7 @@ const Tabs = (props) => {
     setCurrentTab(selectedFile.name);
 
     if (props.onChangeTab) {
-      props.onChangeTab(selectedFile.name);
+      props.onChangeTab(selectedFile);
     }
   };
 

@@ -7,6 +7,7 @@ import style from "./ProjectRouting.module.css";
 import RoutingItem from "./RoutingItem";
 import SectionForm from "./SectionForm";
 import { projActions } from "../../../../store/projects";
+import { useRouter } from "next/router";
 
 export const TESTING_SECTIONS = [
   {
@@ -21,14 +22,12 @@ export const TESTING_SECTIONS = [
 const FALLBACK = [];
 
 const ProjectRouting = (props) => {
-  const { classtype = "", className = "" } = props;
+  const { routingData, classtype = "", className = "" } = props;
 
   const currentProject = useSelector((state) => state.proj.currentProject);
   const editingSection = useSelector((state) => state.proj.editingSection);
 
   const dispatch = useDispatch();
-
-  const [routingData, setRoutingData] = useState({ name: "Overview" });
 
   const sections = currentProject.sections || FALLBACK;
 
@@ -36,20 +35,6 @@ const ProjectRouting = (props) => {
   const finalClass = styleGroup(style.routing, classtype, className, style);
 
   const handleChangeRoute = (routeData) => {
-    if (routeData.name.toLowerCase() === "overview") {
-      setRoutingData(routeData);
-      props.onChangeRoute(routeData);
-      return;
-    }
-    setRoutingData((prev) => {
-      const newData = { ...prev };
-
-      for (const prop in routeData) {
-        newData[prop] = routeData[prop];
-      }
-
-      return newData;
-    });
     props.onChangeRoute(routeData);
   };
 

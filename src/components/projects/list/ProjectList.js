@@ -14,7 +14,7 @@ const ProjectList = () => {
   const projects = useSelector((state) => state.proj.projects);
 
   const handleSelectProject = (project) => {
-    router.push(`/projects/${project._id}`);
+    router.push(`/projects/select?id=${project._id}`);
   };
 
   const projectsContent = projects.map((project) => (
