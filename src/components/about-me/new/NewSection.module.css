@@ -1,10 +1,41 @@
 .container {
   border-style: solid;
   border-width: 2px;
-  min-height: 200px;
+  min-height: 150px;
   min-width: 100%;
   border-radius: var(--border-radius);
   margin-left: auto;
   margin-right: auto;
   min-width: 98%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.add {
+  font-size: 50px;
+}
+
+.card {
+  min-width: 300px;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 15px;
+}
+
+.form > div {
+  align-self: flex-end;
+  display: flex;
+  gap: 15px;
+}
+
+.form > div > button {
+  padding: 10px;
 }
