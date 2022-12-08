@@ -32,7 +32,7 @@ const FileForm = (props) => {
   const close = () => {
     dispatch(
       aboutMeActions.update({
-        editingFile: false,
+        editingFileName: false,
         editingFileIndex: -1,
       })
     );

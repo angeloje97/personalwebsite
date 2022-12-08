@@ -8,6 +8,7 @@ export const onStartAboutMe = () => {
 
 export const loadFiles = () => {
   return async (dispatch) => {
+    dispatch(aboutMeActions.update({ loading: true }));
     try {
       const response = await fetch("/api/about-me");
 
@@ -17,6 +18,8 @@ export const loadFiles = () => {
     } catch (error) {
       console.log(error.message);
     }
+
+    dispatch(aboutMeActions.update({ loading: false }));
   };
 };
 
@@ -108,7 +111,7 @@ export const addFile = (newFile, currentFiles, sessionId) => {
         dispatch(
           aboutMeActions.update({
             files: [newFile, ...currentFiles],
-            editingFile: false,
+            editingFileName: false,
             editingFileIndex: -1,
           })
         );

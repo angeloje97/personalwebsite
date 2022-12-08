@@ -12,6 +12,7 @@ const AboutMeEditor = () => {
   const dispatch = useDispatch();
 
   const removingFiles = useSelector((state) => state.aboutMe.removing);
+  const editingFile = useSelector((state) => state.editingFile);
   const editingFileNames = useSelector(
     (state) => state.aboutMe.editingFileNames
   );
@@ -21,7 +22,7 @@ const AboutMeEditor = () => {
   const handleAddNewFile = () => {
     dispatch(
       aboutMeActions.update({
-        editingFile: true,
+        editingFileName: true,
         editingFileIndex: -1,
       })
     );
@@ -35,6 +36,14 @@ const AboutMeEditor = () => {
     );
   };
 
+  const editCurrentFile = () => {
+    dispatch(
+      aboutMeActions.update({
+        editingFile: true,
+      })
+    );
+  };
+
   useEffect(() => {
     return () => {
       dispatch(
@@ -42,6 +51,7 @@ const AboutMeEditor = () => {
           editing: false,
           removing: false,
           editingFile: false,
+          editingFileName: false,
           editingFileNames: false,
         })
       );
@@ -52,6 +62,10 @@ const AboutMeEditor = () => {
     dispatch(aboutMeActions.update({ removing: true, selectedFilesId: [] }));
   };
 
+  if (editingFile) {
+    return <EditingCurrentFileButtons dispatch={dispatch} />;
+  }
+
   if (removingFiles) {
     return <RemovingButtons dispatch={dispatch} />;
   }
@@ -61,12 +75,12 @@ const AboutMeEditor = () => {
   }
 
   const editSelectedButton = currentFile.name ? (
-    <Button>Edit {currentFile.name}</Button>
+    <Button onClick={editCurrentFile}>Edit {currentFile.name}</Button>
   ) : null;
   return (
     <div className={style.editor}>
-      <Button onClick={handleRemove}>Remove</Button>
       {editSelectedButton}
+      <Button onClick={handleRemove}>Remove Files</Button>
       <Button onClick={handleEditFileName}>Edit File Names</Button>
       <Button onClick={handleAddNewFile}>Add New File</Button>
     </div>
@@ -80,6 +94,15 @@ const EditingFileNameButtons = ({ dispatch }) => {
   return (
     <div className={style.editor}>
       <Button onClick={handleBack}>Back</Button>
+    </div>
+  );
+};
+
+const EditingCurrentFileButtons = ({ dispatch }) => {
+  return (
+    <div classname={style.editor}>
+      <Button>Confirm Changes</Button>
+      <Button>Revert</Button>
     </div>
   );
 };

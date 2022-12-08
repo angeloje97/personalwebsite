@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import style from "./Tabs.module.css";
 import { styleGroup } from "../../helpers/styles";
@@ -17,6 +17,12 @@ const Tabs = (props) => {
     (state) => state.aboutMe.editingFileNames
   );
 
+  useEffect(() => {
+    if (files.length === 0) return;
+
+    handleClickTab(files[0]);
+  }, []);
+
   const removing = useSelector((state) => state.aboutMe.removing);
 
   const handleClickTab = (selectedFile) => {
@@ -24,7 +30,7 @@ const Tabs = (props) => {
       const index = files.findIndex((file) => file.name === selectedFile.name);
       dispatch(
         aboutMeActions.update({
-          editingFile: true,
+          editingFileName: true,
           editingFileIndex: index,
         })
       );

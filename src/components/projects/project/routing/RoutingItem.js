@@ -89,10 +89,7 @@ const RoutingItem = (props) => {
     dragOver.current = null;
   };
 
-  console.log(routingData);
   const contentList = names.map((name, index) => {
-    console.log(routingData.sectionIndex, "==", sectionIndex);
-    console.log(routingData.contentIndex, "==", index);
     const isSelected =
       routingData.sectionIndex === sectionIndex &&
       routingData.contentIndex === index;

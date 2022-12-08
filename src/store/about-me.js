@@ -9,6 +9,7 @@ const initialState = {
 
   editingFile: false,
   editingFileIndex: -1,
+  editingFileName: false,
   editingFileNames: false,
 
   currentFile: {},

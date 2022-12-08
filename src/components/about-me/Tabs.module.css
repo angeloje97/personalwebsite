@@ -5,6 +5,9 @@
   align-items: stretch;
   gap: 25px;
   height: 40px;
+  height: fit-content;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .tab {

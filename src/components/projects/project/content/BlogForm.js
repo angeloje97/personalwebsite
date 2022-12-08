@@ -47,7 +47,6 @@ const BlogForm = (props) => {
   };
 
   const handleLinkChange = (linkData) => {
-    console.log(linkData);
     setData({ ...data, links: linkData });
   };
 
@@ -61,9 +60,9 @@ const BlogForm = (props) => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-
     const entry = { ...data };
+
+    entry.links = entry.links.filter((link) => link.name.trim() !== "");
 
     if (currentEntry) {
       const newEntries = [...content.entries];
