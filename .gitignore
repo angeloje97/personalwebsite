@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-# /pages/api/config.json
+/pages/api/config.json
 
 # next.js
 /.next/
