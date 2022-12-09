@@ -51,8 +51,8 @@ const Entries = ({ entries, editing }) => {
         {divider}
         {editing && <EntryEditorButtons entryIndex={index} />}
         <h4 className={style.dateCreated}>{date}</h4>
-        <InterpretedText text={entry.text} />
         <List className={style.linkList}>{linkContent}</List>
+        <InterpretedText text={entry.text} />
       </li>
     );
   });
