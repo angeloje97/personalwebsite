@@ -11,11 +11,8 @@ import { projActions } from "../../../../store/projects";
 const SectionForm = (props) => {
   const currentProject = useSelector((state) => state.proj.currentProject);
   const sectionIndex = useSelector((state) => state.proj.editingSectionIndex);
-
   const section =
-    sectionIndex !== -1
-      ? useSelector((state) => state.proj.currentProject.sections[sectionIndex])
-      : null;
+    sectionIndex !== -1 ? currentProject.sections[sectionIndex] : null;
 
   const dispatch = useDispatch();
 
