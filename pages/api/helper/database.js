@@ -1,5 +1,3 @@
-const config = require("../config.json");
-
 const cluster = process.env.cluster;
 const username = process.env.username;
 const password = process.env.password;
