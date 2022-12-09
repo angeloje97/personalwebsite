@@ -3,6 +3,9 @@ import { projActions } from "../store/projects";
 
 export const useContent = (control) => {
   const routingData = useSelector((state) => state.proj.routingData);
+  const currentProject = useSelector((state) => state.proj.currentProject);
+  const dispatch = useDispatch();
+
   const { sectionIndex, contentIndex } = routingData;
 
   const currentContent = useSelector(
@@ -11,10 +14,7 @@ export const useContent = (control) => {
   );
 
   if (control) {
-    const dispatch = useDispatch();
-    const oldContent = useSelector(
-      (state) => state.proj.currentProject.sections[sectionIndex].contents
-    );
+    const oldContent = currentProject.sections[sectionIndex].contents;
 
     const setCurrentContent = (newContent) => {
       const newContents = [];
