@@ -56,7 +56,7 @@ const InterpretedText = (props) => {
     if (type === "video") {
       results.push(
         <div key={index}>
-          <ReactPlayer controls url={content} />
+          <ReactPlayer controls url={content} sandbox="allow-presentation" />
         </div>
       );
       continue;

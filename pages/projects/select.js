@@ -59,6 +59,7 @@ const Project = (props) => {
       dispatch(projActions.setCurrentProject({ project: { ...realProject } }));
     }
   }, [projects]);
+
   if (loading) {
     return (
       <div>
