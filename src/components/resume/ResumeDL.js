@@ -10,7 +10,7 @@ const ResumeDL = (props) => {
 
   const header = (
     <div className={style.imageContainer}>
-      <Image src={`${headline}${image}`} className={style.resumeImage} />
+      <Image src={`${headline}${image}`} className={style.resumeImage} alt="" />
     </div>
   );
   return (
