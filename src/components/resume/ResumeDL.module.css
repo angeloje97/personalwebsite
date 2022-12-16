@@ -1,0 +1,28 @@
+.resumeCard {
+  width: 350px;
+}
+
+.resumeCard > header {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  height: 250px;
+}
+
+.resumeImage {
+  transform: scale(0.25);
+}
+
+.imageContainer {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resumeCard > main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
