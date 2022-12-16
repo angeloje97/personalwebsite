@@ -57,11 +57,7 @@ const Entries = ({ entries, editing }) => {
     );
   });
 
-  return (
-    <List className={style.entryList} listtype="row">
-      {entryContent}
-    </List>
-  );
+  return <List className={style.entryList}>{entryContent}</List>;
 };
 
 const BlogEditorButtons = () => {
