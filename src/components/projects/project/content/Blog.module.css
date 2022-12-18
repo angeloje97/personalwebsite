@@ -12,7 +12,7 @@
 }
 
 .dateCreated {
-  text-indent: 2rem;
+  margin: 2rem 2rem;
   color: var(--color-tabs);
 }
 
@@ -34,11 +34,11 @@
 }
 
 .entry > div > p {
-  text-indent: 2rem;
+  margin: 0.5rem 3rem;
 }
 
 .entry > div > h3 {
-  text-indent: 2rem;
+  margin: 0.5rem 2rem;
 }
 
 /* video player container*/
