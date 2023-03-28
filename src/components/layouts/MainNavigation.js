@@ -26,6 +26,7 @@ const MainNavigation = () => {
   const handleSelectRoute = (event) => {
     router.push(event.target.value);
   };
+
   return (
     <NavBar navbartype="top" className={style.main}>
       <NavButtons
@@ -33,10 +34,6 @@ const MainNavigation = () => {
         currentRoute={router.pathname}
       />
       <SideBar />
-      {/* <Button classtype="navBar first">Home</Button>
-      <Button classtype="navBar">Resume</Button>
-      <Button classtype="navBar">Projects</Button>
-      <Button classtype="navBar last">About Me</Button> */}
     </NavBar>
   );
 };
