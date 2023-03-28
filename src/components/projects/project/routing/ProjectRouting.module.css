@@ -9,26 +9,10 @@
   padding: 0px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   justify-content: flex-start;
   gap: 0px;
   list-style: none;
   margin-top: 0px;
-}
-
-.routingList > * {
-  height: 50px;
-  /* border-style: solid; */
-  width: 100%;
-  /* background-color: var(--color-secondary); */
-  /* border-width: 0px 0px 0.5px 0px; */
-  font-size: 18px;
-}
-
-.routingList > li {
-  margin: 0px;
-  display: flex;
-  flex-direction: column;
 }
 
 .overview {
