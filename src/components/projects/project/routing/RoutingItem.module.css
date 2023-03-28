@@ -1,7 +1,7 @@
-.item {
+/* .item {
   height: fit-content;
   padding: 0px;
-}
+} */
 
 .section {
   margin: 0px;
@@ -43,22 +43,15 @@
 
 /*Content Navigation */
 .contentList > li {
-  margin: 0px;
-  padding: 0px;
   gap: 15px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex;
+  justify-content: space-between;
   border-style: solid;
   border-width: 0px 0px 0.5px 0px;
   cursor: pointer;
 }
-/* .contentList > li > button {
-  aspect-ratio: 1/1;
-  min-width: 35px;
-  margin: 0px;
-  margin-right: 5px;
-} */
 
 .contentButtons {
   display: flex;
