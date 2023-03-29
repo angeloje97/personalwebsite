@@ -14,13 +14,29 @@
   text-align: center;
 }
 
+.projectCard > main > p {
+  line-height: 2rem;
+  margin: 0px 1.5rem;
+}
+
+.projectCard > main {
+  background-color: var(--color-primary);
+}
+
+.projectCard > main > ul {
+  text-align: left;
+  padding-left: 25px;
+}
+
 .projectCard > main > div {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 25px;
+  padding: 0px 15px 15px 0px;
 }
 
 .projectCard > main > div > a {
   cursor: pointer;
+  text-decoration: underline;
 }
