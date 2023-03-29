@@ -20,6 +20,21 @@ const projects = [
     ],
     tech: ["Unity", "C#"],
   },
+  {
+    name: "Personal Website",
+    thumbnail: "/resources/pictures/Website_1.png",
+    description:
+      "This project is the website you are using right now! It's more than just a portfolio website. " +
+      "I'm using the NextJS framework to develope a full stack website that will allow me to update information without editing code. " +
+      "This project is what allows me to easily create documentation for my other projects.",
+    links: [
+      {
+        name: "More",
+        url: "projects/select?id=6344b87198d645313a2545bb",
+      },
+    ],
+    tech: ["Javascript", "NextJS", "React"],
+  },
 ];
 
 const ProjectHighlights = (props) => {
@@ -29,13 +44,17 @@ const ProjectHighlights = (props) => {
   return (
     <React.Fragment>
       <h2>Project Highlights</h2>
-      <div>{currentProjects}</div>
+      <div className={style.highlights}>{currentProjects}</div>
     </React.Fragment>
   );
 };
 
 const Project = ({ projectData: data }) => {
-  const links = data.links.map((link) => <a href={link.url}>{link.name}</a>);
+  const links = data.links.map((link) => (
+    <a href={link.url} key={link.url}>
+      {link.name}
+    </a>
+  ));
 
   const technologyUsed = data.tech.map((tech) => <li key={tech}>{tech}</li>);
   return (
@@ -43,8 +62,9 @@ const Project = ({ projectData: data }) => {
       className={style.projectCard}
       header={<Image src={data.thumbnail}></Image>}
     >
-      <h3>{data.name}</h3>
+      <h2>{data.name}</h2>
       <p>{data.description}</p>
+      <h4>Technology Used</h4>
       <List>{technologyUsed}</List>
       <div>{links}</div>
     </CardHeader>
