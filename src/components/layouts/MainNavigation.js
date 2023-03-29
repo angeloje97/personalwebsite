@@ -27,9 +27,9 @@ const MainNavigation = () => {
     router.push(event.target.value);
   };
 
-  if (router.pathname === "/") {
-    return null;
-  }
+  // if (router.pathname === "/") {
+  //   return null;
+  // }
 
   return (
     <NavBar navbartype="top" className={style.main}>

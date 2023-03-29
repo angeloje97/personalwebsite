@@ -1,0 +1,26 @@
+.projectCard {
+}
+
+.projectCard > header {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.projectCard > header > img {
+  max-width: 350px;
+}
+
+.projectCard > main > * {
+  text-align: center;
+}
+
+.projectCard > main > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 25px;
+}
+
+.projectCard > main > div > a {
+  cursor: pointer;
+}
