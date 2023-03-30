@@ -20,6 +20,8 @@
   border-width: 0.5px;
   border-style: solid;
   color: var(--color-highlight);
+
+  overflow: hidden;
 }
 
 .header {

@@ -5,6 +5,7 @@ import { loadProjects } from "../../src/store/projActions";
 import ProjectList from "../../src/components/projects/list/ProjectList";
 import ProjectListEditor from "../../src/components/projects/list/ProjectListEditor";
 import NewProject from "../../src/components/projects/list/NewProject";
+import WebpageBackground from "../../src/components/backgrounds/WebpageBackground";
 const Projects = () => {
   const dispatch = useDispatch();
   const creatingNew = useSelector((state) => state.proj.creatingNew);
