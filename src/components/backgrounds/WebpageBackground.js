@@ -4,21 +4,11 @@ import ReactDOM from "react-dom";
 import style from "./WebpageBackground.module.css";
 
 const WebpageBackground = ({ src }) => {
-  const [background, setBackground] = useState(null);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const element = document.getElementById("backgrounds");
-
-    setBackground(
-      ReactDOM.createPortal(
-        <Image src={src} className={style.image} />,
-        element
-      )
-    );
-  }, []);
-
-  return <React.Fragment>{background}</React.Fragment>;
+  return (
+    <React.Fragment>
+      <Image src={src} className={style.image} />
+    </React.Fragment>
+  );
 };
 
 export default WebpageBackground;
