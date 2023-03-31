@@ -83,7 +83,6 @@ const Project = (props) => {
 
   return (
     <div>
-      <WebpageBackground src="/resources/pictures/Background1.png" />
       <div className={style.projectLayout}>
         <ProjectHeader className={style.header} />
         <ProjectRouting

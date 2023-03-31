@@ -7,7 +7,6 @@ import React from "react";
 const Index = () => {
   return (
     <React.Fragment>
-      <WebpageBackground src="/resources/pictures/Background3.jpeg" />
       <HomeGrid></HomeGrid>
     </React.Fragment>
   );

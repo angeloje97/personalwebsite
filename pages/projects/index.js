@@ -18,7 +18,6 @@ const Projects = () => {
 
   return (
     <React.Fragment>
-      <WebpageBackground src="/resources/pictures/Background1.png" />
       <ProjectList />
       {isAuthenticated && <ProjectListEditor />}
       {creatingNew && <NewProject />}

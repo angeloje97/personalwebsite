@@ -5,7 +5,6 @@ import style from "./Resume.module.css";
 const Resume = () => {
   return (
     <div className={style.resumes}>
-      <WebpageBackground src="/resources/pictures/Background2.jpg" />
       <ResumeDL
         resume="Resume2022_3.pdf"
         name="Software Engineer"
