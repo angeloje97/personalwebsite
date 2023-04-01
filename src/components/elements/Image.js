@@ -7,7 +7,7 @@ const NewImage = (props) => {
 
   const finalClass = styleGroup(style.image, classtype, className, style);
 
-  return <img {...props} src={src} className={finalClass} />;
+  return <Image {...props} src={src} className={finalClass} priority />;
 };
 
 export default NewImage;
