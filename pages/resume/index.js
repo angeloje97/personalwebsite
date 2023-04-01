@@ -1,3 +1,4 @@
+import WebpageBackground from "../../src/components/backgrounds/WebpageBackground";
 import ResumeDL from "../../src/components/resume/ResumeDL";
 import { styleGroup } from "../../src/helpers/styles";
 import style from "./Resume.module.css";

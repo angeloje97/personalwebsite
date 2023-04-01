@@ -13,7 +13,7 @@ const ROUTES = [
   { name: "Home", route: "/" },
   { name: "Resume", route: "/resume" },
   { name: "Projects", route: "/projects" },
-  { name: "About Me", route: "/about-me" },
+  // { name: "About Me", route: "/about-me" },
 ];
 
 const MainNavigation = () => {
@@ -26,6 +26,11 @@ const MainNavigation = () => {
   const handleSelectRoute = (event) => {
     router.push(event.target.value);
   };
+
+  // if (router.pathname === "/") {
+  //   return null;
+  // }
+
   return (
     <NavBar navbartype="top" className={style.main}>
       <NavButtons
@@ -33,10 +38,6 @@ const MainNavigation = () => {
         currentRoute={router.pathname}
       />
       <SideBar />
-      {/* <Button classtype="navBar first">Home</Button>
-      <Button classtype="navBar">Resume</Button>
-      <Button classtype="navBar">Projects</Button>
-      <Button classtype="navBar last">About Me</Button> */}
     </NavBar>
   );
 };

@@ -1,0 +1,19 @@
+.imageContainer {
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  width: min-content;
+  height: 250px;
+  overflow: hidden;
+}
+
+.image {
+  width: 250px;
+}
+
+.introduction {
+  width: 650px;
+  line-height: 2rem;
+  align-self: center;
+  text-align: center;
+  margin: auto;
+}

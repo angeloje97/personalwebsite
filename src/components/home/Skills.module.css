@@ -1,0 +1,38 @@
+.skillSection {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+  align-items: center;
+}
+
+.skillSection > h2 {
+  margin-bottom: 5px;
+}
+
+.skillList {
+  list-style: none;
+  padding: 0px;
+  min-width: 95%;
+}
+
+.skillList > * {
+  padding: 0px;
+  margin: 0px;
+}
+
+.skillSection > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.skillSection > span > * {
+  margin-bottom: 5px;
+  margin-top: 8px;
+}
+
+.progressBar {
+  width: 100%;
+  min-height: 15px;
+}

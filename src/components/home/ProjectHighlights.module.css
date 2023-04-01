@@ -1,0 +1,69 @@
+/* Main Highlights */
+
+.highlights {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  max-width: 100%;
+  width: 100%;
+  overflow-x: auto;
+  justify-content: center;
+}
+
+/* Project Cards */
+
+.projectCard {
+  height: 600px;
+}
+
+.projectCard > header {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.projectCard > header > img {
+  max-width: 350px;
+}
+
+.projectCard > main {
+  height: 100%;
+}
+
+.projectCard > main > * {
+  text-align: center;
+}
+
+.projectCard > main > p {
+  line-height: 1.5rem;
+  margin: 0px 1rem;
+}
+
+.projectCard > main {
+  background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.projectCard > main > ul {
+  list-style-type: none;
+  padding: 0px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.projectCard > main > div {
+  gap: 25px;
+  padding: 0px 15px 15px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.projectCard > main > div > a {
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: end;
+}
