@@ -2,22 +2,25 @@ import React from "react";
 import ProgressBar from "../elements/ProgressBar.js";
 import style from "./Skills.module.css";
 import List from "../elements/List.js";
+import formatter from "../../../styles/formatter.module.css";
 
 const skillData = [
   {
-    type: "Languages",
+    type: "Programming Languages",
     skills: [
-      { name: "C#", value: 0.9, unit: "5 Years" },
-      { name: "C++", value: 0.5, unit: "2 Years" },
+      { name: "C#", value: 1, unit: "5 Years" },
+      { name: "C++", value: 0.4, unit: "2 Years" },
       { name: "Javascript", value: 0.8, unit: "4 Years" },
-      { name: "Java", value: 0.6, unit: "3 Years" },
+      { name: "Java", value: 1, unit: "8 Years" },
+      { name: "Python", value: 0.6, unit: "3 Years" },
     ],
   },
   {
-    type: "Frameworks",
+    type: "Frameworks/Libraries",
     skills: [
-      { name: "Unity", value: 0.8, unit: "3 Years" },
-      { name: "NextJS", value: 0.4, unit: "1 Year" },
+      { name: "Unity", value: 0.75, unit: "3 Years" },
+      { name: "NextJS", value: 0.25, unit: "1 Year" },
+      { name: "React", value: 0.5, unit: "2 Years" },
     ],
   },
 ];
@@ -37,7 +40,12 @@ const Skills = (props) => {
       </div>
     );
   });
-  return <React.Fragment>{skillsDisplay}</React.Fragment>;
+  return (
+    <React.Fragment>
+      <h2 className={formatter.centerHorizontal}>Skills</h2>
+      {skillsDisplay}
+    </React.Fragment>
+  );
 };
 
 const SkillBar = ({ name, value, unit }) => {

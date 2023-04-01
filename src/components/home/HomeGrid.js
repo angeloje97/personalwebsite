@@ -18,7 +18,7 @@ const HomeGrid = (props) => {
         <div className={style.side}>
           <Skills />
         </div>
-        <div className={style.footer}>Footer</div>
+        {/* <div className={style.footer}>Footer</div> */}
       </div>
     </React.Fragment>
   );

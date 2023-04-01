@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.skillSection > h2 {
+  margin-bottom: 5px;
+}
+
 .skillList {
   list-style: none;
   padding: 0px;
