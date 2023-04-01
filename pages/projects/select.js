@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import WebpageBackground from "../../src/components/backgrounds/WebpageBackground";
 import Loading from "../../src/components/elements/Loading";
 import Content from "../../src/components/projects/project/content/Content";
 import ProjectOverView from "../../src/components/projects/project/overview/ProjectOverView";

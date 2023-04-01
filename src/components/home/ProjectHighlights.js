@@ -25,7 +25,7 @@ const projects = [
     thumbnail: "/resources/pictures/Website_1.png",
     description:
       "This project is the website you are using right now! It's more than just a portfolio website. " +
-      "I'm using the NextJS framework to develope a full stack website that will allow me to update information without editing code. " +
+      "I'm using the NextJS framework to develop a full stack website that will allow me to update information without editing code. " +
       "This project is what allows me to easily create documentation for my other projects.",
     links: [
       {

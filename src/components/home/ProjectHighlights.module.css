@@ -3,6 +3,9 @@
 .highlights {
   display: flex;
   gap: 15px;
+  padding: 15px;
+  max-width: 100%;
+  overflow: scroll;
 }
 
 /* Project Cards */
@@ -20,6 +23,10 @@
   max-width: 350px;
 }
 
+.projectCard > main {
+  height: 100%;
+}
+
 .projectCard > main > * {
   text-align: center;
 }
@@ -31,6 +38,9 @@
 
 .projectCard > main {
   background-color: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .projectCard > main > ul {
@@ -43,14 +53,15 @@
 }
 
 .projectCard > main > div {
+  gap: 25px;
+  padding: 0px 15px 15px 0px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  gap: 25px;
-  padding: 0px 15px 15px 0px;
 }
 
 .projectCard > main > div > a {
   cursor: pointer;
   text-decoration: underline;
+  text-align: end;
 }
