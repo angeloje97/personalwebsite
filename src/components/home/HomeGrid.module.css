@@ -48,4 +48,5 @@
 
 .side {
   grid-area: side;
+  overflow-y: auto;
 }
