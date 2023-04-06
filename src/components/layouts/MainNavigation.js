@@ -96,18 +96,18 @@ const SideBar = () => {
   };
 
   const emailClipBoard = (
-    <ClipBoard copyContent={personal.email} onClose={emailClose} />
+    <ClipBoard copyContent={personal.email.url} onClose={emailClose} />
   );
 
   return (
     <div className={style.side}>
-      <a href={personal.email} onClick={onClickEmail}>
+      <a href={personal.email.url} onClick={onClickEmail}>
         Email
       </a>
-      <a href={personal.linkedIn} target="_blank" rel="noreferrer">
+      <a href={personal.linkedIn.url} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
-      <a href={personal.gitHub} target="_blank" rel="noreferrer">
+      <a href={personal.gitHub.url} target="_blank" rel="noreferrer">
         GitHub
       </a>
       {isAuthenticated && (

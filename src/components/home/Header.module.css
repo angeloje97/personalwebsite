@@ -11,9 +11,26 @@
 }
 
 .introduction {
-  width: 650px;
+  max-width: 50%;
   line-height: 2rem;
   align-self: center;
   text-align: center;
   margin: auto;
+}
+
+.linkList {
+  list-style: none;
+  background-color: var(--color-highlight);
+  padding: 0px;
+
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  padding: 15px 15px;
+}
+
+.linkList > li > a > img {
+  max-width: 64px;
 }

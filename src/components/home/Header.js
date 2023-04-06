@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "../elements/Image.js";
 import style from "./Header.module.css";
+import { useSelector } from "react-redux";
+import List from "../elements/List.js";
 
 const biographyInfo = {
   intro:
@@ -20,6 +22,7 @@ const Header = (props) => {
         />
       </div>
       <Biography />
+      <Links />
     </React.Fragment>
   );
 };
@@ -29,7 +32,26 @@ const Biography = (props) => {
 };
 
 const Links = (props) => {
-  return <div></div>;
+  const personal = useSelector((state) => state.personal);
+  const [body, setBody] = useState([]);
+
+  useEffect(() => {
+    const results = [];
+    for (const prop in personal) {
+      if (!personal[prop].icon) continue;
+      const link = personal[prop];
+      results.push(
+        <li>
+          <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+            <Image src={`/resources/icons/${link.icon}`}></Image>
+          </a>
+        </li>
+      );
+    }
+
+    setBody(results);
+  }, []);
+  return <List className={style.linkList}>{body}</List>;
 };
 
 export default Header;
