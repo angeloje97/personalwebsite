@@ -36,10 +36,6 @@ const MainNavigation = () => {
     return null;
   }
 
-  // if (router.pathname === "/") {
-  //   return null;
-  // }
-
   return (
     <NavBar navbartype="top" className={style.main}>
       <NavButtons

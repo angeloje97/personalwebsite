@@ -10,7 +10,7 @@ const biographyInfo = {
     "Hey there, I'm Angelo Esmeralda and I'm an aspiring software engineer from California. Welcome to my portfolio page " +
     "where you'll be able to know more about me, see all my projects, and find out what I'm up to. " +
     "Some of my favorite things to do are develop games with Unity, edit videos, play video games and randomly " +
-    "pick up on some new hobbies.",
+    "pick up on some new hobbies. A fun fact about me is my average words per minute on a keyboard is 120 WPM.",
 };
 
 const Header = (props) => {
