@@ -3,6 +3,7 @@ import Image from "../elements/Image.js";
 import style from "./Header.module.css";
 import { useSelector } from "react-redux";
 import List from "../elements/List.js";
+import ClipBoard from "../modals/ClipBoard.js";
 
 const biographyInfo = {
   intro:
@@ -34,15 +35,24 @@ const Biography = (props) => {
 const Links = (props) => {
   const personal = useSelector((state) => state.personal);
   const [body, setBody] = useState([]);
+  const [clipBoard, setClipBoard] = useState({
+    isShowing: false,
+    content: "",
+  });
+
+  const closeClipBoard = () => {
+    setClipBoard({ ...clipBoard, isShowing: false });
+  };
 
   useEffect(() => {
     const results = [];
     for (const prop in personal) {
       if (!personal[prop].icon) continue;
       const link = personal[prop];
+
       results.push(
-        <li>
-          <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+        <li key={link.url}>
+          <a href={link.url} target="_blank" rel="noreferrer">
             <Image src={`/resources/icons/${link.icon}`}></Image>
           </a>
         </li>
@@ -51,7 +61,25 @@ const Links = (props) => {
 
     setBody(results);
   }, []);
-  return <List className={style.linkList}>{body}</List>;
+  return (
+    <React.Fragment>
+      <List className={style.linkList}>
+        {body}
+        <li
+          onClick={() => {
+            setClipBoard({ ...clipBoard, isShowing: true });
+          }}
+        >
+          <a>
+            <Image src={"/resources/icons/Email.png"}></Image>
+          </a>
+        </li>
+      </List>
+      {clipBoard.isShowing && (
+        <ClipBoard copyContent={personal.email.url} onClose={closeClipBoard} />
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Header;

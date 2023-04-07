@@ -2,16 +2,17 @@
   border-width: 0px 1px 0px 0px;
   border-style: solid;
   width: min-content;
-  height: 250px;
+  height: 100%;
   overflow: hidden;
 }
 
 .image {
   width: 250px;
+  height: 100%;
 }
 
 .introduction {
-  max-width: 50%;
+  max-width: 60%;
   line-height: 2rem;
   align-self: center;
   text-align: center;
@@ -20,16 +21,17 @@
 .linkList {
   list-style: none;
   background-color: var(--color-highlight);
-  padding: 0px;
-
+  padding: 15px;
   margin: 0px;
-  display: flex;
-  flex-direction: column;
 
+  display: grid;
+  flex-direction: column;
   justify-content: space-between;
-  padding: 15px 15px;
 }
 
 .linkList > li > a > img {
   max-width: 64px;
+}
+.linkList > li > a:hover {
+  cursor: pointer;
 }

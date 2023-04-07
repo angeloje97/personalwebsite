@@ -4,7 +4,7 @@ import style from "./MainNavigation.module.css";
 import { useRouter } from "next/router";
 import { authActions } from "../../store/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClipBoard from "../modals/ClipBoard";
 
 const hiddenRoutes = ["/admin"];
@@ -18,6 +18,7 @@ const ROUTES = [
 
 const MainNavigation = () => {
   const router = useRouter();
+  const [isHomePage, setIsHomePage] = useState(false);
 
   if (hiddenRoutes.includes(router.pathname)) {
     return null;
@@ -26,6 +27,14 @@ const MainNavigation = () => {
   const handleSelectRoute = (event) => {
     router.push(event.target.value);
   };
+
+  useEffect(() => {
+    if (router.pathname === "/") {
+      setIsHomePage(true);
+    } else {
+      setIsHomePage(false);
+    }
+  }, [router.pathname]);
 
   // if (router.pathname === "/") {
   //   return null;
@@ -37,7 +46,7 @@ const MainNavigation = () => {
         onSelectRoute={handleSelectRoute}
         currentRoute={router.pathname}
       />
-      <SideBar />
+      <SideBar isHome={isHomePage} />
     </NavBar>
   );
 };
@@ -73,12 +82,13 @@ const NavButtons = (props) => {
   });
 };
 
-const SideBar = () => {
+const SideBar = ({ isHome }) => {
   const personal = useSelector((state) => state.personal);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-
   const [copyingEmail, setCopyingEmail] = useState(false);
+
+  if (isHome) return null;
 
   const onClickEmail = (event) => {
     event.preventDefault();
@@ -115,7 +125,6 @@ const SideBar = () => {
           Logout
         </Button>
       )}
-
       {copyingEmail && emailClipBoard}
     </div>
   );
