@@ -4,7 +4,7 @@ import style from "./MainNavigation.module.css";
 import { useRouter } from "next/router";
 import { authActions } from "../../store/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClipBoard from "../modals/ClipBoard";
 
 const hiddenRoutes = ["/admin"];
@@ -18,18 +18,23 @@ const ROUTES = [
 
 const MainNavigation = () => {
   const router = useRouter();
-
-  if (hiddenRoutes.includes(router.pathname)) {
-    return null;
-  }
+  const [isHomePage, setIsHomePage] = useState(false);
 
   const handleSelectRoute = (event) => {
     router.push(event.target.value);
   };
 
-  // if (router.pathname === "/") {
-  //   return null;
-  // }
+  useEffect(() => {
+    if (router.pathname === "/") {
+      setIsHomePage(true);
+    } else {
+      setIsHomePage(false);
+    }
+  }, [router.pathname]);
+
+  if (hiddenRoutes.includes(router.pathname)) {
+    return null;
+  }
 
   return (
     <NavBar navbartype="top" className={style.main}>
@@ -37,7 +42,7 @@ const MainNavigation = () => {
         onSelectRoute={handleSelectRoute}
         currentRoute={router.pathname}
       />
-      <SideBar />
+      <SideBar isHome={isHomePage} />
     </NavBar>
   );
 };
@@ -73,12 +78,13 @@ const NavButtons = (props) => {
   });
 };
 
-const SideBar = () => {
+const SideBar = ({ isHome }) => {
   const personal = useSelector((state) => state.personal);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-
   const [copyingEmail, setCopyingEmail] = useState(false);
+
+  if (isHome) return null;
 
   const onClickEmail = (event) => {
     event.preventDefault();
@@ -96,18 +102,18 @@ const SideBar = () => {
   };
 
   const emailClipBoard = (
-    <ClipBoard copyContent={personal.email} onClose={emailClose} />
+    <ClipBoard copyContent={personal.email.url} onClose={emailClose} />
   );
 
   return (
     <div className={style.side}>
-      <a href={personal.email} onClick={onClickEmail}>
+      <a href={personal.email.url} onClick={onClickEmail}>
         Email
       </a>
-      <a href={personal.linkedIn} target="_blank" rel="noreferrer">
+      <a href={personal.linkedIn.url} target="_blank" rel="noreferrer">
         LinkedIn
       </a>
-      <a href={personal.gitHub} target="_blank" rel="noreferrer">
+      <a href={personal.gitHub.url} target="_blank" rel="noreferrer">
         GitHub
       </a>
       {isAuthenticated && (
@@ -115,7 +121,6 @@ const SideBar = () => {
           Logout
         </Button>
       )}
-
       {copyingEmail && emailClipBoard}
     </div>
   );
