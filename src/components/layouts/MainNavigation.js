@@ -20,10 +20,6 @@ const MainNavigation = () => {
   const router = useRouter();
   const [isHomePage, setIsHomePage] = useState(false);
 
-  if (hiddenRoutes.includes(router.pathname)) {
-    return null;
-  }
-
   const handleSelectRoute = (event) => {
     router.push(event.target.value);
   };
@@ -35,6 +31,10 @@ const MainNavigation = () => {
       setIsHomePage(false);
     }
   }, [router.pathname]);
+
+  if (hiddenRoutes.includes(router.pathname)) {
+    return null;
+  }
 
   // if (router.pathname === "/") {
   //   return null;
