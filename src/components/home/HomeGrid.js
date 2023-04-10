@@ -4,6 +4,7 @@ import Experiences from "./Experiences.js";
 import Header from "./Header";
 import ProjectHighlights from "./ProjectHighlights";
 import Skills from "./Skills";
+import MouseToolTip from "../modals/ToolTips/MouseToolTip.js";
 
 const HomeGrid = (props) => {
   return (
@@ -20,6 +21,7 @@ const HomeGrid = (props) => {
         </div>
         {/* <div className={style.footer}>Footer</div> */}
       </div>
+      {/* <MouseToolTip offsetY={15} offsetX={15} description="Hello There" /> */}
     </React.Fragment>
   );
 };
