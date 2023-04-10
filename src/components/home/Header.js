@@ -4,6 +4,7 @@ import style from "./Header.module.css";
 import { useSelector } from "react-redux";
 import List from "../elements/List.js";
 import ClipBoard from "../modals/ClipBoard.js";
+import MouseToolTip from "../modals/ToolTips/MouseToolTip.js";
 
 const biographyInfo = {
   intro:
@@ -34,6 +35,10 @@ const Biography = (props) => {
 
 const Links = (props) => {
   const personal = useSelector((state) => state.personal);
+  const [toolTip, setToolTip] = useState({
+    show: false,
+    description: "",
+  });
   const [body, setBody] = useState([]);
   const [clipBoard, setClipBoard] = useState({
     isShowing: false,
@@ -52,7 +57,17 @@ const Links = (props) => {
 
       results.push(
         <li key={link.url}>
-          <a href={link.url} target="_blank" rel="noreferrer">
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noreferrer"
+            onMouseEnter={() => {
+              handleMouseEnter(true, link.name);
+            }}
+            onMouseLeave={() => {
+              handleMouseEnter(false);
+            }}
+          >
             <Image src={`/resources/icons/${link.icon}`}></Image>
           </a>
         </li>
@@ -61,6 +76,14 @@ const Links = (props) => {
 
     setBody(results);
   }, []);
+
+  const handleMouseEnter = (show, description = "") => {
+    setToolTip({
+      show,
+      description,
+    });
+  };
+
   return (
     <React.Fragment>
       <List className={style.linkList}>
@@ -68,6 +91,12 @@ const Links = (props) => {
         <li
           onClick={() => {
             setClipBoard({ ...clipBoard, isShowing: true });
+          }}
+          onMouseEnter={() => {
+            handleMouseEnter(true, "Email");
+          }}
+          onMouseLeave={() => {
+            handleMouseEnter(false);
           }}
         >
           <a>
@@ -77,6 +106,13 @@ const Links = (props) => {
       </List>
       {clipBoard.isShowing && (
         <ClipBoard copyContent={personal.email.url} onClose={closeClipBoard} />
+      )}
+      {toolTip.show && (
+        <MouseToolTip
+          offsetX={25}
+          offsetY={15}
+          description={toolTip.description}
+        />
       )}
     </React.Fragment>
   );
