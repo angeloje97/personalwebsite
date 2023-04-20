@@ -121,6 +121,10 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
     });
 
     const data = await response.json();
+    if (!data.body) {
+      dispatch(projActions.update({ creatingNew: false }));
+      return;
+    }
 
     createdProject._id = data.body.newProject.insertedId;
     createdProject.created = `${createdProject.created}`;
@@ -129,7 +133,12 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
     if (currentProjects) {
       dispatch(
         projActions.setProjects({
-          projects: [createdProject, ...currentProjects],
+          projects: [createdProject, ...currentProjects].sort((a, b) => {
+            let aValue = a.favorite ? 1 : -1;
+            let bValue = b.favorite ? 1 : -1;
+            aValue += new Date(a.updated) > new Date(b.updated) ? 1 : -1;
+            return bValue - aValue;
+          }),
         })
       );
     }

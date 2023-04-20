@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { database } from "../helper/database";
+import userVerified from "../middleware/userVerified";
 
 async function handler(req, res) {
   try {
