@@ -1,5 +1,5 @@
-import { MongoClient, ObjectId } from "mongodb";
-import { database } from "../helper/database";
+import { ObjectId } from "mongodb";
+import userVerified from "../middleware/userVerified";
 
 async function handler(req, res) {
   if (req.method !== "DELETE") {
@@ -9,45 +9,30 @@ async function handler(req, res) {
     return;
   }
 
-  const client = await MongoClient.connect(database.url);
+  await userVerified(req, res, async (db) => {
+    try {
+      const body = JSON.parse(req.body);
+      const { projectIds } = body;
 
-  try {
-    const body = JSON.parse(req.body);
-    const { projectIds, sessionId } = body;
+      const formattedIds = projectIds.map((id) => ObjectId(id));
 
-    const db = client.db(database.name);
+      console.log(body);
 
-    const admins = db.collection("Admins");
-    const authenticated = await admins.findOne({ sessionId });
+      const collection = db.collection("Projects");
 
-    if (!authenticated) {
+      const response = await collection.deleteMany({
+        _id: { $in: formattedIds },
+      });
+
+      console.log(response);
+      res.status(200).json({ successful: "Successful!", body: response });
+    } catch (error) {
+      console.log(error.message);
       res
-        .status(401)
-        .json({ message: "Invalid session ID to make this request" });
-      client.close();
-      return;
+        .status(500)
+        .json({ mesage: "Something went wrong", error: error.message });
     }
-
-    const formattedIds = projectIds.map((id) => ObjectId(id));
-
-    console.log(body);
-
-    const collection = db.collection("Projects");
-
-    const response = await collection.deleteMany({
-      _id: { $in: formattedIds },
-    });
-
-    console.log(response);
-    res.status(200).json({ successful: "Successful!", body: response });
-  } catch (error) {
-    console.log(error.message);
-    res
-      .status(500)
-      .json({ mesage: "Something went wrong", error: error.message });
-  }
-
-  client.close();
+  });
 }
 
 export default handler;
