@@ -1,5 +1,3 @@
-import { MongoClient } from "mongodb";
-import { database } from "../helper/database";
 import userVerified from "../middleware/userVerified";
 
 async function handler(req, res) {
@@ -9,20 +7,15 @@ async function handler(req, res) {
     });
   }
 
-  await userVerified(req, res, async () => {
+  await userVerified(req, res, async (db) => {
     const body = JSON.parse(req.body);
     const project = body.createdProject;
 
-    const client = await MongoClient.connect(database.url);
     try {
-      const db = client.db(database.name);
-
       const collection = db.collection("Projects");
       const newProject = await collection.insertOne(project);
 
       console.log(newProject);
-
-      client.close();
 
       console.log(newProject.insertedId);
 
@@ -35,7 +28,6 @@ async function handler(req, res) {
         .status(500)
         .json({ message: "Something went wrong", error: error.message });
     }
-    client.close();
   });
 }
 

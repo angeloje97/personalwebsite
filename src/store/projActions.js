@@ -7,6 +7,15 @@ export const onStartProjects = () => {
   };
 };
 
+export const sortedProjects = (projects) => {
+  return projects.sort((a, b) => {
+    let aValue = a.favorite ? 1 : -1;
+    let bValue = b.favorite ? 1 : -1;
+    aValue += new Date(a.updated) > new Date(b.updated) ? 1 : -1;
+    return bValue - aValue;
+  });
+};
+
 export const loadProjects = () => {
   return async (dispatch) => {
     dispatch(projActions.update({ loading: true }));
@@ -14,16 +23,7 @@ export const loadProjects = () => {
       const response = await fetch("/api/projects");
       const data = await response.json();
 
-      const fetchedProjects = data.body.projects.sort((a, b) => {
-        if (a.favorite && !b.favorite) {
-          return -1;
-        }
-
-        if (!a.favorite && b.favorite) {
-          return 1;
-        }
-        return new Date(b.updated) - new Date(a.updated);
-      });
+      const fetchedProjects = sortedProjects(data.body.projects);
 
       dispatch(projActions.setProjects({ projects: fetchedProjects }));
     } catch (error) {}
@@ -86,7 +86,7 @@ export const updateProject = (updatedProject, currentProjects, sessionId) => {
 
       dispatch(
         projActions.setProjects({
-          projects: [modifiedProject, ...updatedProjects],
+          projects: sortedProjects([modifiedProject, ...updatedProjects]),
         })
       );
     }
@@ -133,12 +133,7 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
     if (currentProjects) {
       dispatch(
         projActions.setProjects({
-          projects: [createdProject, ...currentProjects].sort((a, b) => {
-            let aValue = a.favorite ? 1 : -1;
-            let bValue = b.favorite ? 1 : -1;
-            aValue += new Date(a.updated) > new Date(b.updated) ? 1 : -1;
-            return bValue - aValue;
-          }),
+          projects: sortedProjects([createdProject, ...currentProjects]),
         })
       );
     }

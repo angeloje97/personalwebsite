@@ -18,7 +18,7 @@ const userVerified = async (req, res, action) => {
       });
     }
 
-    action();
+    await action(db);
   } catch (error) {
     client.close();
     return res.status(500).json({
