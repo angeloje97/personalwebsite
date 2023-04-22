@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import { database } from "../helper/database";
+import userVerified from "../middleware/userVerified";
 
 export default async function (req, res) {
   if (req.method !== "POST") {
@@ -8,38 +9,24 @@ export default async function (req, res) {
     });
   }
 
-  const client = await MongoClient.connect(database.url);
-
   const body = JSON.parse(req.body);
+  const { newFile: createdFile } = body;
+  await userVerified(req, res, async (db) => {
+    try {
+      const collection = db.collection("AboutMe");
 
-  const { newFile: createdFile, sessionId } = body;
+      const newFile = await collection.insertOne(createdFile);
 
-  try {
-    const db = client.db("Angelo");
-    const collection = db.collection("AboutMe");
-    const admins = db.collection("Admins");
-
-    const admin = await admins.findOne({ sessionId });
-
-    if (!admin) {
-      res.status(401).json({ message: "Invalid Session ID" });
-      client.close();
-      return;
+      res.status(200).json({
+        message: "Succesful Request!",
+        body: {
+          newFile,
+        },
+      });
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Something went wrong.", error: error.message });
     }
-
-    const newFile = await collection.insertOne(createdFile);
-
-    res.status(200).json({
-      message: "Succesful Request!",
-      body: {
-        newFile,
-      },
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Something went wrong.", error: error.message });
-  }
-
-  client.close();
+  });
 }
