@@ -6,28 +6,32 @@ import formatter from "../../../styles/formatter.module.css";
 
 const skillData = [
   {
-    type: "Programming Languages",
+    type: "Languages/Databases",
     skills: [
-      { name: "C#", value: 1, unit: "6 Years" },
-      { name: "C++", value: 0.6, unit: "3 Years" },
-      { name: "Javascript", value: 0.8, unit: "4 Years" },
-      { name: "Java", value: 1, unit: "8 Years" },
-      { name: "Python", value: 0.6, unit: "3 Years" },
+      { name: "C#", value: 0.7, unit: "7 Years" },
+      { name: "C++", value: 0.5, unit: "5 Years" },
+      { name: "Javascript", value: 0.5, unit: "5 Years" },
+      { name: "Java", value: 0.8, unit: "8 Years" },
+      { name: "Python", value: 0.5, unit: "5 Years" },
+      { name: "MySQL", value: 0.6, unit: "6 Years" },
+      { name: "Firebase", value: 0.4, unit: "4 Years" },
+      { name: "MongoDB", value: 0.4, unit: "4 Years" },
     ],
   },
   {
     type: "Frameworks/Libraries",
     skills: [
-      { name: "Unity", value: 0.75, unit: "3 Years" },
-      { name: "NextJS", value: 0.25, unit: "1 Year" },
-      { name: "React", value: 0.5, unit: "2 Years" },
+      { name: "Unity", value: 0.6, unit: "6 Years" },
+      { name: "NextJS", value: 0.6, unit: "5 Year" },
+      { name: "React", value: 0.5, unit: "5 Years" },
+      { name: ".NET", value: 0.5, unit: "5 Years" },
     ],
   },
   {
     type: "Tech Categories",
     skills: [
-      { name: "Game Developement", value: 1, unit: "4 Years" },
-      { name: "Full Stack", value: 0.75, unit: "3 Years" },
+      { name: "Game Developement", value: 0.6, unit: "6 Years" },
+      { name: "Full Stack", value: 0.5, unit: "5 Years" },
     ],
   },
 ];
