@@ -6,7 +6,7 @@ const Resume = () => {
   return (
     <div className={style.resumes}>
       <ResumeDL
-        resume="Resume2023_8.pdf"
+        resume="Resume2023.pdf"
         name="Software Engineer 2023"
         image="Resume2023_1.png"
       />
