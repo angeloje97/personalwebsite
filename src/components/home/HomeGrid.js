@@ -5,6 +5,8 @@ import Header from "./Header";
 import ProjectHighlights from "./ProjectHighlights";
 import Skills from "./Skills";
 import MouseToolTip from "../modals/ToolTips/MouseToolTip.js";
+import References from "./References";
+import { HorizontalDivider } from "../decorators/Dividers";
 
 const HomeGrid = (props) => {
   return (
@@ -15,6 +17,8 @@ const HomeGrid = (props) => {
         </div>
         <div className={style.body}>
           <ProjectHighlights />
+          <HorizontalDivider />
+          <References />
         </div>
         <div className={style.side}>
           <Skills />

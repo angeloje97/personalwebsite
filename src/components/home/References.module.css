@@ -1,0 +1,14 @@
+.reference {
+}
+
+.referenceList {
+  list-style: none;
+}
+
+.body {
+  width: 100%;
+}
+
+.body > h2 {
+  text-align: center;
+}
