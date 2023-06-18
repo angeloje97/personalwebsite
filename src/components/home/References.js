@@ -11,12 +11,21 @@ const references = [
       "During his tenure within our company, Angelo was responsible for developing various new features for our website. He quickly became proficient in utilizing the tools and software used for working on our site. Tasks given to him and his group would always be completed promptly and in less time than was expected. " +
       "Angelo has a strong work ethic and was always reliable during his time at We2Link. The work he produced was always of high quality with very few errors if any. Because of this, I would recommend Angelo Esmeralda as a candidate for a position within any organization. If given the opportunity, I feel he will prove to be a worthy asset.",
   },
+  {
+    name: "Michael Malone",
+    role: "CEO",
+    company: "We2Link",
+    entry:
+      "Angelo has worked for We2Link, Inc. for the last 9 months. He has contributed significantly to the development of our Web App. He is skilled in React programing and has a foundational understanding of Google Firebase which we use as our backend. He understands agile programming and is skilled in the use of GitHub for submitting code." +
+      "Angelo is an excellent team player and often offers insights that helped improve the project's function.",
+  },
 ];
 
 const References = () => {
-  const referencesContent = references.map((reference) => {
-    return <Reference referenceData={reference} key={reference.name} />;
-  });
+  const referencesContent = references.map((reference) => (
+    <Reference referenceData={reference} key={reference.name} />
+  ));
+
   return (
     <div className={style.body}>
       <h2>References</h2>
@@ -27,6 +36,7 @@ const References = () => {
 
 const Reference = ({ referenceData }) => {
   const { name, role, company, entry } = referenceData;
+
   return (
     <li>
       <h3>

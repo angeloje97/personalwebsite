@@ -27,6 +27,16 @@ export const formattedDate = (date) => {
   return formatted;
 };
 
+export const monthValue = (month) => {
+  for (let i = 0; i < month.length; i++) {
+    if (months[i] === month) {
+      return i;
+    }
+  }
+
+  return "";
+};
+
 export const stringList = (items) => {
   let result = "";
 
