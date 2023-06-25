@@ -10,7 +10,7 @@ const userVerified = async (req, res, action) => {
     const db = client.db(database.name);
     const admins = db.collection("Admins");
     const authenticated = await admins.findOne({ sessionId });
-    console.log(authenticated);
+    // console.log(authenticated);
     if (!authenticated) {
       client.close();
       return res.status(401).json({

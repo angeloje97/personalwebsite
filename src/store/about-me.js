@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   editing: false,
   removing: false,
+  sendingFetch: false,
 
   editingFile: false,
   editingFileIndex: -1,

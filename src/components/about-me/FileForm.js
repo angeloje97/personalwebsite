@@ -12,6 +12,7 @@ import { useState } from "react";
 
 const FileForm = (props) => {
   const fileIndex = useSelector((state) => state.aboutMe.editingFileIndex);
+  const sendingFetch = useSelector((state) => state.aboutMe.sendingFetch);
   const files = useSelector((state) => state.aboutMe.files);
   const sessionId = useSelector((state) => state.auth.sessionId);
   const dispatch = useDispatch();
@@ -49,6 +50,8 @@ const FileForm = (props) => {
     } else {
       dispatch(updateFile(data, files, sessionId));
     }
+
+    close();
   };
 
   return (
@@ -60,12 +63,14 @@ const FileForm = (props) => {
             onChange={updateName}
             value={data.name}
           />
-          <div className={style.formButtons}>
-            <Button type="submit">Confirm</Button>
-            <Button type="button" onClick={close}>
-              Cancel
-            </Button>
-          </div>
+          {!sendingFetch && (
+            <div className={style.formButtons}>
+              <Button type="submit">Confirm</Button>
+              <Button type="button" onClick={close}>
+                Cancel
+              </Button>
+            </div>
+          )}
         </form>
       </CardHeader>
     </Modal>

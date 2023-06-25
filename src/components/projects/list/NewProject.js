@@ -9,7 +9,9 @@ import Button from "../../elements/Button";
 import style from "./NewProject.module.css";
 
 const NewProject = ({ editing, onClose, label = "New Project" }) => {
+  const sendingFetch = useSelector((state) => state.proj.sendingFetch);
   const dispatch = useDispatch();
+  console.log(sendingFetch);
 
   const tagsJoined = editing ? editing.tags.join(", ") : "";
 
@@ -88,14 +90,14 @@ const NewProject = ({ editing, onClose, label = "New Project" }) => {
   };
 
   const headerContent = <div className={style.header}>{label}</div>;
-  const buttons = (
+  const buttons = !sendingFetch ? (
     <div className={style.buttons}>
       <Button type="submit">
         {editing ? "Update Project" : "Create New Project"}
       </Button>
       <Button onClick={handleCancel}>Cancel</Button>
     </div>
-  );
+  ) : null;
 
   return (
     <Modal onClickOut={handleCancel}>

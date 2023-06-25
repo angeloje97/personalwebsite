@@ -12,6 +12,7 @@ const initialState = {
   editingContent: false,
   editingBlog: false,
   editingModule: false,
+  sendingFetch: false,
 
   routingData: {
     name: "",

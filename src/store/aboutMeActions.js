@@ -26,6 +26,9 @@ export const loadFiles = () => {
 export const removeFiles = (fileIds, currentFiles, sessionId) => {
   return async (dispatch) => {
     console.log(fileIds, currentFiles);
+
+    dispatch(aboutMeActions.update({ sendingFetch: true }));
+
     const response = await fetch("/api/about-me/remove-many", {
       method: "DELETE",
       body: JSON.stringify({
@@ -38,6 +41,8 @@ export const removeFiles = (fileIds, currentFiles, sessionId) => {
     const data = await response.json();
 
     console.log(data);
+
+    dispatch(aboutMeActions.update({ sendingFetch: false }));
 
     if (data.body && data.body.deletedCount) {
       dispatch(
@@ -56,6 +61,7 @@ export const updateFile = (updatedFile, currentFiles, sessionId) => {
     try {
       updatedFile.updated = new Date();
 
+      dispatch(aboutMeActions.update({ sendingFetch: true }));
       const response = await fetch("/api/about-me/update", {
         method: "PUT",
         body: JSON.stringify({
@@ -64,6 +70,7 @@ export const updateFile = (updatedFile, currentFiles, sessionId) => {
         }),
         "Content-Type": "Application/json",
       });
+      dispatch(aboutMeActions.update({ sendingFetch: false }));
 
       updatedFile.update = `${updatedFile.updated}`;
 
@@ -93,6 +100,9 @@ export const addFile = (newFile, currentFiles, sessionId) => {
     try {
       newFile.created = new Date();
       newFile.updated = new Date();
+
+      dispatch(aboutMeActions.update({ sendingFetch: true }));
+
       const response = await fetch("/api/about-me/new", {
         method: "POST",
         body: JSON.stringify({
@@ -101,6 +111,8 @@ export const addFile = (newFile, currentFiles, sessionId) => {
         }),
         "Content-Type": "Application/json",
       });
+
+      dispatch(aboutMeActions.update({ sendingFetch: false }));
 
       const data = await response.json();
       newFile._id = data.body.newFile.insertedId;

@@ -68,6 +68,12 @@ export const updateProject = (updatedProject, currentProjects, sessionId) => {
 
     modifiedProject.updated = new Date();
 
+    dispatch(
+      projActions.update({
+        sendingFetch: true,
+      })
+    );
+
     const response = await fetch("/api/projects/update", {
       method: "PUT",
       body: JSON.stringify({
@@ -94,6 +100,7 @@ export const updateProject = (updatedProject, currentProjects, sessionId) => {
     dispatch(
       projActions.update({
         editing: false,
+        sendingFetch: false,
       })
     );
   };
@@ -114,6 +121,12 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
     createdProject.updated = new Date();
     // createdProject.tags = createdProject.tags.split(", ");
 
+    dispatch(
+      projActions.update({
+        sendingFetch: true,
+      })
+    );
+
     const response = await fetch("/api/projects/new", {
       method: "POST",
       body: JSON.stringify({ createdProject, sessionId }),
@@ -122,7 +135,12 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
 
     const data = await response.json();
     if (!data.body) {
-      dispatch(projActions.update({ creatingNew: false }));
+      dispatch(
+        projActions.update({
+          creatingNew: false,
+          sendingFetch: false,
+        })
+      );
       return;
     }
 
@@ -137,6 +155,11 @@ export const addNewProject = (createdProject, currentProjects, sessionId) => {
         })
       );
     }
-    dispatch(projActions.update({ creatingNew: false }));
+    dispatch(
+      projActions.update({
+        creatingNew: false,
+        sendingFetch: false,
+      })
+    );
   };
 };

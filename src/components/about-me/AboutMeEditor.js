@@ -111,6 +111,7 @@ const RemovingButtons = ({ dispatch }) => {
   const selectedFilesId = useSelector((state) => state.aboutMe.selectedFilesId);
   const files = useSelector((state) => state.aboutMe.files);
   const sessionId = useSelector((state) => state.auth.sessionId);
+  const sendingFetch = useSelector((state) => state.aboutMe.sendingFetch);
   const [showConfirm, setShowConfirm] = useState(false);
 
   const fileNames = files
@@ -141,16 +142,18 @@ const RemovingButtons = ({ dispatch }) => {
         className={style.confirmCard}
       >
         <p>Are you sure you want to remove {fileNames}?</p>
-        <section>
-          <Button onClick={handleConfirmRemove}>Confirm</Button>
-          <Button
-            onClick={() => {
-              setShowConfirm(false);
-            }}
-          >
-            Cancel
-          </Button>
-        </section>
+        {!sendingFetch && (
+          <section>
+            <Button onClick={handleConfirmRemove}>Confirm</Button>
+            <Button
+              onClick={() => {
+                setShowConfirm(false);
+              }}
+            >
+              Cancel
+            </Button>
+          </section>
+        )}
       </CardHeader>
     </Modal>
   );

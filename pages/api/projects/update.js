@@ -14,14 +14,6 @@ async function handler(req, res) {
     try {
       const { updatedProject } = body;
       const collection = db.collection("Projects");
-      const admins = db.collection("Admins");
-
-      const user = await admins.findOne({ sessionId });
-
-      if (!user) {
-        res.status(401).json({ message: "Invalid Session ID" });
-        return;
-      }
 
       updatedProject._id = ObjectId(updatedProject._id);
 
