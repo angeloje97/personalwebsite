@@ -56,7 +56,7 @@ const AboutMeEditor = () => {
         })
       );
     };
-  }, []);
+  }, [dispatch]);
 
   const handleRemove = () => {
     dispatch(aboutMeActions.update({ removing: true, selectedFilesId: [] }));
